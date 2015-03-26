@@ -90,15 +90,28 @@ public class SAHistoryNavigationViewController: UINavigationController {
     }
     
     public override func popToViewController(viewController: UIViewController, animated: Bool) -> [AnyObject]? {
-        var canRemove = false
-        for (index, currentViewController) in enumerate(viewControllers) {
+        
+        var index: Int?
+        for (currentIndex, currentViewController) in enumerate(viewControllers) {
             if currentViewController as? UIViewController == viewController {
-                canRemove = true
-                continue
+                index = currentIndex
+                break
             }
-            
-            if canRemove {
-                screenshotImages.removeAtIndex(index)
+        }
+        
+        var removeList = [Bool]()
+        for (currentIndex, image) in enumerate(screenshotImages) {
+            if currentIndex > index {
+                removeList += [true]
+            } else {
+                removeList += [false]
+            }
+        }
+        for (currentIndex, shouldRemove) in enumerate(removeList) {
+            if shouldRemove {
+                if let index = index {
+                    screenshotImages.removeAtIndex(index + 1)
+                }
             }
         }
         return super.popToViewController(viewController, animated: animated)
@@ -106,8 +119,8 @@ public class SAHistoryNavigationViewController: UINavigationController {
     
     public override func setViewControllers(viewControllers: [AnyObject]!, animated: Bool) {
         super.setViewControllers(viewControllers, animated: animated)
-        if let viewControllers = viewControllers as? [UIViewController] {
-            for viewController in viewControllers {
+        for viewController in viewControllers {
+            if let viewController = viewController as? UIViewController {
                 screenshotImages += [viewController.view.screenshotImage(scale: kImageScale)]
             }
         }
@@ -141,29 +154,27 @@ public class SAHistoryNavigationViewController: UINavigationController {
 extension SAHistoryNavigationViewController: SAHistoryViewControllerDelegate {
     func didSelectIndex(index: Int) {
         
-        let viewControllers = self.viewControllers
-        
-        //var destinationViewController: UIViewController?
-        var newViewControllers = [AnyObject]()
-        for (currentIndex, viewController) in enumerate(viewControllers) {
-            newViewControllers += [viewController]
-            if currentIndex == index {
-                break
+        if let viewControllers = self.viewControllers as? [UIViewController] {
+            var destinationViewController: UIViewController?
+            for (currentIndex, viewController) in enumerate(viewControllers) {
+                if currentIndex == index {
+                    destinationViewController = viewController
+                    break
+                }
             }
-        }
-    
-        //self.popToViewController(nil, animated: false)
-    
-        screenshotImages.removeAll(keepCapacity: false)
-        setViewControllers(newViewControllers, animated: false)
         
-        UIView.animateWithDuration(0.25, delay: 0.0, options: .CurveEaseOut, animations: {
-            self.historyViewController.view.transform = CGAffineTransformIdentity
-            self.historyViewController.scrollToIndex(index, animated: false)
-        }) { (finished) in
-            self.historyViewController.view.hidden = true
-            self.coverView.hidden = true
-            self.setNavigationBarHidden(false, animated: true)
+            if let viewController = destinationViewController {
+                popToViewController(viewController, animated: false)
+            }
+            
+            UIView.animateWithDuration(0.25, delay: 0.0, options: .CurveEaseOut, animations: {
+                self.historyViewController.view.transform = CGAffineTransformIdentity
+                self.historyViewController.scrollToIndex(index, animated: false)
+            }) { (finished) in
+                self.historyViewController.view.hidden = true
+                self.coverView.hidden = true
+                self.setNavigationBarHidden(false, animated: true)
+            }
         }
     }
 }
