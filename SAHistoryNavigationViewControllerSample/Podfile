@@ -1,0 +1,3 @@
+platform :ios, "8.0"
+pod 'SAHistoryNavigationViewController'
+use_frameworks!
