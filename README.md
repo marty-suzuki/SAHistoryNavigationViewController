@@ -1,24 +1,73 @@
 # SAHistoryNavigationViewController
 
-[![CI Status](http://img.shields.io/travis/Taiki Suzuki/SAHistoryNavigationViewController.svg?style=flat)](https://travis-ci.org/Taiki Suzuki/SAHistoryNavigationViewController)
+[![Platform](http://img.shields.io/badge/platform-ios-blue.svg?style=flat
+)](https://developer.apple.com/iphone/index.action)
+[![Language](http://img.shields.io/badge/language-swift-brightgreen.svg?style=flat
+)](https://developer.apple.com/swift)
 [![Version](https://img.shields.io/cocoapods/v/SAHistoryNavigationViewController.svg?style=flat)](http://cocoapods.org/pods/SAHistoryNavigationViewController)
 [![License](https://img.shields.io/cocoapods/l/SAHistoryNavigationViewController.svg?style=flat)](http://cocoapods.org/pods/SAHistoryNavigationViewController)
-[![Platform](https://img.shields.io/cocoapods/p/SAHistoryNavigationViewController.svg?style=flat)](http://cocoapods.org/pods/SAHistoryNavigationViewController)
 
-## Usage
+![](./SampleImage/sample.gif)
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+SAHistoryNavigationViewController realizes iOS task manager like UI in UINavigationContoller.
 
-## Requirements
+## Features
+
+- [x] iOS task manager like UI
+- [x] Launch Navigation History with Long tap action of Back Bar Button
 
 ## Installation
 
-SAHistoryNavigationViewController is available through [CocoaPods](http://cocoapods.org). To install
+#### CocoaPods
+
+SAHistoryNavigationViewController is available through [CocoaPods](http://cocoapods.org). If you have cocoapods 0.36.0 or greater, you can install
 it, simply add the following line to your Podfile:
 
-```ruby
-pod "SAHistoryNavigationViewController"
+    pod "SAHistoryNavigationViewController"
+
+#### Manually
+
+Add the [SAHistoryNavigationViewController](./SAHistoryNavigationViewController) directory to your project. 
+
+## Usage
+
+If you install from cocoapods, You have to write `import SAHistoryNavigationViewController`.
+
+#### Storyboard or Xib
+![](./SampleImage/storyboard.png)
+
+Set custom class of UINavigationController to SAHistoryNavigationViewController.
+
+#### Code
+
+You can use SAHistoryNavigationViewController like UINavigationViewController.
+
+```swift
+	let viewControlelr = UIViewController()
+	let navigationController = SAHistoryNavigationViewController()
+	navigationController.setViewControllers([viewControlelr], animated: true)
+	presentViewController(navigationController, animated: true, completion: nil)
 ```
+
+If you want to launch Navigation History without long tap action, use this code.
+
+```swift
+	navigationController?.showHistory()
+```
+
+## Customize
+
+If you want to customize background of Navigation History, you can use those methods.
+
+```swift
+	navigationController?.contentView()
+	navigationController?.setHistoryBackgroundColor(color: UIColor)
+```
+
+## Requirements
+
+- Xcode 6.1 or greater
+- iOS7.0(manually only) or greater
 
 ## Author
 
