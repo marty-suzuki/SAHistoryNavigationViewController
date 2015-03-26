@@ -14,6 +14,9 @@
 		37E3BCF61AC3D57600A81554 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37E3BCF41AC3D57600A81554 /* LaunchScreen.xib */; };
 		37E3BD021AC3D57600A81554 /* SAHistoryNavigationViewControllerSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3BD011AC3D57600A81554 /* SAHistoryNavigationViewControllerSampleTests.swift */; };
 		37E3BD121AC3D62A00A81554 /* UINavigationViewController+History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3BD111AC3D62A00A81554 /* UINavigationViewController+History.swift */; };
+		37E3BD141AC3DB5300A81554 /* SAHistoryNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3BD131AC3DB5300A81554 /* SAHistoryNavigationViewController.swift */; };
+		37E3BD161AC3DCF700A81554 /* SAHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3BD151AC3DCF700A81554 /* SAHistoryViewController.swift */; };
+		37E3BD181AC3DEBA00A81554 /* NSLayoutConstraint+Fit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3BD171AC3DEBA00A81554 /* NSLayoutConstraint+Fit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +41,9 @@
 		37E3BD001AC3D57600A81554 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		37E3BD011AC3D57600A81554 /* SAHistoryNavigationViewControllerSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAHistoryNavigationViewControllerSampleTests.swift; sourceTree = "<group>"; };
 		37E3BD111AC3D62A00A81554 /* UINavigationViewController+History.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationViewController+History.swift"; sourceTree = "<group>"; };
+		37E3BD131AC3DB5300A81554 /* SAHistoryNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAHistoryNavigationViewController.swift; sourceTree = "<group>"; };
+		37E3BD151AC3DCF700A81554 /* SAHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAHistoryViewController.swift; sourceTree = "<group>"; };
+		37E3BD171AC3DEBA00A81554 /* NSLayoutConstraint+Fit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Fit.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +125,9 @@
 			isa = PBXGroup;
 			children = (
 				37E3BD111AC3D62A00A81554 /* UINavigationViewController+History.swift */,
+				37E3BD131AC3DB5300A81554 /* SAHistoryNavigationViewController.swift */,
+				37E3BD151AC3DCF700A81554 /* SAHistoryViewController.swift */,
+				37E3BD171AC3DEBA00A81554 /* NSLayoutConstraint+Fit.swift */,
 			);
 			name = SAHistoryNavigationViewController;
 			path = ../../SAHistoryNavigationViewController;
@@ -227,6 +236,9 @@
 				37E3BCEE1AC3D57600A81554 /* ViewController.swift in Sources */,
 				37E3BD121AC3D62A00A81554 /* UINavigationViewController+History.swift in Sources */,
 				37E3BCEC1AC3D57600A81554 /* AppDelegate.swift in Sources */,
+				37E3BD181AC3DEBA00A81554 /* NSLayoutConstraint+Fit.swift in Sources */,
+				37E3BD141AC3DB5300A81554 /* SAHistoryNavigationViewController.swift in Sources */,
+				37E3BD161AC3DCF700A81554 /* SAHistoryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

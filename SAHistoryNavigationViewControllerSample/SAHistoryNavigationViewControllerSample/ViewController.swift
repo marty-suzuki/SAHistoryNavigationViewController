@@ -10,9 +10,13 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var numberLabel: UILabel!
+    var number: Int  = 1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        numberLabel.text = "\(number)"
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,5 +25,16 @@ class ViewController: UIViewController {
     }
 
 
+    @IBAction func didTapNextButton(sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let viewController = storyboard.instantiateViewControllerWithIdentifier("ViewContoller") as? ViewController {
+            viewController.number = ++number
+            navigationController?.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    @IBAction func didTapRightBarButton(sender: UIBarButtonItem) {
+        navigationController?.showHistory()
+    }
 }
 
