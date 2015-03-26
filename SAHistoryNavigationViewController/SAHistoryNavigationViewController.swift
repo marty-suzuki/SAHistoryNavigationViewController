@@ -10,6 +10,8 @@ import UIKit
 
 extension UINavigationController {
     public func showHistory() {}
+    public func setHistoryBackgroundColor(color: UIColor) {}
+    public func contentView() -> UIView? { return nil }
 }
 
 extension UIView {
@@ -25,6 +27,8 @@ extension UIView {
 public class SAHistoryNavigationViewController: UINavigationController {
     
     var historyViewController = SAHistoryViewController()
+    
+    public var historyContentView = UIView()
     
     private var coverView = UIView()
     private var screenshotImages = [UIImage]()
@@ -51,7 +55,7 @@ public class SAHistoryNavigationViewController: UINavigationController {
         super.init(rootViewController: rootViewController)
     }
     
-    public override func viewDidLoad() {
+    override public func viewDidLoad() {
         if let viewController = viewControllers.first as? UIViewController {
             screenshotImages += [viewController.view.screenshotImage(scale: kImageScale)]
         }
@@ -59,6 +63,10 @@ public class SAHistoryNavigationViewController: UINavigationController {
         coverView.backgroundColor = .grayColor()
         coverView.hidden = true
         NSLayoutConstraint.applyAutoLayout(view, target: coverView, index: nil, top: 0.0, left: 0.0, right: 0.0, bottom: 0.0, height: nil, width: nil)
+        
+        historyContentView.backgroundColor = .clearColor()
+        historyContentView.hidden = true
+        NSLayoutConstraint.applyAutoLayout(view, target: historyContentView, index: nil, top: 0.0, left: 0.0, right: 0.0, bottom: 0.0, height: nil, width: nil)
         
         historyViewController.delegate = self
         historyViewController.view.hidden = true
@@ -71,17 +79,17 @@ public class SAHistoryNavigationViewController: UINavigationController {
         navigationBar.addGestureRecognizer(longPressGesture)
     }
     
-    public override func pushViewController(viewController: UIViewController, animated: Bool) {
+    override public func pushViewController(viewController: UIViewController, animated: Bool) {
         super.pushViewController(viewController, animated: animated)
         screenshotImages += [viewController.view.screenshotImage(scale: kImageScale)]
     }
     
-    public override func popViewControllerAnimated(animated: Bool) -> UIViewController? {
+    override public func popViewControllerAnimated(animated: Bool) -> UIViewController? {
         screenshotImages.removeLast()
         return super.popViewControllerAnimated(animated)
     }
     
-    public override func popToRootViewControllerAnimated(animated: Bool) -> [AnyObject]? {
+    override public func popToRootViewControllerAnimated(animated: Bool) -> [AnyObject]? {
         if let image = screenshotImages.first {
             screenshotImages.removeAll(keepCapacity: false)
             screenshotImages += [image]
@@ -89,7 +97,7 @@ public class SAHistoryNavigationViewController: UINavigationController {
         return super.popToRootViewControllerAnimated(animated)
     }
     
-    public override func popToViewController(viewController: UIViewController, animated: Bool) -> [AnyObject]? {
+    override public func popToViewController(viewController: UIViewController, animated: Bool) -> [AnyObject]? {
         
         var index: Int?
         for (currentIndex, currentViewController) in enumerate(viewControllers) {
@@ -117,7 +125,7 @@ public class SAHistoryNavigationViewController: UINavigationController {
         return super.popToViewController(viewController, animated: animated)
     }
     
-    public override func setViewControllers(viewControllers: [AnyObject]!, animated: Bool) {
+    override public func setViewControllers(viewControllers: [AnyObject]!, animated: Bool) {
         super.setViewControllers(viewControllers, animated: animated)
         for viewController in viewControllers {
             if let viewController = viewController as? UIViewController {
@@ -126,7 +134,7 @@ public class SAHistoryNavigationViewController: UINavigationController {
         }
     }
     
-    public override func showHistory() {
+    override public func showHistory() {
         
         super.showHistory()
         
@@ -135,6 +143,7 @@ public class SAHistoryNavigationViewController: UINavigationController {
         historyViewController.reload()
         historyViewController.view.hidden = false
         coverView.hidden = false
+        historyContentView.hidden = false
         
         setNavigationBarHidden(true, animated: true)
         UIView.animateWithDuration(0.25, delay: 0.0, options: .CurveEaseOut, animations: {
@@ -142,6 +151,14 @@ public class SAHistoryNavigationViewController: UINavigationController {
         }) { (finished) in
                 
         }
+    }
+    
+    override public func setHistoryBackgroundColor(color: UIColor) {
+        coverView.backgroundColor = color
+    }
+    
+    override public func contentView() -> UIView? {
+        return historyContentView
     }
     
     func detectLongTap(gesture: UILongPressGestureRecognizer) {
@@ -173,6 +190,7 @@ extension SAHistoryNavigationViewController: SAHistoryViewControllerDelegate {
             }) { (finished) in
                 self.historyViewController.view.hidden = true
                 self.coverView.hidden = true
+                self.historyContentView.hidden = true
                 self.setNavigationBarHidden(false, animated: true)
             }
         }
