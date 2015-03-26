@@ -67,13 +67,7 @@
                             <constraint firstItem="d24-6e-laG" firstAttribute="leading" secondItem="adU-c2-TYm" secondAttribute="leading" id="xuZ-NJ-jIP"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="vAc-ho-exi">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="6jN-7K-ZoW">
-                            <connections>
-                                <action selector="didTapRightBarButton:" destination="kSU-MY-cU6" id="kMR-C2-sdi"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="vAc-ho-exi"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="numberLabel" destination="HLG-M5-7bp" id="OGl-np-kod"/>

@@ -64,6 +64,11 @@ public class SAHistoryNavigationViewController: UINavigationController {
         historyViewController.view.hidden = true
         let width = UIScreen.mainScreen().bounds.size.width
         NSLayoutConstraint.applyAutoLayout(view, target: historyViewController.view, index: nil, top: 0.0, left: Float(-width), right: Float(-width), bottom: 0.0, height: nil, width: Float(width * 3))
+        
+        
+        let  longPressGesture = UILongPressGestureRecognizer(target: self, action: "detectLongTap:")
+        longPressGesture.delegate = self
+        navigationBar.addGestureRecognizer(longPressGesture)
     }
     
     public override func pushViewController(viewController: UIViewController, animated: Bool) {
@@ -125,12 +130,20 @@ public class SAHistoryNavigationViewController: UINavigationController {
                 
         }
     }
+    
+    func detectLongTap(gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .Began {
+            showHistory()
+        }
+    }
 }
 
 extension SAHistoryNavigationViewController: SAHistoryViewControllerDelegate {
     func didSelectIndex(index: Int) {
         
         let viewControllers = self.viewControllers
+        
+        //var destinationViewController: UIViewController?
         var newViewControllers = [AnyObject]()
         for (currentIndex, viewController) in enumerate(viewControllers) {
             newViewControllers += [viewController]
@@ -138,7 +151,9 @@ extension SAHistoryNavigationViewController: SAHistoryViewControllerDelegate {
                 break
             }
         }
-        
+    
+        //self.popToViewController(nil, animated: false)
+    
         screenshotImages.removeAll(keepCapacity: false)
         setViewControllers(newViewControllers, animated: false)
         
@@ -150,5 +165,20 @@ extension SAHistoryNavigationViewController: SAHistoryViewControllerDelegate {
             self.coverView.hidden = true
             self.setNavigationBarHidden(false, animated: true)
         }
+    }
+}
+
+extension SAHistoryNavigationViewController: UIGestureRecognizerDelegate {
+    public func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        
+        if let backItem = visibleViewController.navigationController?.navigationBar.backItem {
+            let backButtonFrame = CGRect(x:8, y:6,  width:58, height:30)
+            let touchPoint = gestureRecognizer.locationInView(gestureRecognizer.view)
+            if CGRectContainsPoint(backButtonFrame, touchPoint) {
+                return true
+            }
+        }
+        
+        return false
     }
 }

@@ -41,9 +41,5 @@ class ViewController: UIViewController {
             navigationController?.pushViewController(viewController, animated: true)
         }
     }
-    
-    @IBAction func didTapRightBarButton(sender: UIBarButtonItem) {
-        navigationController?.showHistory()
-    }
 }
 
