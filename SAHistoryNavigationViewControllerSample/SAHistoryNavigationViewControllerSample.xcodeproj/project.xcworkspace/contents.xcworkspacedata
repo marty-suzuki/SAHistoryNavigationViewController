@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:SAHistoryNavigationViewController.xcodeproj">
+      location = "self:SAHistoryNavigationViewControllerSample.xcodeproj">
    </FileRef>
 </Workspace>

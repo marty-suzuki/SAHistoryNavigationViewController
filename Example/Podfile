@@ -1,8 +1,0 @@
-source 'https://github.com/CocoaPods/Specs.git'
-
-
-target 'SAHistoryNavigationViewController', :exclusive => true do
-  pod "SAHistoryNavigationViewController", :path => "../"
-
-  
-end
