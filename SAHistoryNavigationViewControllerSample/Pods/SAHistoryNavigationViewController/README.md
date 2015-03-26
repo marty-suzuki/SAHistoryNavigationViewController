@@ -37,7 +37,6 @@ If you install from cocoapods, You have to write `import SAHistoryNavigationView
 ![](./SampleImage/storyboard.png)
 
 Set custom class of UINavigationController to SAHistoryNavigationViewController.
-In addition, set module to SAHistoryNavigationViewController.
 
 #### Code
 

@@ -1,0 +1,10 @@
+PODS:
+  - SAHistoryNavigationViewController (1.0.0)
+
+DEPENDENCIES:
+  - SAHistoryNavigationViewController
+
+SPEC CHECKSUMS:
+  SAHistoryNavigationViewController: bd5b16d998652b52b5fa4bba4d5cd4c37ea895ef
+
+COCOAPODS: 0.36.0
