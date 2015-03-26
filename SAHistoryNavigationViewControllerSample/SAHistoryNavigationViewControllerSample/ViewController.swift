@@ -16,7 +16,17 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        numberLabel.text = "\(number)"
+        if let count = navigationController?.viewControllers.count {
+            numberLabel.text = "\(count)"
+            switch count % 3 {
+            case 0:
+                view.backgroundColor = .whiteColor()
+            case 1:
+                view.backgroundColor = .lightGrayColor()
+            default:
+                view.backgroundColor = .greenColor()
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,7 +38,6 @@ class ViewController: UIViewController {
     @IBAction func didTapNextButton(sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let viewController = storyboard.instantiateViewControllerWithIdentifier("ViewContoller") as? ViewController {
-            viewController.number = ++number
             navigationController?.pushViewController(viewController, animated: true)
         }
     }

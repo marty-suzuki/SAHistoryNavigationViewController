@@ -21,6 +21,8 @@ class SAHistoryViewController: UIViewController {
     
     weak var delegate: SAHistoryViewControllerDelegate?
     
+    private let kLineSpace: CGFloat = 20.0
+    
     override init() {
         super.init()
     }
@@ -37,19 +39,20 @@ class SAHistoryViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
         let size = UIScreen.mainScreen().bounds.size
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.itemSize = size
             layout.minimumInteritemSpacing = 0.0
-            layout.minimumLineSpacing = 0.0
-            layout.sectionInset = UIEdgeInsetsZero
+            layout.minimumLineSpacing = 20.0
+            layout.sectionInset = UIEdgeInsets(top: 0.0, left: size.width, bottom: 0.0, right: size.width)
             layout.scrollDirection = .Horizontal
         }
         
         collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.backgroundColor = .clearColor()
+        collectionView.showsHorizontalScrollIndicator = false
         
         NSLayoutConstraint.applyAutoLayout(view, target: collectionView, index: nil, top: 0.0, left: 0.0, right: 0.0, bottom: 0.0, height: nil, width: nil)
     }
@@ -61,8 +64,12 @@ class SAHistoryViewController: UIViewController {
     
     func reload() {
         collectionView.reloadData()
+        scrollToIndex(currentIndex, animated: false)
+    }
+    
+    func scrollToIndex(index: Int, animated: Bool) {
         let width = UIScreen.mainScreen().bounds.size.width
-        collectionView.setContentOffset(CGPoint(x: width * CGFloat(currentIndex), y: 0), animated: false)
+        collectionView.setContentOffset(CGPoint(x: (width + kLineSpace) * CGFloat(index), y: 0), animated: animated)
     }
 }
 
