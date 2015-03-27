@@ -44,9 +44,9 @@ In addition, set module to SAHistoryNavigationViewController.
 You can use SAHistoryNavigationViewController like UINavigationViewController.
 
 ```swift
-	let viewControlelr = UIViewController()
+	let ViewController = UIViewController()
 	let navigationController = SAHistoryNavigationViewController()
-	navigationController.setViewControllers([viewControlelr], animated: true)
+	navigationController.setViewControllers([ViewController], animated: true)
 	presentViewController(navigationController, animated: true, completion: nil)
 ```
 

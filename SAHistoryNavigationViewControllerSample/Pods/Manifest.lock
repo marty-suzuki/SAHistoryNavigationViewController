@@ -2,9 +2,13 @@ PODS:
   - SAHistoryNavigationViewController (1.0.0)
 
 DEPENDENCIES:
-  - SAHistoryNavigationViewController
+  - SAHistoryNavigationViewController (from `../`)
+
+EXTERNAL SOURCES:
+  SAHistoryNavigationViewController:
+    :path: ../
 
 SPEC CHECKSUMS:
   SAHistoryNavigationViewController: bd5b16d998652b52b5fa4bba4d5cd4c37ea895ef
 
-COCOAPODS: 0.36.0
+COCOAPODS: 0.36.1

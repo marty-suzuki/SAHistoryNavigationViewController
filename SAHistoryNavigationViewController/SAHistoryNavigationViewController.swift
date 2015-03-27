@@ -56,10 +56,6 @@ public class SAHistoryNavigationViewController: UINavigationController {
     }
     
     override public func viewDidLoad() {
-        if let viewController = viewControllers.first as? UIViewController {
-            screenshotImages += [viewController.view.screenshotImage(scale: kImageScale)]
-        }
-        
         coverView.backgroundColor = .grayColor()
         coverView.hidden = true
         NSLayoutConstraint.applyAutoLayout(view, target: coverView, index: nil, top: 0.0, left: 0.0, right: 0.0, bottom: 0.0, height: nil, width: nil)
@@ -69,7 +65,7 @@ public class SAHistoryNavigationViewController: UINavigationController {
         NSLayoutConstraint.applyAutoLayout(view, target: historyContentView, index: nil, top: 0.0, left: 0.0, right: 0.0, bottom: 0.0, height: nil, width: nil)
         
         historyViewController.delegate = self
-        historyViewController.view.hidden = true
+        historyViewController.view.alpha = 0.0
         let width = UIScreen.mainScreen().bounds.size.width
         NSLayoutConstraint.applyAutoLayout(view, target: historyViewController.view, index: nil, top: 0.0, left: Float(-width), right: Float(-width), bottom: 0.0, height: nil, width: Float(width * 3))
         
@@ -80,8 +76,10 @@ public class SAHistoryNavigationViewController: UINavigationController {
     }
     
     override public func pushViewController(viewController: UIViewController, animated: Bool) {
+        
+        screenshotImages += [visibleViewController.view.screenshotImage(scale: kImageScale)]
+        
         super.pushViewController(viewController, animated: animated)
-        screenshotImages += [viewController.view.screenshotImage(scale: kImageScale)]
     }
     
     override public func popViewControllerAnimated(animated: Bool) -> UIViewController? {
@@ -90,10 +88,11 @@ public class SAHistoryNavigationViewController: UINavigationController {
     }
     
     override public func popToRootViewControllerAnimated(animated: Bool) -> [AnyObject]? {
-        if let image = screenshotImages.first {
-            screenshotImages.removeAll(keepCapacity: false)
-            screenshotImages += [image]
-        }
+//        if let image = screenshotImages.first {
+//            screenshotImages.removeAll(keepCapacity: false)
+//            screenshotImages += [image]
+//        }
+        screenshotImages.removeAll(keepCapacity: false)
         return super.popToRootViewControllerAnimated(animated)
     }
     
@@ -109,7 +108,7 @@ public class SAHistoryNavigationViewController: UINavigationController {
         
         var removeList = [Bool]()
         for (currentIndex, image) in enumerate(screenshotImages) {
-            if currentIndex > index {
+            if currentIndex >= index {
                 removeList += [true]
             } else {
                 removeList += [false]
@@ -118,7 +117,7 @@ public class SAHistoryNavigationViewController: UINavigationController {
         for (currentIndex, shouldRemove) in enumerate(removeList) {
             if shouldRemove {
                 if let index = index {
-                    screenshotImages.removeAtIndex(index + 1)
+                    screenshotImages.removeAtIndex(index)
                 }
             }
         }
@@ -127,7 +126,11 @@ public class SAHistoryNavigationViewController: UINavigationController {
     
     override public func setViewControllers(viewControllers: [AnyObject]!, animated: Bool) {
         super.setViewControllers(viewControllers, animated: animated)
-        for viewController in viewControllers {
+        for (currentIndex, viewController) in enumerate(viewControllers) {
+            if currentIndex == viewControllers.endIndex {
+                break
+            }
+            
             if let viewController = viewController as? UIViewController {
                 screenshotImages += [viewController.view.screenshotImage(scale: kImageScale)]
             }
@@ -138,18 +141,22 @@ public class SAHistoryNavigationViewController: UINavigationController {
         
         super.showHistory()
         
+        //screenshotImages.removeLast()
+        screenshotImages += [visibleViewController.view.screenshotImage(scale: 1.0)]
+        
         historyViewController.images = screenshotImages
         historyViewController.currentIndex = viewControllers.count - 1
         historyViewController.reload()
-        historyViewController.view.hidden = false
+        historyViewController.view.alpha = 1.0
+        
         coverView.hidden = false
         historyContentView.hidden = false
         
-        setNavigationBarHidden(true, animated: true)
+       setNavigationBarHidden(true, animated: false)
         UIView.animateWithDuration(0.25, delay: 0.0, options: .CurveEaseOut, animations: {
             self.historyViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.7, 0.7)
         }) { (finished) in
-                
+                    
         }
     }
     
@@ -184,13 +191,14 @@ extension SAHistoryNavigationViewController: SAHistoryViewControllerDelegate {
                 popToViewController(viewController, animated: false)
             }
             
+            
             UIView.animateWithDuration(0.25, delay: 0.0, options: .CurveEaseOut, animations: {
                 self.historyViewController.view.transform = CGAffineTransformIdentity
                 self.historyViewController.scrollToIndex(index, animated: false)
             }) { (finished) in
-                self.historyViewController.view.hidden = true
                 self.coverView.hidden = true
                 self.historyContentView.hidden = true
+                self.historyViewController.view.alpha = 0.0
                 self.setNavigationBarHidden(false, animated: true)
             }
         }
@@ -201,7 +209,11 @@ extension SAHistoryNavigationViewController: UIGestureRecognizerDelegate {
     public func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
         
         if let backItem = visibleViewController.navigationController?.navigationBar.backItem {
-            let backButtonFrame = CGRect(x:8, y:6,  width:58, height:30)
+            var height = 64.0
+            if visibleViewController.navigationController?.navigationBarHidden == true {
+                height = 44.0
+            }
+            let backButtonFrame = CGRect(x: 0.0, y :0.0,  width: 100.0, height: height)
             let touchPoint = gestureRecognizer.locationInView(gestureRecognizer.view)
             if CGRectContainsPoint(backButtonFrame, touchPoint) {
                 return true

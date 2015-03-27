@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ttD-xk-qBH">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--History Navigation View Controller-->
@@ -14,7 +13,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="kSU-MY-cU6" kind="relationship" relationship="rootViewController" id="fE0-HW-yZ3"/>
+                        <segue destination="IxO-V9-zE7" kind="relationship" relationship="rootViewController" id="8qa-1y-bRP"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d6e-7R-gJj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -22,59 +21,58 @@
             <point key="canvasLocation" x="252" y="484"/>
         </scene>
         <!--View Controller-->
-        <scene sceneID="RdV-4n-giq">
+        <scene sceneID="nYW-Dj-kq2">
             <objects>
-                <viewController storyboardIdentifier="ViewContoller" id="kSU-MY-cU6" customClass="ViewController" customModule="SAHistoryNavigationViewControllerSample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" id="IxO-V9-zE7" customClass="ViewController" customModule="SAHistoryNavigationViewControllerSample" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="IwE-b1-52W"/>
-                        <viewControllerLayoutGuide type="bottom" id="2im-Dk-Svn"/>
+                        <viewControllerLayoutGuide type="top" id="wKg-pg-ffw"/>
+                        <viewControllerLayoutGuide type="bottom" id="jZY-XW-3zN"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="adU-c2-TYm">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <view key="view" contentMode="scaleToFill" id="Og6-uL-sC4">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HLG-M5-7bp">
-                                <rect key="frame" x="0.0" y="146" width="375" height="375"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWi-BS-X2X">
+                                <rect key="frame" x="0.0" y="150" width="600" height="300"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="HLG-M5-7bp" secondAttribute="height" multiplier="1:1" id="jbj-kB-xBM"/>
+                                    <constraint firstAttribute="height" constant="300" id="bR2-tg-Vu8"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="200"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="300"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d24-6e-laG">
-                                <rect key="frame" x="0.0" y="521" width="375" height="100"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dsG-dA-6Zf">
+                                <rect key="frame" x="0.0" y="460" width="600" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="6Au-ff-dhV"/>
+                                    <constraint firstAttribute="height" constant="100" id="d7Z-Kw-LXG"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <state key="normal" title="Next">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="didTapNextButton:" destination="kSU-MY-cU6" eventType="touchUpInside" id="uef-LY-Bug"/>
+                                    <action selector="didTapNextButton:" destination="IxO-V9-zE7" eventType="touchUpInside" id="rtP-aS-Jzl"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="d24-6e-laG" secondAttribute="trailing" id="K6s-Gy-g38"/>
-                            <constraint firstItem="HLG-M5-7bp" firstAttribute="leading" secondItem="adU-c2-TYm" secondAttribute="leading" id="O8C-pg-vOj"/>
-                            <constraint firstAttribute="trailing" secondItem="HLG-M5-7bp" secondAttribute="trailing" id="PXo-Ce-MuI"/>
-                            <constraint firstItem="d24-6e-laG" firstAttribute="top" secondItem="HLG-M5-7bp" secondAttribute="bottom" id="ZKe-r6-rXK"/>
-                            <constraint firstAttribute="centerY" secondItem="HLG-M5-7bp" secondAttribute="centerY" id="gB5-EO-fvy"/>
-                            <constraint firstItem="d24-6e-laG" firstAttribute="leading" secondItem="adU-c2-TYm" secondAttribute="leading" id="xuZ-NJ-jIP"/>
+                            <constraint firstItem="cWi-BS-X2X" firstAttribute="leading" secondItem="Og6-uL-sC4" secondAttribute="leading" id="3P2-o6-HvL"/>
+                            <constraint firstItem="dsG-dA-6Zf" firstAttribute="top" secondItem="cWi-BS-X2X" secondAttribute="bottom" constant="10" id="4eF-ys-zxr"/>
+                            <constraint firstAttribute="trailing" secondItem="dsG-dA-6Zf" secondAttribute="trailing" id="HY9-JR-2h2"/>
+                            <constraint firstItem="dsG-dA-6Zf" firstAttribute="leading" secondItem="Og6-uL-sC4" secondAttribute="leading" id="NTU-KN-uXi"/>
+                            <constraint firstAttribute="trailing" secondItem="cWi-BS-X2X" secondAttribute="trailing" id="h45-yi-ohC"/>
+                            <constraint firstAttribute="centerY" secondItem="cWi-BS-X2X" secondAttribute="centerY" id="yU6-pj-4al"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="vAc-ho-exi"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationItem key="navigationItem" id="27C-SQ-kz4"/>
                     <connections>
-                        <outlet property="numberLabel" destination="HLG-M5-7bp" id="OGl-np-kod"/>
+                        <outlet property="numberLabel" destination="cWi-BS-X2X" id="KOx-Dv-PEJ"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5GW-nL-lyZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bed-ev-UIl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1041.5" y="483.5"/>
+            <point key="canvasLocation" x="1099" y="484"/>
         </scene>
     </scenes>
 </document>
