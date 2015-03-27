@@ -9,14 +9,14 @@
 
 Pod::Spec.new do |s|
   s.name             = "SAHistoryNavigationViewController"
-  s.version          = "1.0.0"
+  s.version          = "1.0.1"
   s.summary          = "SAHistoryNavigationViewController realizes iOS task manager like UI in UINavigationContoller."
 
   s.homepage         = "https://github.com/szk-atmosphere/SAHistoryNavigationViewController"
   s.license          = 'MIT'
   s.author           = { "Taiki Suzuki" => "s1180183@gmail.com" }
   s.source           = { :git => "https://github.com/szk-atmosphere/SAHistoryNavigationViewController.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/SzkAtmosphere'
+  s.social_media_url = 'https://twitter.com/SzkAtmosphere'
 
   s.platform     = :ios, '8.0'
   s.requires_arc = true
