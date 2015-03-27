@@ -33,6 +33,7 @@ Add the [SAHistoryNavigationViewController](./SAHistoryNavigationViewController)
 
 If you install from cocoapods, You have to write `import SAHistoryNavigationViewController`.
 
+
 #### Storyboard or Xib
 ![](./SampleImage/storyboard.png)
 
@@ -41,12 +42,23 @@ In addition, set module to SAHistoryNavigationViewController.
 
 #### Code
 
-You can use SAHistoryNavigationViewController like UINavigationViewController.
+You can use SAHistoryNavigationViewController as `self.navigationController` in ViewController, bacause implemented `extension UINavigationController` as below codes and override those methods in SAHistoryNavigationViewController.
 
 ```swift
-	let viewControlelr = UIViewController()
+extension UINavigationController {
+    public func showHistory() {}
+    public func setHistoryBackgroundColor(color: UIColor) {}
+    public func contentView() -> UIView? { return nil }
+}
+```
+
+And you have to initialize like this.
+
+
+```swift
+	let ViewController = UIViewController()
 	let navigationController = SAHistoryNavigationViewController()
-	navigationController.setViewControllers([viewControlelr], animated: true)
+	navigationController.setViewControllers([ViewController], animated: true)
 	presentViewController(navigationController, animated: true, completion: nil)
 ```
 

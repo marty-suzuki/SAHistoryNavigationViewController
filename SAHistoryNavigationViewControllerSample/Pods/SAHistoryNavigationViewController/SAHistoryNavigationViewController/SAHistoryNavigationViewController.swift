@@ -145,6 +145,9 @@ public class SAHistoryNavigationViewController: UINavigationController {
         coverView.hidden = false
         historyContentView.hidden = false
         
+        screenshotImages.removeLast()
+        screenshotImages += [visibleViewController.view.screenshotImage(scale: 1.0)]
+        
         setNavigationBarHidden(true, animated: true)
         UIView.animateWithDuration(0.25, delay: 0.0, options: .CurveEaseOut, animations: {
             self.historyViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.7, 0.7)

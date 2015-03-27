@@ -13,6 +13,7 @@
 		37E3BCF31AC3D57600A81554 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37E3BCF21AC3D57600A81554 /* Images.xcassets */; };
 		37E3BCF61AC3D57600A81554 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37E3BCF41AC3D57600A81554 /* LaunchScreen.xib */; };
 		37E3BD021AC3D57600A81554 /* SAHistoryNavigationViewControllerSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3BD011AC3D57600A81554 /* SAHistoryNavigationViewControllerSampleTests.swift */; };
+		37E3BD581AC50A5700A81554 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E3BD571AC50A5700A81554 /* QuartzCore.framework */; };
 		F716EB89838168081B56AD11 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71751ACF9E74B8ED274C4A63 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,7 @@
 		37E3BCFB1AC3D57600A81554 /* SAHistoryNavigationViewControllerSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SAHistoryNavigationViewControllerSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		37E3BD001AC3D57600A81554 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		37E3BD011AC3D57600A81554 /* SAHistoryNavigationViewControllerSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAHistoryNavigationViewControllerSampleTests.swift; sourceTree = "<group>"; };
+		37E3BD571AC50A5700A81554 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		71751ACF9E74B8ED274C4A63 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D18C8BA5C7CF7C47522EDB80 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -47,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37E3BD581AC50A5700A81554 /* QuartzCore.framework in Frameworks */,
 				F716EB89838168081B56AD11 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -131,6 +134,7 @@
 		9E12D08F8741E3189AA871D1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				37E3BD571AC50A5700A81554 /* QuartzCore.framework */,
 				71751ACF9E74B8ED274C4A63 /* Pods.framework */,
 			);
 			name = Frameworks;

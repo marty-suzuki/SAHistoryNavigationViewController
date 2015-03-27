@@ -37,7 +37,7 @@ class ViewController: UIViewController {
 
     @IBAction func didTapNextButton(sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let viewController = storyboard.instantiateViewControllerWithIdentifier("ViewContoller") as? ViewController {
+        if let viewController = storyboard.instantiateViewControllerWithIdentifier("ViewController") as? ViewController {
             navigationController?.pushViewController(viewController, animated: true)
         }
     }
