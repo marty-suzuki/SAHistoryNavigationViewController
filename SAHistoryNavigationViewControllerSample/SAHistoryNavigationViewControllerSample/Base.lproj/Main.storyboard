@@ -119,59 +119,5 @@
             </objects>
             <point key="canvasLocation" x="1099" y="1998"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="nYW-Dj-kq2">
-            <objects>
-                <viewController storyboardIdentifier="ViewController" id="IxO-V9-zE7" customClass="ViewController" customModule="SAHistoryNavigationViewControllerSample" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="wKg-pg-ffw"/>
-                        <viewControllerLayoutGuide type="bottom" id="jZY-XW-3zN"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Og6-uL-sC4">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWi-BS-X2X">
-                                <rect key="frame" x="0.0" y="150" width="600" height="300"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="300" id="bR2-tg-Vu8"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="300"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dsG-dA-6Zf">
-                                <rect key="frame" x="0.0" y="460" width="600" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="d7Z-Kw-LXG"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                <state key="normal" title="Next">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="didTapNextButton:" destination="IxO-V9-zE7" eventType="touchUpInside" id="rtP-aS-Jzl"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="cWi-BS-X2X" firstAttribute="leading" secondItem="Og6-uL-sC4" secondAttribute="leading" id="3P2-o6-HvL"/>
-                            <constraint firstItem="dsG-dA-6Zf" firstAttribute="top" secondItem="cWi-BS-X2X" secondAttribute="bottom" constant="10" id="4eF-ys-zxr"/>
-                            <constraint firstAttribute="trailing" secondItem="dsG-dA-6Zf" secondAttribute="trailing" id="HY9-JR-2h2"/>
-                            <constraint firstItem="dsG-dA-6Zf" firstAttribute="leading" secondItem="Og6-uL-sC4" secondAttribute="leading" id="NTU-KN-uXi"/>
-                            <constraint firstAttribute="trailing" secondItem="cWi-BS-X2X" secondAttribute="trailing" id="h45-yi-ohC"/>
-                            <constraint firstAttribute="centerY" secondItem="cWi-BS-X2X" secondAttribute="centerY" id="yU6-pj-4al"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="27C-SQ-kz4"/>
-                    <connections>
-                        <outlet property="numberLabel" destination="cWi-BS-X2X" id="KOx-Dv-PEJ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bed-ev-UIl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1099" y="484"/>
-        </scene>
     </scenes>
 </document>
