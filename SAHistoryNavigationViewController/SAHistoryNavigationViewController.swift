@@ -24,6 +24,21 @@ extension UIView {
     }
 }
 
+extension UIViewController {
+    func screenshotFromWindow(scale: CGFloat = 0.0) -> UIImage? {
+
+        if let window = UIApplication.sharedApplication().windows.first as? UIWindow {
+            UIGraphicsBeginImageContextWithOptions(window.frame.size, false, scale)
+            window.drawViewHierarchyInRect(window.bounds, afterScreenUpdates: true)
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return image
+        }
+        
+        return nil
+    }
+}
+
 public class SAHistoryNavigationViewController: UINavigationController {
     
     var historyViewController = SAHistoryViewController()
@@ -77,7 +92,10 @@ public class SAHistoryNavigationViewController: UINavigationController {
     
     override public func pushViewController(viewController: UIViewController, animated: Bool) {
         
-        screenshotImages += [visibleViewController.view.screenshotImage(scale: kImageScale)]
+        //screenshotImages += [visibleViewController.view.screenshotImage(scale: kImageScale)]
+        if let image = visibleViewController.screenshotFromWindow(scale: kImageScale) {
+            screenshotImages += [image]
+        }
         
         super.pushViewController(viewController, animated: animated)
     }
@@ -88,10 +106,6 @@ public class SAHistoryNavigationViewController: UINavigationController {
     }
     
     override public func popToRootViewControllerAnimated(animated: Bool) -> [AnyObject]? {
-//        if let image = screenshotImages.first {
-//            screenshotImages.removeAll(keepCapacity: false)
-//            screenshotImages += [image]
-//        }
         screenshotImages.removeAll(keepCapacity: false)
         return super.popToRootViewControllerAnimated(animated)
     }
@@ -132,7 +146,10 @@ public class SAHistoryNavigationViewController: UINavigationController {
             }
             
             if let viewController = viewController as? UIViewController {
-                screenshotImages += [viewController.view.screenshotImage(scale: kImageScale)]
+                //screenshotImages += [viewController.view.screenshotImage(scale: kImageScale)]
+                if let image = viewController.screenshotFromWindow(scale: kImageScale) {
+                    screenshotImages += [image]
+                }
             }
         }
     }
@@ -141,8 +158,11 @@ public class SAHistoryNavigationViewController: UINavigationController {
         
         super.showHistory()
         
-        //screenshotImages.removeLast()
-        screenshotImages += [visibleViewController.view.screenshotImage(scale: 1.0)]
+        //screenshotImages += [visibleViewController.view.screenshotImage(scale: kImageScale)]
+        if let image = visibleViewController.screenshotFromWindow(scale: kImageScale) {
+            screenshotImages += [image]
+        }
+
         
         historyViewController.images = screenshotImages
         historyViewController.currentIndex = viewControllers.count - 1
