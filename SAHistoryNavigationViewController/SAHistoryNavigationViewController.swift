@@ -219,7 +219,7 @@ extension SAHistoryNavigationViewController: SAHistoryViewControllerDelegate {
                 self.coverView.hidden = true
                 self.historyContentView.hidden = true
                 self.historyViewController.view.alpha = 0.0
-                self.setNavigationBarHidden(false, animated: true)
+                self.setNavigationBarHidden(false, animated: false)
             }
         }
     }
