@@ -79,7 +79,7 @@ If you want to customize background of Navigation History, you can use those met
 
 ## Requirements
 
-- Xcode 6.1 or greater
+- Xcode 6.3 or greater
 - iOS7.0(manually only) or greater
 
 ## Author

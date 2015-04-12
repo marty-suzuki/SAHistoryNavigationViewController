@@ -28,7 +28,7 @@ class TimelineViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setImage(image: UIImage) {
+    func setIconImage(image: UIImage) {
         iconImageView.image = image
     }
     
