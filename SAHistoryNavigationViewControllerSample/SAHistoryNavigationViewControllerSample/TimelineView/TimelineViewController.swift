@@ -54,12 +54,12 @@ class TimelineViewController: UIViewController {
 
 extension TimelineViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as! UITableViewCell
         
         if let cell = cell as? TimelineViewCell {
             let num = indexPath.row % 5 + 1
             if let image = UIImage(named: "icon_\(num)") {
-                cell.setImage(image)
+                cell.setIconImage(image)
             }
             
             let content = contents[indexPath.row]

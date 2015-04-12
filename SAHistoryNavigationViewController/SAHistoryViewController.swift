@@ -23,10 +23,6 @@ class SAHistoryViewController: UIViewController {
     
     private let kLineSpace: CGFloat = 20.0
     
-    override init() {
-        super.init()
-    }
-    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -82,7 +78,7 @@ extension SAHistoryViewController: UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as UICollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! UICollectionViewCell
         
         for view in cell.subviews {
             if let view = view as? UIImageView {

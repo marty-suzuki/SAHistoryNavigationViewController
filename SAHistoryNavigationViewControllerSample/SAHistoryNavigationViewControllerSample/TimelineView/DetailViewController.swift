@@ -46,7 +46,7 @@ class DetailViewController: UIViewController {
     
     @IBAction func didTapIconButton(sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewControllerWithIdentifier("TimelineViewController") as UIViewController
+        let viewController = storyboard.instantiateViewControllerWithIdentifier("TimelineViewController") as! UIViewController
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

@@ -50,10 +50,6 @@ public class SAHistoryNavigationViewController: UINavigationController {
     
     private let kImageScale: CGFloat = 1.0
     
-    override init() {
-        super.init()
-    }
-    
     required public init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
