@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "SAHistoryNavigationViewController"
-  s.version          = "1.1.0"
+  s.version          = "1.1.1"
   s.summary          = "SAHistoryNavigationViewController realizes iOS task manager like UI in UINavigationContoller."
 
   s.homepage         = "https://github.com/szk-atmosphere/SAHistoryNavigationViewController"
