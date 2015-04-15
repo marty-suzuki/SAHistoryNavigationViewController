@@ -50,6 +50,8 @@ public class SAHistoryNavigationViewController: UINavigationController {
     
     private let kImageScale: CGFloat = 1.0
     
+    private var swipingViewController: UIViewController?
+    
     required public init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -84,6 +86,11 @@ public class SAHistoryNavigationViewController: UINavigationController {
         let  longPressGesture = UILongPressGestureRecognizer(target: self, action: "detectLongTap:")
         longPressGesture.delegate = self
         navigationBar.addGestureRecognizer(longPressGesture)
+        
+        interactivePopGestureRecognizer.addTarget(self, action: "handleEdgeSwipe:")
+        interactivePopGestureRecognizer.delegate = self
+        
+        delegate = self
     }
     
     override public func pushViewController(viewController: UIViewController, animated: Bool) {
@@ -97,7 +104,9 @@ public class SAHistoryNavigationViewController: UINavigationController {
     }
     
     override public func popViewControllerAnimated(animated: Bool) -> UIViewController? {
-        screenshotImages.removeLast()
+        if swipingViewController == nil {
+            screenshotImages.removeLast()
+        }
         return super.popViewControllerAnimated(animated)
     }
     
@@ -147,6 +156,24 @@ public class SAHistoryNavigationViewController: UINavigationController {
                     screenshotImages += [image]
                 }
             }
+        }
+    }
+}
+
+extension SAHistoryNavigationViewController {
+
+    func handleEdgeSwipe(gestureRecognizer: UIGestureRecognizer) {
+        switch gestureRecognizer.state {
+            case .Began, .Changed, .Possible:
+                break
+                
+            case .Ended, .Cancelled, .Failed:
+                let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1.0 * Double(NSEC_PER_SEC)))
+                dispatch_after(dispatchTime, dispatch_get_main_queue()) { [weak self] in
+                    if let weakSelf = self {
+                        weakSelf.swipingViewController = nil
+                    }
+                }
         }
     }
     
@@ -236,6 +263,24 @@ extension SAHistoryNavigationViewController: UIGestureRecognizerDelegate {
             }
         }
         
+        if let gestureRecognizer = gestureRecognizer as? UIScreenEdgePanGestureRecognizer {
+            if view == gestureRecognizer.view{
+                swipingViewController = visibleViewController
+                return true
+            }
+        }
+        
         return false
+    }
+}
+
+extension SAHistoryNavigationViewController: UINavigationControllerDelegate {
+    public func navigationController(navigationController: UINavigationController, didShowViewController viewController: UIViewController, animated: Bool) {
+        if let swipingViewController = swipingViewController {
+            if swipingViewController != visibleViewController {
+                screenshotImages.removeLast()
+            }
+            self.swipingViewController = nil
+        }
     }
 }
