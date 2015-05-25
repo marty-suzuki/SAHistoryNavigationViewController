@@ -46,9 +46,29 @@ You can use SAHistoryNavigationViewController as `self.navigationController` in 
 
 ```swift
 extension UINavigationController {
+    public weak var navigationDelegate: SAHistoryNavigationViewControllerDelegate? {
+        set {
+            willSetNavigationDelegate(navigationDelegate)
+        }
+        get {
+            return willGetNavigationDelegate()
+        }
+    }
+    public weak var transitionDelegate: SAHistoryNavigationViewControllerTransitionDelegate? {
+        set {
+            willSetTransitionDelegate(transitionDelegate)
+        }
+        get {
+            return willGetTransitionDelegate()
+        }
+    }
     public func showHistory() {}
     public func setHistoryBackgroundColor(color: UIColor) {}
     public func contentView() -> UIView? { return nil }
+    func willSetNavigationDelegate(navigationDelegate: SAHistoryNavigationViewControllerDelegate?) {}
+    func willGetNavigationDelegate() -> SAHistoryNavigationViewControllerDelegate? { return nil }
+    func willSetTransitionDelegate(transitionDelegate: SAHistoryNavigationViewControllerTransitionDelegate?) {}
+    func willGetTransitionDelegate() -> SAHistoryNavigationViewControllerTransitionDelegate? { return nil }
 }
 ```
 
@@ -75,6 +95,28 @@ If you want to customize background of Navigation History, you can use those met
 ```swift
 	navigationController?.contentView()
 	navigationController?.setHistoryBackgroundColor(color: UIColor)
+```
+
+This is delegate methods.
+
+```swift
+@objc public protocol SAHistoryNavigationViewControllerDelegate : NSObjectProtocol {
+    
+    optional func navigationController(navigationController: SAHistoryNavigationViewController, willShowViewController viewController: UIViewController, animated: Bool)
+    optional func navigationController(navigationController: SAHistoryNavigationViewController, didShowViewController viewController: UIViewController, animated: Bool)
+    
+    optional func navigationControllerSupportedInterfaceOrientations(navigationController: SAHistoryNavigationViewController) -> Int
+    
+    optional func navigationControllerPreferredInterfaceOrientationForPresentation(navigationController: SAHistoryNavigationViewController) -> UIInterfaceOrientation
+}
+
+@objc public protocol SAHistoryNavigationViewControllerTransitionDelegate : NSObjectProtocol {
+    
+    optional func navigationController(navigationController: SAHistoryNavigationViewController, interactionControllerForAnimationController animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning?
+    
+    optional func navigationController(navigationController: SAHistoryNavigationViewController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
+}
+
 ```
 
 ## Requirements
