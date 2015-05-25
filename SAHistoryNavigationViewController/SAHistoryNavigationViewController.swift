@@ -9,9 +9,29 @@
 import UIKit
 
 extension UINavigationController {
+    public weak var navigationDelegate: SAHistoryNavigationViewControllerDelegate? {
+        set {
+            willSetNavigationDelegate(navigationDelegate)
+        }
+        get {
+            return willGetNavigationDelegate()
+        }
+    }
+    public weak var transitionDelegate: SAHistoryNavigationViewControllerTransitionDelegate? {
+        set {
+            willSetTransitionDelegate(transitionDelegate)
+        }
+        get {
+            return willGetTransitionDelegate()
+        }
+    }
     public func showHistory() {}
     public func setHistoryBackgroundColor(color: UIColor) {}
     public func contentView() -> UIView? { return nil }
+    func willSetNavigationDelegate(navigationDelegate: SAHistoryNavigationViewControllerDelegate?) {}
+    func willGetNavigationDelegate() -> SAHistoryNavigationViewControllerDelegate? { return nil }
+    func willSetTransitionDelegate(transitionDelegate: SAHistoryNavigationViewControllerTransitionDelegate?) {}
+    func willGetTransitionDelegate() -> SAHistoryNavigationViewControllerTransitionDelegate? { return nil }
 }
 
 extension UIView {
@@ -39,6 +59,23 @@ extension UIViewController {
     }
 }
 
+@objc public protocol SAHistoryNavigationViewControllerDelegate : NSObjectProtocol {
+    
+    optional func navigationController(navigationController: SAHistoryNavigationViewController, willShowViewController viewController: UIViewController, animated: Bool)
+    optional func navigationController(navigationController: SAHistoryNavigationViewController, didShowViewController viewController: UIViewController, animated: Bool)
+    
+    optional func navigationControllerSupportedInterfaceOrientations(navigationController: SAHistoryNavigationViewController) -> Int
+    
+    optional func navigationControllerPreferredInterfaceOrientationForPresentation(navigationController: SAHistoryNavigationViewController) -> UIInterfaceOrientation
+}
+
+@objc public protocol SAHistoryNavigationViewControllerTransitionDelegate : NSObjectProtocol {
+    
+    optional func navigationController(navigationController: SAHistoryNavigationViewController, interactionControllerForAnimationController animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning?
+    
+    optional func navigationController(navigationController: SAHistoryNavigationViewController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
+}
+
 public class SAHistoryNavigationViewController: UINavigationController {
     
     var historyViewController = SAHistoryViewController()
@@ -50,7 +87,13 @@ public class SAHistoryNavigationViewController: UINavigationController {
     
     private let kImageScale: CGFloat = 1.0
     
-    private var swipingViewController: UIViewController?
+    private let defaultInteractiveTransition = UIPercentDrivenInteractiveTransition()
+    private var edgePanGestureRecognizer: UIScreenEdgePanGestureRecognizer?
+    private var animationController: UIViewControllerAnimatedTransitioning?
+    private var edgeSwiping = false
+    
+    private weak var _navigationDelegate: SAHistoryNavigationViewControllerDelegate?
+    private weak var _transitionDelegate: SAHistoryNavigationViewControllerTransitionDelegate?
     
     required public init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -69,6 +112,8 @@ public class SAHistoryNavigationViewController: UINavigationController {
     }
     
     override public func viewDidLoad() {
+        super.viewDidLoad()
+        
         coverView.backgroundColor = .grayColor()
         coverView.hidden = true
         NSLayoutConstraint.applyAutoLayout(view, target: coverView, index: nil, top: 0.0, left: 0.0, right: 0.0, bottom: 0.0, height: nil, width: nil)
@@ -82,20 +127,20 @@ public class SAHistoryNavigationViewController: UINavigationController {
         let width = UIScreen.mainScreen().bounds.size.width
         NSLayoutConstraint.applyAutoLayout(view, target: historyViewController.view, index: nil, top: 0.0, left: Float(-width), right: Float(-width), bottom: 0.0, height: nil, width: Float(width * 3))
         
-        
         let  longPressGesture = UILongPressGestureRecognizer(target: self, action: "detectLongTap:")
         longPressGesture.delegate = self
         navigationBar.addGestureRecognizer(longPressGesture)
         
-        interactivePopGestureRecognizer.addTarget(self, action: "handleEdgeSwipe:")
-        interactivePopGestureRecognizer.delegate = self
+        let edgePanGestureRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: "handleEdgeSwipe:")
+        edgePanGestureRecognizer.edges = .Left
+        view.addGestureRecognizer(edgePanGestureRecognizer)
+        interactivePopGestureRecognizer.requireGestureRecognizerToFail(edgePanGestureRecognizer)
+        self.edgePanGestureRecognizer = edgePanGestureRecognizer
         
         delegate = self
     }
     
     override public func pushViewController(viewController: UIViewController, animated: Bool) {
-        
-        //screenshotImages += [visibleViewController.view.screenshotImage(scale: kImageScale)]
         if let image = visibleViewController.screenshotFromWindow(scale: kImageScale) {
             screenshotImages += [image]
         }
@@ -104,7 +149,7 @@ public class SAHistoryNavigationViewController: UINavigationController {
     }
     
     override public func popViewControllerAnimated(animated: Bool) -> UIViewController? {
-        if swipingViewController == nil {
+        if !edgeSwiping {
             screenshotImages.removeLast()
         }
         return super.popViewControllerAnimated(animated)
@@ -158,22 +203,54 @@ public class SAHistoryNavigationViewController: UINavigationController {
             }
         }
     }
+    
+    override func willSetNavigationDelegate(navigationDelegate: SAHistoryNavigationViewControllerDelegate?) {
+        _navigationDelegate = navigationDelegate
+    }
+    
+    override func willGetNavigationDelegate() -> SAHistoryNavigationViewControllerDelegate? {
+        return _navigationDelegate
+    }
+    
+    override func willSetTransitionDelegate(transitionDelegate: SAHistoryNavigationViewControllerTransitionDelegate?) {
+        _transitionDelegate = transitionDelegate
+    }
+    
+    override func willGetTransitionDelegate() -> SAHistoryNavigationViewControllerTransitionDelegate? {
+        return _transitionDelegate
+    }
 }
 
 extension SAHistoryNavigationViewController {
 
-    func handleEdgeSwipe(gestureRecognizer: UIGestureRecognizer) {
-        switch gestureRecognizer.state {
-            case .Began, .Changed, .Possible:
-                break
+    func handleEdgeSwipe(gesture: UIScreenEdgePanGestureRecognizer) {
+        var progress = gesture.translationInView(view).x / view.bounds.size.width
+        progress = min(1.0, max(0.0, progress))
+        
+        switch gesture.state {
+            case .Began:
+                edgeSwiping = true
+                popViewControllerAnimated(true)
                 
-            case .Ended, .Cancelled, .Failed:
-                let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1.0 * Double(NSEC_PER_SEC)))
-                dispatch_after(dispatchTime, dispatch_get_main_queue()) { [weak self] in
-                    if let weakSelf = self {
-                        weakSelf.swipingViewController = nil
-                    }
+            case .Changed:
+                defaultInteractiveTransition.updateInteractiveTransition(progress)
+                
+            case .Ended, .Cancelled:
+                if progress > 0.5 {
+                    screenshotImages.removeLast()
+                    defaultInteractiveTransition.finishInteractiveTransition()
+                } else {
+                    defaultInteractiveTransition.cancelInteractiveTransition()
                 }
+                edgeSwiping = false
+                
+                if let animationController = animationController as? SAHistoryNavigationTransitionController {
+                    animationController.forceFinish()
+                }
+                animationController = nil
+                
+            case .Failed, .Possible:
+                break
         }
     }
     
@@ -264,8 +341,7 @@ extension SAHistoryNavigationViewController: UIGestureRecognizerDelegate {
         }
         
         if let gestureRecognizer = gestureRecognizer as? UIScreenEdgePanGestureRecognizer {
-            if view == gestureRecognizer.view{
-                swipingViewController = visibleViewController
+            if view == gestureRecognizer.view {
                 return true
             }
         }
@@ -275,12 +351,53 @@ extension SAHistoryNavigationViewController: UIGestureRecognizerDelegate {
 }
 
 extension SAHistoryNavigationViewController: UINavigationControllerDelegate {
+    public func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+        _navigationDelegate?.navigationController?(self, willShowViewController: viewController, animated: animated)
+    }
     public func navigationController(navigationController: UINavigationController, didShowViewController viewController: UIViewController, animated: Bool) {
-        if let swipingViewController = swipingViewController {
-            if swipingViewController != visibleViewController {
-                screenshotImages.removeLast()
-            }
-            self.swipingViewController = nil
+        _navigationDelegate?.navigationController?(self, didShowViewController: viewController, animated: animated)
+    }
+    
+    public func navigationControllerSupportedInterfaceOrientations(navigationController: UINavigationController) -> Int {
+        if let supportedInterfaceOrientations = _navigationDelegate?.navigationControllerSupportedInterfaceOrientations?(self) {
+            return supportedInterfaceOrientations
         }
+        return UIInterfaceOrientation.Unknown.rawValue
+    }
+    
+    public func navigationControllerPreferredInterfaceOrientationForPresentation(navigationController: UINavigationController) -> UIInterfaceOrientation {
+        if let preferredInterfaceOrientationForPresentation = _navigationDelegate?.navigationControllerPreferredInterfaceOrientationForPresentation?(self) {
+            return preferredInterfaceOrientationForPresentation
+        }
+        return .Unknown
+    }
+    
+    public func navigationController(navigationController: UINavigationController, interactionControllerForAnimationController animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        
+        if let interactiveTransition = _transitionDelegate?.navigationController?(self, interactionControllerForAnimationController: animationController) {
+            return interactiveTransition
+        }
+        
+        self.animationController = animationController
+        
+        if let animationController = animationController as? SAHistoryNavigationTransitionController {
+            if animationController.navigationControllerOperation == .Push {
+                return nil
+            }
+        }
+    
+        if !edgeSwiping {
+            return nil
+        }
+    
+        return defaultInteractiveTransition
+    }
+    
+    public func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        if let animationController = _transitionDelegate?.navigationController?(self, animationControllerForOperation: operation, fromViewController: fromVC, toViewController: toVC) {
+            return animationController
+        }
+        
+        return SAHistoryNavigationTransitionController(operation: operation)
     }
 }
