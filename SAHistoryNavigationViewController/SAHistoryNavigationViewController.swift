@@ -224,33 +224,36 @@ public class SAHistoryNavigationViewController: UINavigationController {
 extension SAHistoryNavigationViewController {
 
     func handleEdgeSwipe(gesture: UIScreenEdgePanGestureRecognizer) {
-        var progress = gesture.translationInView(view).x / view.bounds.size.width
-        progress = min(1.0, max(0.0, progress))
-        
-        switch gesture.state {
-            case .Began:
-                edgeSwiping = true
-                popViewControllerAnimated(true)
-                
-            case .Changed:
-                defaultInteractiveTransition.updateInteractiveTransition(progress)
-                
-            case .Ended, .Cancelled:
-                if progress > 0.5 && screenshotImages.count>=1 {
-                    screenshotImages.removeLast()
-                    defaultInteractiveTransition.finishInteractiveTransition()
-                } else {
-                    defaultInteractiveTransition.cancelInteractiveTransition()
-                }
-                edgeSwiping = false
-                
-                if let animationController = animationController as? SAHistoryNavigationTransitionController {
-                    animationController.forceFinish()
-                }
-                animationController = nil
-                
-            case .Failed, .Possible:
-                break
+
+        if screenshotImages.count > 0 {
+            var progress = gesture.translationInView(view).x / view.bounds.size.width
+            progress = min(1.0, max(0.0, progress))
+            
+            switch gesture.state {
+                case .Began:
+                    edgeSwiping = true
+                    popViewControllerAnimated(true)
+                    
+                case .Changed:
+                    defaultInteractiveTransition.updateInteractiveTransition(progress)
+                    
+                case .Ended, .Cancelled:
+                    if progress > 0.5 {
+                        screenshotImages.removeLast()
+                        defaultInteractiveTransition.finishInteractiveTransition()
+                    } else {
+                        defaultInteractiveTransition.cancelInteractiveTransition()
+                    }
+                    edgeSwiping = false
+                    
+                    if let animationController = animationController as? SAHistoryNavigationTransitionController {
+                        animationController.forceFinish()
+                    }
+                    animationController = nil
+                    
+                case .Failed, .Possible:
+                    break
+            }
         }
     }
     
