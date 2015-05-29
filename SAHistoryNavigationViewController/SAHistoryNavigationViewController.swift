@@ -236,7 +236,7 @@ extension SAHistoryNavigationViewController {
                 defaultInteractiveTransition.updateInteractiveTransition(progress)
                 
             case .Ended, .Cancelled:
-                if progress > 0.5 {
+                if progress > 0.5 && screenshotImages.count>=1 {
                     screenshotImages.removeLast()
                     defaultInteractiveTransition.finishInteractiveTransition()
                 } else {
