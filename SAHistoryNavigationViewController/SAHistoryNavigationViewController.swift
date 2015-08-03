@@ -25,6 +25,14 @@ extension UINavigationController {
             return willGetTransitionDelegate()
         }
     }
+    public var showCustomAnimation: Bool {
+        set {
+            willSetShowCustomAnimation(showCustomAnimation)
+        }
+        get {
+            return willGetShowCustomAnimation()
+        }
+    }
     public func showHistory() {}
     public func setHistoryBackgroundColor(color: UIColor) {}
     public func contentView() -> UIView? { return nil }
@@ -32,6 +40,8 @@ extension UINavigationController {
     func willGetNavigationDelegate() -> SAHistoryNavigationViewControllerDelegate? { return nil }
     func willSetTransitionDelegate(transitionDelegate: SAHistoryNavigationViewControllerTransitionDelegate?) {}
     func willGetTransitionDelegate() -> SAHistoryNavigationViewControllerTransitionDelegate? { return nil }
+    func willSetShowCustomAnimation(showCustomAnimation: Bool) {}
+    func willGetShowCustomAnimation() -> Bool { return true }
 }
 
 extension UIView {
@@ -94,7 +104,8 @@ public class SAHistoryNavigationViewController: UINavigationController {
     
     private weak var _navigationDelegate: SAHistoryNavigationViewControllerDelegate?
     private weak var _transitionDelegate: SAHistoryNavigationViewControllerTransitionDelegate?
-    
+    private var _showCustomAnimation: Bool
+
     required public init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -218,6 +229,14 @@ public class SAHistoryNavigationViewController: UINavigationController {
     
     override func willGetTransitionDelegate() -> SAHistoryNavigationViewControllerTransitionDelegate? {
         return _transitionDelegate
+    }
+
+    override func willSetShowCustomAnimation(showCustomAnimation: Bool) {
+        _showCustomAnimation = showCustomAnimation
+    }
+
+    override func willGetShowCustomAnimation() -> Bool {
+        return _showCustomAnimation
     }
 }
 
@@ -392,6 +411,10 @@ extension SAHistoryNavigationViewController: UINavigationControllerDelegate {
         if !edgeSwiping {
             return nil
         }
+
+        if !showCustomAnimation {
+            return nil
+        }
     
         return defaultInteractiveTransition
     }
@@ -400,7 +423,11 @@ extension SAHistoryNavigationViewController: UINavigationControllerDelegate {
         if let animationController = _transitionDelegate?.navigationController?(self, animationControllerForOperation: operation, fromViewController: fromVC, toViewController: toVC) {
             return animationController
         }
-        
+
+        if !showCustomAnimation {
+          return nil
+        }
+
         return SAHistoryNavigationTransitionController(operation: operation)
     }
 }
