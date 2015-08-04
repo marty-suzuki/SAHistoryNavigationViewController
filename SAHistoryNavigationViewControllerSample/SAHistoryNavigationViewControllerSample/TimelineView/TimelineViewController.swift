@@ -41,7 +41,7 @@ class TimelineViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
 
-        navigationController?.showCustomAnimation = true
+        navigationController?.useOriginalTransition = true
     }
 
     override func didReceiveMemoryWarning() {

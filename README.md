@@ -27,7 +27,7 @@ it, simply add the following line to your Podfile:
 
 #### Manually
 
-Add the [SAHistoryNavigationViewController](./SAHistoryNavigationViewController) directory to your project. 
+Add the [SAHistoryNavigationViewController](./SAHistoryNavigationViewController) directory to your project.
 
 ## Usage
 
@@ -62,6 +62,14 @@ extension UINavigationController {
             return willGetTransitionDelegate()
         }
     }
+    public var useOriginalTransition: Bool {
+        set {
+            willSetUseOriginalTransition(newValue)
+        }
+        get {
+            return willGetUseOriginalTransition()
+        }
+    }
     public func showHistory() {}
     public func setHistoryBackgroundColor(color: UIColor) {}
     public func contentView() -> UIView? { return nil }
@@ -69,6 +77,8 @@ extension UINavigationController {
     func willGetNavigationDelegate() -> SAHistoryNavigationViewControllerDelegate? { return nil }
     func willSetTransitionDelegate(transitionDelegate: SAHistoryNavigationViewControllerTransitionDelegate?) {}
     func willGetTransitionDelegate() -> SAHistoryNavigationViewControllerTransitionDelegate? { return nil }
+    func willSetUseOriginalTransition(useOriginalTransition: Bool) {}
+    func willGetUseOriginalTransition() -> Bool { return true }
 }
 ```
 
