@@ -11,7 +11,7 @@ import UIKit
 extension UINavigationController {
     public weak var navigationDelegate: SAHistoryNavigationViewControllerDelegate? {
         set {
-            willSetNavigationDelegate(navigationDelegate)
+            willSetNavigationDelegate(newValue)
         }
         get {
             return willGetNavigationDelegate()
@@ -19,7 +19,7 @@ extension UINavigationController {
     }
     public weak var transitionDelegate: SAHistoryNavigationViewControllerTransitionDelegate? {
         set {
-            willSetTransitionDelegate(transitionDelegate)
+            willSetTransitionDelegate(newValue)
         }
         get {
             return willGetTransitionDelegate()
@@ -27,7 +27,7 @@ extension UINavigationController {
     }
     public var showCustomAnimation: Bool {
         set {
-            willSetShowCustomAnimation(showCustomAnimation)
+            willSetShowCustomAnimation(newValue)
         }
         get {
             return willGetShowCustomAnimation()
