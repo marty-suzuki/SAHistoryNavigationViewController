@@ -104,7 +104,7 @@ public class SAHistoryNavigationViewController: UINavigationController {
     
     private weak var _navigationDelegate: SAHistoryNavigationViewControllerDelegate?
     private weak var _transitionDelegate: SAHistoryNavigationViewControllerTransitionDelegate?
-    private var _showCustomAnimation: Bool
+    private var _showCustomAnimation = false
 
     required public init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
