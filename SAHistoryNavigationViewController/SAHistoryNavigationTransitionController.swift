@@ -11,19 +11,22 @@ import UIKit
 class SAHistoryNavigationTransitionController: NSObject, UIViewControllerAnimatedTransitioning {
     
     private(set) var navigationControllerOperation: UINavigationControllerOperation
+    private(set) var useOriginalAnimation: Bool
     private var currentTransitionContext: UIViewControllerContextTransitioning?
     private var backgroundView: UIView?
     private var alphaView: UIView?
-    private let kDefaultScale: CGFloat = 0.8
-    private let kDefaultDuration: NSTimeInterval = 0.3
     
-    required init(operation: UINavigationControllerOperation) {
+    private static let kDefaultScale: CGFloat = 0.8
+    private static let kDefaultDuration: NSTimeInterval = 0.3
+    
+    required init(operation: UINavigationControllerOperation, useOriginalAnimation: Bool) {
         navigationControllerOperation = operation
+        self.useOriginalAnimation = useOriginalAnimation
         super.init()
     }
     
     func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
-        return kDefaultDuration
+        return SAHistoryNavigationTransitionController.kDefaultDuration
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
@@ -52,7 +55,7 @@ extension SAHistoryNavigationTransitionController {
     func forceFinish() {
         let navigationControllerOperation = self.navigationControllerOperation
         if let backgroundView = backgroundView, alphaView = alphaView {
-            let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64((kDefaultDuration + 0.1) * Double(NSEC_PER_SEC)))
+            let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64((SAHistoryNavigationTransitionController.kDefaultDuration + 0.1) * Double(NSEC_PER_SEC)))
             dispatch_after(dispatchTime, dispatch_get_main_queue()) { [weak self] in
                 if let currentTransitionContext = self?.currentTransitionContext {
                     
@@ -61,13 +64,13 @@ extension SAHistoryNavigationTransitionController {
                     
                     if let fromView = fromViewContoller?.view, toView = toViewContoller?.view {
                         switch navigationControllerOperation {
-                        case .Push:
-                            self?.pushAniamtionCompletion(currentTransitionContext, toView: toView, fromView: fromView, backgroundView: backgroundView, alphaView: alphaView)
-                        case .Pop:
-                            self?.popAniamtionCompletion(currentTransitionContext, toView: toView, fromView: fromView, backgroundView: backgroundView, alphaView: alphaView)
-                        case .None:
-                            let cancelled = currentTransitionContext.transitionWasCancelled()
-                            currentTransitionContext.completeTransition(!cancelled)
+                            case .Push:
+                                self?.pushAniamtionCompletion(currentTransitionContext, toView: toView, fromView: fromView, backgroundView: backgroundView, alphaView: alphaView)
+                            case .Pop:
+                                self?.popAniamtionCompletion(currentTransitionContext, toView: toView, fromView: fromView, backgroundView: backgroundView, alphaView: alphaView)
+                            case .None:
+                                let cancelled = currentTransitionContext.transitionWasCancelled()
+                                currentTransitionContext.completeTransition(!cancelled)
                         }
                         self?.currentTransitionContext = nil
                         self?.backgroundView = nil
@@ -89,28 +92,45 @@ extension SAHistoryNavigationTransitionController {
         self.backgroundView = backgroundView
         
         toView.frame = containerView.bounds
-        toView.transform = CGAffineTransformScale(CGAffineTransformIdentity, kDefaultScale, kDefaultScale)
         containerView.addSubview(toView)
         
         let alphaView = UIView(frame: containerView.bounds)
         alphaView.backgroundColor = .blackColor()
-        alphaView.alpha = 0.7
         containerView.addSubview(alphaView)
         self.alphaView = alphaView
         
         fromView.frame = containerView.bounds
         containerView.addSubview(fromView)
         
-        UIView.animateWithDuration(transitionDuration(transitionContext), delay: 0.0, options: .CurveEaseOut, animations: {
+        let completion: (Bool) -> Void = { [weak self] finished in
+            if finished {
+                self?.popAniamtionCompletion(transitionContext, toView: toView, fromView: fromView, backgroundView: backgroundView, alphaView: alphaView)
+            }
+        }
+        
+        if useOriginalAnimation {
+            let kDefaultScale = SAHistoryNavigationTransitionController.kDefaultScale
+            toView.transform = CGAffineTransformScale(CGAffineTransformIdentity, kDefaultScale, kDefaultScale)
+            alphaView.alpha = 0.7
             
-            toView.transform = CGAffineTransformIdentity
-            fromView.frame.origin.x = containerView.frame.size.width
-            alphaView.alpha = 0.0
+            UIView.animateWithDuration(transitionDuration(transitionContext), delay: 0.0, options: .CurveEaseOut, animations: {
+                
+                toView.transform = CGAffineTransformIdentity
+                fromView.frame.origin.x = containerView.frame.size.width
+                alphaView.alpha = 0.0
+                
+            }, completion: completion)
+        } else {
+            toView.frame.origin.x = -(toView.frame.size.width / 4.0)
+            alphaView.alpha = 0.4
             
-            }) { [weak self] finished in
-                if finished {
-                    self?.popAniamtionCompletion(transitionContext, toView: toView, fromView: fromView, backgroundView: backgroundView, alphaView: alphaView)
-                }
+            UIView.animateWithDuration(transitionDuration(transitionContext), delay: 0.0, options: .CurveEaseOut, animations: {
+                
+                toView.frame.origin.x = 0
+                fromView.frame.origin.x = containerView.frame.size.width
+                alphaView.alpha = 0.0
+                
+            }, completion: completion)
         }
     }
     
@@ -153,17 +173,29 @@ extension SAHistoryNavigationTransitionController {
         toView.frame.origin.x = containerView.frame.size.width
         containerView.addSubview(toView)
         
-        let kDefaultScale = self.kDefaultScale
-        UIView.animateWithDuration(transitionDuration(transitionContext), delay: 0.0, options: .CurveEaseOut, animations: {
-            
-            fromView.transform = CGAffineTransformScale(CGAffineTransformIdentity, kDefaultScale, kDefaultScale)
-            toView.frame.origin.x = 0.0
-            alphaView.alpha = 0.7
-            
-            }) { [weak self] finished in
-                if finished {
-                    self?.pushAniamtionCompletion(transitionContext, toView: toView, fromView: fromView, backgroundView: backgroundView, alphaView: alphaView)
-                }
+        let completion: (Bool) -> Void = { [weak self] finished in
+            if finished {
+                self?.pushAniamtionCompletion(transitionContext, toView: toView, fromView: fromView, backgroundView: backgroundView, alphaView: alphaView)
+            }
+        }
+        
+        if useOriginalAnimation {
+            let kDefaultScale = SAHistoryNavigationTransitionController.kDefaultScale
+            UIView.animateWithDuration(transitionDuration(transitionContext), delay: 0.0, options: .CurveEaseOut, animations: {
+                
+                fromView.transform = CGAffineTransformScale(CGAffineTransformIdentity, kDefaultScale, kDefaultScale)
+                toView.frame.origin.x = 0.0
+                alphaView.alpha = 0.7
+                
+            }, completion: completion)
+        } else {
+            UIView.animateWithDuration(transitionDuration(transitionContext), delay: 0.0, options: .CurveEaseOut, animations: {
+                
+                fromView.frame.origin.x = -(fromView.frame.size.width / 4.0)
+                toView.frame.origin.x = 0.0
+                alphaView.alpha = 0.4
+                
+            }, completion: completion)
         }
     }
     
