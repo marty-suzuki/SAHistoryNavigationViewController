@@ -1,21 +1,22 @@
 //
-//  SAHistoryNavigationTransitionController.swift
-//  SAHistoryNavigationViewController
+//  CustomTransitioningController.swift
+//  SAHistoryNavigationViewControllerSample
 //
-//  Created by 鈴木大貴 on 2015/05/26.
-//  Copyright (c) 2015年 鈴木大貴. All rights reserved.
+//  Created by 鈴木 大貴 on 2015/08/05.
+//  Copyright (c) 2015年 &#37428;&#26408;&#22823;&#36020;. All rights reserved.
 //
 
 import UIKit
 
-class SAHistoryNavigationTransitionController: NSObject, UIViewControllerAnimatedTransitioning {
-    
-    private static let kDefaultDuration: NSTimeInterval = 0.3
+class CustomTransitioningController: NSObject, UIViewControllerAnimatedTransitioning {
     
     private(set) var navigationControllerOperation: UINavigationControllerOperation
     private var currentTransitionContext: UIViewControllerContextTransitioning?
     private var backgroundView: UIView?
     private var alphaView: UIView?
+    
+    private static let kDefaultScale: CGFloat = 0.8
+    private static let kDefaultDuration: NSTimeInterval = 0.3
     
     required init(operation: UINavigationControllerOperation) {
         navigationControllerOperation = operation
@@ -23,7 +24,7 @@ class SAHistoryNavigationTransitionController: NSObject, UIViewControllerAnimate
     }
     
     func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
-        return SAHistoryNavigationTransitionController.kDefaultDuration
+        return CustomTransitioningController.kDefaultDuration
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
@@ -35,24 +36,24 @@ class SAHistoryNavigationTransitionController: NSObject, UIViewControllerAnimate
         
         if let fromView = fromViewContoller?.view, toView = toViewContoller?.view {
             switch navigationControllerOperation {
-                case .Push:
-                    pushAnimation(transitionContext, toView: toView, fromView: fromView, containerView: containerView)
-                case .Pop:
-                    popAnimation(transitionContext, toView: toView, fromView: fromView, containerView: containerView)
-                case .None:
-                    let cancelled = transitionContext.transitionWasCancelled()
-                    transitionContext.completeTransition(!cancelled)
+            case .Push:
+                pushAnimation(transitionContext, toView: toView, fromView: fromView, containerView: containerView)
+            case .Pop:
+                popAnimation(transitionContext, toView: toView, fromView: fromView, containerView: containerView)
+            case .None:
+                let cancelled = transitionContext.transitionWasCancelled()
+                transitionContext.completeTransition(!cancelled)
             }
         }
     }
 }
 
 //MARK: - Internal Methods
-extension SAHistoryNavigationTransitionController {
+extension CustomTransitioningController {
     func forceFinish() {
         let navigationControllerOperation = self.navigationControllerOperation
         if let backgroundView = backgroundView, alphaView = alphaView {
-            let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64((SAHistoryNavigationTransitionController.kDefaultDuration + 0.1) * Double(NSEC_PER_SEC)))
+            let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64((CustomTransitioningController.kDefaultDuration + 0.1) * Double(NSEC_PER_SEC)))
             dispatch_after(dispatchTime, dispatch_get_main_queue()) { [weak self] in
                 if let currentTransitionContext = self?.currentTransitionContext {
                     
@@ -61,13 +62,13 @@ extension SAHistoryNavigationTransitionController {
                     
                     if let fromView = fromViewContoller?.view, toView = toViewContoller?.view {
                         switch navigationControllerOperation {
-                            case .Push:
-                                self?.pushAniamtionCompletion(currentTransitionContext, toView: toView, fromView: fromView, backgroundView: backgroundView, alphaView: alphaView)
-                            case .Pop:
-                                self?.popAniamtionCompletion(currentTransitionContext, toView: toView, fromView: fromView, backgroundView: backgroundView, alphaView: alphaView)
-                            case .None:
-                                let cancelled = currentTransitionContext.transitionWasCancelled()
-                                currentTransitionContext.completeTransition(!cancelled)
+                        case .Push:
+                            self?.pushAniamtionCompletion(currentTransitionContext, toView: toView, fromView: fromView, backgroundView: backgroundView, alphaView: alphaView)
+                        case .Pop:
+                            self?.popAniamtionCompletion(currentTransitionContext, toView: toView, fromView: fromView, backgroundView: backgroundView, alphaView: alphaView)
+                        case .None:
+                            let cancelled = currentTransitionContext.transitionWasCancelled()
+                            currentTransitionContext.completeTransition(!cancelled)
                         }
                         self?.currentTransitionContext = nil
                         self?.backgroundView = nil
@@ -80,7 +81,7 @@ extension SAHistoryNavigationTransitionController {
 }
 
 //MARK: - Private Methods
-extension SAHistoryNavigationTransitionController {
+extension CustomTransitioningController {
     private func popAnimation(transitionContext: UIViewControllerContextTransitioning, toView: UIView, fromView: UIView, containerView: UIView) {
         
         let backgroundView = UIView(frame: containerView.bounds)
@@ -105,16 +106,18 @@ extension SAHistoryNavigationTransitionController {
             }
         }
         
-        toView.frame.origin.x = -(toView.frame.size.width / 4.0)
-        alphaView.alpha = 0.4
+        let kDefaultScale = CustomTransitioningController.kDefaultScale
+        toView.transform = CGAffineTransformScale(CGAffineTransformIdentity, kDefaultScale, kDefaultScale)
+        alphaView.alpha = 0.7
         
         UIView.animateWithDuration(transitionDuration(transitionContext), delay: 0.0, options: .CurveEaseOut, animations: {
             
-            toView.frame.origin.x = 0
+            toView.transform = CGAffineTransformIdentity
             fromView.frame.origin.x = containerView.frame.size.width
             alphaView.alpha = 0.0
             
-        }, completion: completion)
+            }, completion: completion)
+        
     }
     
     private func popAniamtionCompletion(transitionContext: UIViewControllerContextTransitioning, toView: UIView, fromView: UIView, backgroundView: UIView, alphaView: UIView) {
@@ -162,13 +165,14 @@ extension SAHistoryNavigationTransitionController {
             }
         }
         
+        let kDefaultScale = CustomTransitioningController.kDefaultScale
         UIView.animateWithDuration(transitionDuration(transitionContext), delay: 0.0, options: .CurveEaseOut, animations: {
             
-            fromView.frame.origin.x = -(fromView.frame.size.width / 4.0)
+            fromView.transform = CGAffineTransformScale(CGAffineTransformIdentity, kDefaultScale, kDefaultScale)
             toView.frame.origin.x = 0.0
-            alphaView.alpha = 0.4
+            alphaView.alpha = 0.7
             
-        }, completion: completion)
+            }, completion: completion)
     }
     
     private func pushAniamtionCompletion(transitionContext: UIViewControllerContextTransitioning, toView: UIView, fromView: UIView, backgroundView: UIView, alphaView: UIView) {
@@ -189,3 +193,4 @@ extension SAHistoryNavigationTransitionController {
         self.alphaView = nil
     }
 }
+

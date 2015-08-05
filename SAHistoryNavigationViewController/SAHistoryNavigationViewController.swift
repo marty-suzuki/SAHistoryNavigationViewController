@@ -17,20 +17,20 @@ extension UINavigationController {
             return willGetNavigationDelegate()
         }
     }
-    public weak var transitionDelegate: SAHistoryNavigationViewControllerTransitionDelegate? {
+    public weak var navigationTransitioningDelegate: SAHistoryNavigationViewControllerTransitioningDelegate? {
         set {
-            willSetTransitionDelegate(newValue)
+            willSetNavigationTransitioningDelegate(newValue)
         }
         get {
-            return willGetTransitionDelegate()
+            return willGetNavigationTransitioningDelegate()
         }
     }
-    public var useOriginalTransition: Bool {
+    public var interactivePopGestureEnabled: Bool {
         set {
-            willSetUseOriginalTransition(newValue)
+            willSetInteractivePopGestureEnabled(newValue)
         }
         get {
-            return willGetUseOriginalTransition()
+            return willGetInteractivePopGestureEnabled()
         }
     }
     public func showHistory() {}
@@ -38,10 +38,10 @@ extension UINavigationController {
     public func contentView() -> UIView? { return nil }
     func willSetNavigationDelegate(navigationDelegate: SAHistoryNavigationViewControllerDelegate?) {}
     func willGetNavigationDelegate() -> SAHistoryNavigationViewControllerDelegate? { return nil }
-    func willSetTransitionDelegate(transitionDelegate: SAHistoryNavigationViewControllerTransitionDelegate?) {}
-    func willGetTransitionDelegate() -> SAHistoryNavigationViewControllerTransitionDelegate? { return nil }
-    func willSetUseOriginalTransition(useOriginalTransition: Bool) {}
-    func willGetUseOriginalTransition() -> Bool { return true }
+    func willSetNavigationTransitioningDelegate(navigationTransitioningDelegate: SAHistoryNavigationViewControllerTransitioningDelegate?) {}
+    func willGetNavigationTransitioningDelegate() -> SAHistoryNavigationViewControllerTransitioningDelegate? { return nil }
+    func willSetInteractivePopGestureEnabled(interactivePopGestureEnabled: Bool) {}
+    func willGetInteractivePopGestureEnabled() -> Bool { return true }
 }
 
 extension UIView {
@@ -77,9 +77,12 @@ extension UIViewController {
     optional func navigationControllerSupportedInterfaceOrientations(navigationController: SAHistoryNavigationViewController) -> Int
     
     optional func navigationControllerPreferredInterfaceOrientationForPresentation(navigationController: SAHistoryNavigationViewController) -> UIInterfaceOrientation
+    
+    optional func navigationController(navigationController: SAHistoryNavigationViewController, willHandleEdgeSwipe gesture: UIScreenEdgePanGestureRecognizer)
+    optional func navigationController(navigationController: SAHistoryNavigationViewController, didHandleEdgeSwipe gesture: UIScreenEdgePanGestureRecognizer)
 }
 
-@objc public protocol SAHistoryNavigationViewControllerTransitionDelegate : NSObjectProtocol {
+@objc public protocol SAHistoryNavigationViewControllerTransitioningDelegate : NSObjectProtocol {
     
     optional func navigationController(navigationController: SAHistoryNavigationViewController, interactionControllerForAnimationController animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning?
     
@@ -88,6 +91,8 @@ extension UIViewController {
 
 public class SAHistoryNavigationViewController: UINavigationController {
     
+    private static let kImageScale: CGFloat = 1.0
+    
     var historyViewController = SAHistoryViewController()
     
     public var historyContentView = UIView()
@@ -95,16 +100,14 @@ public class SAHistoryNavigationViewController: UINavigationController {
     private var coverView = UIView()
     private var screenshotImages = [UIImage]()
     
-    private let kImageScale: CGFloat = 1.0
-    
     private let defaultInteractiveTransition = UIPercentDrivenInteractiveTransition()
     private var edgePanGestureRecognizer: UIScreenEdgePanGestureRecognizer?
     private var animationController: UIViewControllerAnimatedTransitioning?
     private var edgeSwiping = false
     
     private weak var _navigationDelegate: SAHistoryNavigationViewControllerDelegate?
-    private weak var _transitionDelegate: SAHistoryNavigationViewControllerTransitionDelegate?
-    private var _useOriginalTransition = false
+    private weak var _navigationTransitioningDelegate: SAHistoryNavigationViewControllerTransitioningDelegate?
+    private var _interactivePopGestureEnabled = true
 
     required public init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -152,7 +155,7 @@ public class SAHistoryNavigationViewController: UINavigationController {
     }
     
     override public func pushViewController(viewController: UIViewController, animated: Bool) {
-        if let image = visibleViewController.screenshotFromWindow(scale: kImageScale) {
+        if let image = visibleViewController.screenshotFromWindow(scale: SAHistoryNavigationViewController.kImageScale) {
             screenshotImages += [image]
         }
         
@@ -207,8 +210,7 @@ public class SAHistoryNavigationViewController: UINavigationController {
             }
             
             if let viewController = viewController as? UIViewController {
-                //screenshotImages += [viewController.view.screenshotImage(scale: kImageScale)]
-                if let image = viewController.screenshotFromWindow(scale: kImageScale) {
+                if let image = viewController.screenshotFromWindow(scale: SAHistoryNavigationViewController.kImageScale) {
                     screenshotImages += [image]
                 }
             }
@@ -223,20 +225,20 @@ public class SAHistoryNavigationViewController: UINavigationController {
         return _navigationDelegate
     }
     
-    override func willSetTransitionDelegate(transitionDelegate: SAHistoryNavigationViewControllerTransitionDelegate?) {
-        _transitionDelegate = transitionDelegate
+    override func willSetNavigationTransitioningDelegate(transitionDelegate: SAHistoryNavigationViewControllerTransitioningDelegate?) {
+        _navigationTransitioningDelegate = transitionDelegate
     }
     
-    override func willGetTransitionDelegate() -> SAHistoryNavigationViewControllerTransitionDelegate? {
-        return _transitionDelegate
+    override func willGetNavigationTransitioningDelegate() -> SAHistoryNavigationViewControllerTransitioningDelegate? {
+        return _navigationTransitioningDelegate
     }
-
-    override func willSetUseOriginalTransition(useOriginalTransition: Bool) {
-        _useOriginalTransition = useOriginalTransition
+    
+    override func willSetInteractivePopGestureEnabled(interactivePopGestureEnabled: Bool) {
+        _interactivePopGestureEnabled = interactivePopGestureEnabled
     }
-
-    override func willGetUseOriginalTransition() -> Bool {
-        return _useOriginalTransition
+    
+    override func willGetInteractivePopGestureEnabled() -> Bool {
+        return _interactivePopGestureEnabled
     }
 }
 
@@ -244,6 +246,8 @@ extension SAHistoryNavigationViewController {
 
     func handleEdgeSwipe(gesture: UIScreenEdgePanGestureRecognizer) {
 
+        navigationDelegate?.navigationController?(self, willHandleEdgeSwipe: gesture)
+        
         if screenshotImages.count > 0 {
             var progress = gesture.translationInView(view).x / view.bounds.size.width
             progress = min(1.0, max(0.0, progress))
@@ -274,6 +278,8 @@ extension SAHistoryNavigationViewController {
                     break
             }
         }
+        
+        navigationDelegate?.navigationController?(self, didHandleEdgeSwipe: gesture)
     }
     
     override public func showHistory() {
@@ -281,7 +287,7 @@ extension SAHistoryNavigationViewController {
         super.showHistory()
         
         //screenshotImages += [visibleViewController.view.screenshotImage(scale: kImageScale)]
-        if let image = visibleViewController.screenshotFromWindow(scale: kImageScale) {
+        if let image = visibleViewController.screenshotFromWindow(scale: SAHistoryNavigationViewController.kImageScale) {
             screenshotImages += [image]
         }
 
@@ -396,7 +402,7 @@ extension SAHistoryNavigationViewController: UINavigationControllerDelegate {
     
     public func navigationController(navigationController: UINavigationController, interactionControllerForAnimationController animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         
-        if let interactiveTransition = _transitionDelegate?.navigationController?(self, interactionControllerForAnimationController: animationController) {
+        if let interactiveTransition = _navigationTransitioningDelegate?.navigationController?(self, interactionControllerForAnimationController: animationController) {
             return interactiveTransition
         }
         
@@ -408,7 +414,7 @@ extension SAHistoryNavigationViewController: UINavigationControllerDelegate {
             }
         }
     
-        if !edgeSwiping {
+        if !edgeSwiping || !interactivePopGestureEnabled {
             return nil
         }
     
@@ -416,10 +422,10 @@ extension SAHistoryNavigationViewController: UINavigationControllerDelegate {
     }
     
     public func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        if let animationController = _transitionDelegate?.navigationController?(self, animationControllerForOperation: operation, fromViewController: fromVC, toViewController: toVC) {
+        if let animationController = _navigationTransitioningDelegate?.navigationController?(self, animationControllerForOperation: operation, fromViewController: fromVC, toViewController: toVC) {
             return animationController
         }
 
-        return SAHistoryNavigationTransitionController(operation: operation, useOriginalAnimation: _useOriginalTransition)
+        return SAHistoryNavigationTransitionController(operation: operation)
     }
 }
