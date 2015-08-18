@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ttD-xk-qBH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ttD-xk-qBH">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
         <!--History Navigation View Controller-->
@@ -45,7 +45,13 @@
                             <constraint firstItem="RYx-w5-Cm3" firstAttribute="leading" secondItem="LiP-aR-Msu" secondAttribute="leading" id="q55-tQ-sPX"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="8dB-OK-HrW"/>
+                    <navigationItem key="navigationItem" id="8dB-OK-HrW">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="0yv-Of-t3T">
+                            <connections>
+                                <segue destination="dZK-fR-5eK" kind="presentation" id="ay9-Sx-5ke"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="RYx-w5-Cm3" id="kx8-Vb-ZjA"/>
                     </connections>
@@ -53,6 +59,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A1W-c0-5BJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1099" y="1250"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="MN4-TG-Afe">
+            <objects>
+                <viewController id="dZK-fR-5eK" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KsQ-4Y-0i8"/>
+                        <viewControllerLayoutGuide type="bottom" id="QxN-Wy-e1p"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wsH-ga-Ry5">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XoI-rk-nTS">
+                                <rect key="frame" x="156" y="285" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="FCv-f8-tKd" kind="unwind" unwindAction="segueBack:" id="SdO-uc-Eh1"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="XoI-rk-nTS" secondAttribute="centerY" id="OHf-i0-Ggf"/>
+                            <constraint firstAttribute="centerX" secondItem="XoI-rk-nTS" secondAttribute="centerX" id="Vq3-FU-c3v"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="98Y-ne-LLD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="FCv-f8-tKd" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1693" y="1203"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="bYv-aV-3I5">

@@ -50,6 +50,8 @@ class TimelineViewController: UIViewController {
         var username: String
         var text: String
     }
+
+  @IBAction func segueBack(segue: UIStoryboardSegue) {}
 }
 
 extension TimelineViewController: UITableViewDataSource {
