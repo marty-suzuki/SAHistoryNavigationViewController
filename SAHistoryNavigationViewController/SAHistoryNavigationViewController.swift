@@ -64,8 +64,6 @@ public class SAHistoryNavigationViewController: UINavigationController {
     navigationBar.addGestureRecognizer(longPressGesture)
 
     navigationBar.delegate = self
-
-    delegate = self
   }
 
   override public func pushViewController(viewController: UIViewController, animated: Bool) {
@@ -225,28 +223,4 @@ extension SAHistoryNavigationViewController: UIGestureRecognizerDelegate {
 
     return false
   }
-}
-
-extension SAHistoryNavigationViewController: UINavigationControllerDelegate {
-  public func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
-    _navigationDelegate?.navigationController?(self, willShowViewController: viewController, animated: animated)
-  }
-  public func navigationController(navigationController: UINavigationController, didShowViewController viewController: UIViewController, animated: Bool) {
-    _navigationDelegate?.navigationController?(self, didShowViewController: viewController, animated: animated)
-  }
-
-  public func navigationControllerSupportedInterfaceOrientations(navigationController: UINavigationController) -> Int {
-    if let supportedInterfaceOrientations = _navigationDelegate?.navigationControllerSupportedInterfaceOrientations?(self) {
-      return supportedInterfaceOrientations
-    }
-    return UIInterfaceOrientation.Unknown.rawValue
-  }
-
-  public func navigationControllerPreferredInterfaceOrientationForPresentation(navigationController: UINavigationController) -> UIInterfaceOrientation {
-    if let preferredInterfaceOrientationForPresentation = _navigationDelegate?.navigationControllerPreferredInterfaceOrientationForPresentation?(self) {
-      return preferredInterfaceOrientationForPresentation
-    }
-    return .Unknown
-  }
-
 }
