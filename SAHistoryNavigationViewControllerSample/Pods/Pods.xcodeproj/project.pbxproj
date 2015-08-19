@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		05E2E2E8250583C0ED82A426 /* Pods-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B3C35EBE9ECDBF16964823E8 /* Pods-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0E3D11AF2F57FD9CC649FEA4 /* Pods-SAHistoryNavigationViewController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C73B26E494424D7FE832457C /* Pods-SAHistoryNavigationViewController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		37677A7C1B139AF300E47000 /* SAHistoryNavigationTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37677A7A1B1398EC00E47000 /* SAHistoryNavigationTransitionController.swift */; };
 		3D48627D06179601349C15A3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6353072CFE9F271322AF6DE /* Foundation.framework */; };
 		58E95F27E6DA4CB8BFE65E14 /* Pods-SAHistoryNavigationViewController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 30CEB16C867016EA9A3B020A /* Pods-SAHistoryNavigationViewController-dummy.m */; };
 		AB49A5A1FDEC458D30376933 /* NSLayoutConstraint+Fit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A737C99CB2D0F24419525D8 /* NSLayoutConstraint+Fit.swift */; };
@@ -34,7 +33,6 @@
 		2505612A18756E23A2BE58DF /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
 		265E1DA5A06264FE133A14C7 /* SAHistoryNavigationViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SAHistoryNavigationViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		30CEB16C867016EA9A3B020A /* Pods-SAHistoryNavigationViewController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SAHistoryNavigationViewController-dummy.m"; sourceTree = "<group>"; };
-		37677A7A1B1398EC00E47000 /* SAHistoryNavigationTransitionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAHistoryNavigationTransitionController.swift; sourceTree = "<group>"; };
 		4129EA8CDDA6900C6D30CB6C /* Pods-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-environment.h"; sourceTree = "<group>"; };
 		52C528C3213CB8F8432E5F4B /* Pods.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Pods.modulemap; sourceTree = "<group>"; };
 		5B4E51E8F1924885BCEDCA0C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
@@ -134,7 +132,6 @@
 				1A737C99CB2D0F24419525D8 /* NSLayoutConstraint+Fit.swift */,
 				FBBDEF250860D508670F7719 /* SAHistoryNavigationViewController.swift */,
 				EA58D267A9651740FBDCE03A /* SAHistoryViewController.swift */,
-				37677A7A1B1398EC00E47000 /* SAHistoryNavigationTransitionController.swift */,
 			);
 			path = SAHistoryNavigationViewController;
 			sourceTree = "<group>";
@@ -281,7 +278,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37677A7C1B139AF300E47000 /* SAHistoryNavigationTransitionController.swift in Sources */,
 				AB49A5A1FDEC458D30376933 /* NSLayoutConstraint+Fit.swift in Sources */,
 				58E95F27E6DA4CB8BFE65E14 /* Pods-SAHistoryNavigationViewController-dummy.m in Sources */,
 				ABE0E940B53527112319EA93 /* SAHistoryNavigationViewController.swift in Sources */,

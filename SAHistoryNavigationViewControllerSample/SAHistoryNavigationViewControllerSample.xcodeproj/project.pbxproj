@@ -17,7 +17,6 @@
 		37E3BCF61AC3D57600A81554 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37E3BCF41AC3D57600A81554 /* LaunchScreen.xib */; };
 		37E3BD021AC3D57600A81554 /* SAHistoryNavigationViewControllerSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3BD011AC3D57600A81554 /* SAHistoryNavigationViewControllerSampleTests.swift */; };
 		37E3BD581AC50A5700A81554 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E3BD571AC50A5700A81554 /* QuartzCore.framework */; };
-		9D6489F51B7195EC00640C4E /* CustomTransitioningController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6489F41B7195EC00640C4E /* CustomTransitioningController.swift */; };
 		F716EB89838168081B56AD11 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71751ACF9E74B8ED274C4A63 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -48,7 +47,6 @@
 		37E3BD011AC3D57600A81554 /* SAHistoryNavigationViewControllerSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAHistoryNavigationViewControllerSampleTests.swift; sourceTree = "<group>"; };
 		37E3BD571AC50A5700A81554 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		71751ACF9E74B8ED274C4A63 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D6489F41B7195EC00640C4E /* CustomTransitioningController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTransitioningController.swift; sourceTree = "<group>"; };
 		D18C8BA5C7CF7C47522EDB80 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -108,7 +106,6 @@
 			children = (
 				37E3BCEB1AC3D57600A81554 /* AppDelegate.swift */,
 				37E3BCEF1AC3D57600A81554 /* Main.storyboard */,
-				9D6489F41B7195EC00640C4E /* CustomTransitioningController.swift */,
 				37C5DC5C1ACB6E9200C8FD0C /* TimelineView */,
 				37E3BCF21AC3D57600A81554 /* Images.xcassets */,
 				37E3BCF41AC3D57600A81554 /* LaunchScreen.xib */,
@@ -312,7 +309,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D6489F51B7195EC00640C4E /* CustomTransitioningController.swift in Sources */,
 				37C5DC631ACB704A00C8FD0C /* TimelineViewCell.swift in Sources */,
 				37E3BCEC1AC3D57600A81554 /* AppDelegate.swift in Sources */,
 				37C5DC5E1ACB6EAB00C8FD0C /* TimelineViewController.swift in Sources */,
