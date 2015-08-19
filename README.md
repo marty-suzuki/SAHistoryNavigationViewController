@@ -11,6 +11,9 @@
 
 SAHistoryNavigationViewController realizes iOS task manager like UI in UINavigationContoller.
 
+[ManiacDev.com](https://maniacdev.com/) referred.  
+[https://maniacdev.com/2015/03/open-source-component-enhancing-the-back-button-with-view-history-navigation](https://maniacdev.com/2015/03/open-source-component-enhancing-the-back-button-with-view-history-navigation)
+
 ## Features
 
 - [x] iOS task manager like UI
