@@ -65,12 +65,12 @@ extension UINavigationController {
             return willGetTransitionDelegate()
         }
     }
-    public var useOriginalTransition: Bool {
+    public var interactivePopGestureEnabled: Bool {
         set {
-            willSetUseOriginalTransition(newValue)
+            willSetInteractivePopGestureEnabled(newValue)
         }
         get {
-            return willGetUseOriginalTransition()
+            return willGetInteractivePopGestureEnabled()
         }
     }
     public func showHistory() {}
@@ -78,10 +78,10 @@ extension UINavigationController {
     public func contentView() -> UIView? { return nil }
     func willSetNavigationDelegate(navigationDelegate: SAHistoryNavigationViewControllerDelegate?) {}
     func willGetNavigationDelegate() -> SAHistoryNavigationViewControllerDelegate? { return nil }
-    func willSetTransitionDelegate(transitionDelegate: SAHistoryNavigationViewControllerTransitionDelegate?) {}
-    func willGetTransitionDelegate() -> SAHistoryNavigationViewControllerTransitionDelegate? { return nil }
-    func willSetUseOriginalTransition(useOriginalTransition: Bool) {}
-    func willGetUseOriginalTransition() -> Bool { return true }
+    func willSetNavigationTransitioningDelegate(navigationTransitioningDelegate: SAHistoryNavigationViewControllerTransitioningDelegate?) {}
+    func willGetNavigationTransitioningDelegate() -> SAHistoryNavigationViewControllerTransitioningDelegate? { return nil }
+    func willSetInteractivePopGestureEnabled(interactivePopGestureEnabled: Bool) {}
+    func willGetInteractivePopGestureEnabled() -> Bool { return true }
 }
 ```
 
@@ -118,11 +118,13 @@ This is delegate methods.
     optional func navigationController(navigationController: SAHistoryNavigationViewController, didShowViewController viewController: UIViewController, animated: Bool)
     optional func navigationControllerSupportedInterfaceOrientations(navigationController: SAHistoryNavigationViewController) -> Int
     optional func navigationControllerPreferredInterfaceOrientationForPresentation(navigationController: SAHistoryNavigationViewController) -> UIInterfaceOrientation
+    optional func navigationController(navigationController: SAHistoryNavigationViewController, willHandleEdgeSwipe gesture: UIScreenEdgePanGestureRecognizer)
+    optional func navigationController(navigationController: SAHistoryNavigationViewController, didHandleEdgeSwipe gesture: UIScreenEdgePanGestureRecognizer)
 }
 ```
 
 ```swift
-@objc public protocol SAHistoryNavigationViewControllerTransitionDelegate : NSObjectProtocol {
+@objc public protocol SAHistoryNavigationViewControllerTransitioningDelegate : NSObjectProtocol {
     optional func navigationController(navigationController: SAHistoryNavigationViewController, interactionControllerForAnimationController animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning?
     optional func navigationController(navigationController: SAHistoryNavigationViewController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
 }

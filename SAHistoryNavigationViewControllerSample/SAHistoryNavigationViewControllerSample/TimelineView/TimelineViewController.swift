@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SAHistoryNavigationViewController
 
 class TimelineViewController: UIViewController {
 
@@ -40,8 +39,6 @@ class TimelineViewController: UIViewController {
         tableView.layoutMargins = UIEdgeInsetsZero
         tableView.dataSource = self
         tableView.delegate = self
-
-        navigationController?.useOriginalTransition = true
     }
 
     override func didReceiveMemoryWarning() {
