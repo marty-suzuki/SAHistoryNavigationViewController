@@ -26,7 +26,6 @@ extension UIView {
 
 extension UIViewController {
   func screenshotFromWindow(scale: CGFloat = 0.0) -> UIImage? {
-
     if let window = UIApplication.sharedApplication().windows.first as? UIWindow {
       UIGraphicsBeginImageContextWithOptions(window.frame.size, false, scale)
       window.drawViewHierarchyInRect(window.bounds, afterScreenUpdates: true)
@@ -34,7 +33,6 @@ extension UIViewController {
       UIGraphicsEndImageContext()
       return image
     }
-
     return nil
   }
 }
@@ -83,7 +81,6 @@ public class SAHistoryNavigationViewController: UINavigationController {
     let width = UIScreen.mainScreen().bounds.size.width
 
     //???: width * 3??
-
     NSLayoutConstraint.applyAutoLayout(view, target: historyViewController.view, index: nil, top: 0.0, left: Float(-width), right: Float(-width), bottom: 0.0, height: nil, width: Float(width * 3))
 
     let  longPressGesture = UILongPressGestureRecognizer(target: self, action: "detectLongTap:")
@@ -101,7 +98,6 @@ public class SAHistoryNavigationViewController: UINavigationController {
     if let image = visibleViewController.screenshotFromWindow(scale: SAHistoryNavigationViewController.kImageScale) {
       screenshotImages += [image]
     }
-
     super.pushViewController(viewController, animated: animated)
   }
 
@@ -120,7 +116,6 @@ public class SAHistoryNavigationViewController: UINavigationController {
   }
 
   override public func popToViewController(viewController: UIViewController, animated: Bool) -> [AnyObject]? {
-
     var index: Int?
     for (currentIndex, currentViewController) in enumerate(viewControllers) {
       if currentViewController as? UIViewController == viewController {
@@ -137,6 +132,7 @@ public class SAHistoryNavigationViewController: UINavigationController {
         removeList += [false]
       }
     }
+
     for (currentIndex, shouldRemove) in enumerate(removeList) {
       if shouldRemove {
         if let index = index {
@@ -170,9 +166,7 @@ extension SAHistoryNavigationViewController: UINavigationBarDelegate {
 }
 
 extension SAHistoryNavigationViewController {
-
   override public func showHistory() {
-
     super.showHistory()
 
     if let image = visibleViewController.screenshotFromWindow(scale: SAHistoryNavigationViewController.kImageScale) {
@@ -238,7 +232,6 @@ extension SAHistoryNavigationViewController: SAHistoryViewControllerDelegate {
         popToViewController(viewController, animated: false)
       }
 
-
       UIView.animateWithDuration(0.25, delay: 0.0, options: .CurveEaseOut, animations: {
         self.historyViewController.view.transform = CGAffineTransformIdentity
         self.historyViewController.scrollToIndex(index, animated: false)
@@ -254,7 +247,6 @@ extension SAHistoryNavigationViewController: SAHistoryViewControllerDelegate {
 
 extension SAHistoryNavigationViewController: UIGestureRecognizerDelegate {
   public func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
-
     if let backItem = visibleViewController.navigationController?.navigationBar.backItem {
       var height = 64.0
       if visibleViewController.navigationController?.navigationBarHidden == true {
