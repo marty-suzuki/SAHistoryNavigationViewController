@@ -48,8 +48,6 @@ public class SAHistoryNavigationViewController: UINavigationController {
 
   private var coverView = UIView()
   private var screenshotImages = [UIImage]()
-  private var isSwiping = false
-
 
   override public func viewDidLoad() {
     super.viewDidLoad()
@@ -76,8 +74,6 @@ public class SAHistoryNavigationViewController: UINavigationController {
     navigationBar.delegate = self
 
     delegate = self
-
-    interactivePopGestureRecognizer.addTarget(self, action: "popGestureRecognized:")
   }
 
   override public func pushViewController(viewController: UIViewController, animated: Bool) {
@@ -186,25 +182,10 @@ extension SAHistoryNavigationViewController {
       showHistory()
     }
   }
-
-  func popGestureRecognized(gesture: UIGestureRecognizer) {
-    println("\(gesture.locationInView(gesture.view).x) \(gesture.view?.bounds.width) \(gesture.state.rawValue)")
-    if gesture.state == .Began {
-      isSwiping = true
-    } else if gesture.state == .Ended {
-      isSwiping = false
-    }
-    //    if gesture.state == .Ended {
-    //      screenshotImages.removeLast()
-    //    }
-    //    200 going not
-    //    209 going
-  }
 }
 
 extension SAHistoryNavigationViewController: SAHistoryViewControllerDelegate {
   func didSelectIndex(index: Int) {
-
     if let viewControllers = self.viewControllers as? [UIViewController] {
       var destinationViewController: UIViewController?
       for (currentIndex, viewController) in enumerate(viewControllers) {
