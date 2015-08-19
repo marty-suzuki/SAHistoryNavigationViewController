@@ -50,21 +50,6 @@ public class SAHistoryNavigationViewController: UINavigationController {
   private var screenshotImages = [UIImage]()
   private var isSwiping = false
 
-  required public init(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-  }
-
-  override public init(navigationBarClass: AnyClass!, toolbarClass: AnyClass!) {
-    super.init(navigationBarClass: navigationBarClass, toolbarClass: toolbarClass)
-  }
-
-  override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-  }
-
-  override public init(rootViewController: UIViewController) {
-    super.init(rootViewController: rootViewController)
-  }
 
   override public func viewDidLoad() {
     super.viewDidLoad()
