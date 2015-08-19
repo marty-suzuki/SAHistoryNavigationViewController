@@ -73,15 +73,6 @@ public class SAHistoryNavigationViewController: UINavigationController {
     super.pushViewController(viewController, animated: animated)
   }
 
-//  override public func popViewControllerAnimated(animated: Bool) -> UIViewController? {
-//    //FIXME:
-//    if !isSwiping {
-//      screenshotImages.removeLast()
-//    }
-//    //        }
-//    return super.popViewControllerAnimated(animated)
-//  }
-
   override public func popToRootViewControllerAnimated(animated: Bool) -> [AnyObject]? {
     screenshotImages.removeAll(keepCapacity: false)
     return super.popToRootViewControllerAnimated(animated)
