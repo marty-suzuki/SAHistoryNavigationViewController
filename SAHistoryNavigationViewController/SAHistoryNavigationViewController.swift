@@ -9,19 +9,9 @@
 import UIKit
 
 extension UINavigationController {
-  public weak var navigationDelegate: SAHistoryNavigationViewControllerDelegate? {
-    set {
-      willSetNavigationDelegate(newValue)
-    }
-    get {
-      return willGetNavigationDelegate()
-    }
-  }
   public func showHistory() {}
   public func setHistoryBackgroundColor(color: UIColor) {}
   public func contentView() -> UIView? { return nil }
-  func willSetNavigationDelegate(navigationDelegate: SAHistoryNavigationViewControllerDelegate?) {}
-  func willGetNavigationDelegate() -> SAHistoryNavigationViewControllerDelegate? { return nil }
 }
 
 extension UIView {
@@ -49,19 +39,6 @@ extension UIViewController {
   }
 }
 
-@objc public protocol SAHistoryNavigationViewControllerDelegate : NSObjectProtocol {
-
-  optional func navigationController(navigationController: SAHistoryNavigationViewController, willShowViewController viewController: UIViewController, animated: Bool)
-  optional func navigationController(navigationController: SAHistoryNavigationViewController, didShowViewController viewController: UIViewController, animated: Bool)
-
-  optional func navigationControllerSupportedInterfaceOrientations(navigationController: SAHistoryNavigationViewController) -> Int
-
-  optional func navigationControllerPreferredInterfaceOrientationForPresentation(navigationController: SAHistoryNavigationViewController) -> UIInterfaceOrientation
-
-  optional func navigationController(navigationController: SAHistoryNavigationViewController, willHandleEdgeSwipe gesture: UIScreenEdgePanGestureRecognizer)
-  optional func navigationController(navigationController: SAHistoryNavigationViewController, didHandleEdgeSwipe gesture: UIScreenEdgePanGestureRecognizer)
-}
-
 public class SAHistoryNavigationViewController: UINavigationController {
 
   private static let kImageScale: CGFloat = 1.0
@@ -73,8 +50,6 @@ public class SAHistoryNavigationViewController: UINavigationController {
   private var coverView = UIView()
   private var screenshotImages = [UIImage]()
   private var isSwiping = false
-
-  private weak var _navigationDelegate: SAHistoryNavigationViewControllerDelegate?
 
   required public init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
@@ -186,15 +161,6 @@ public class SAHistoryNavigationViewController: UINavigationController {
       }
     }
   }
-
-  override func willSetNavigationDelegate(navigationDelegate: SAHistoryNavigationViewControllerDelegate?) {
-    _navigationDelegate = navigationDelegate
-  }
-
-  override func willGetNavigationDelegate() -> SAHistoryNavigationViewControllerDelegate? {
-    return _navigationDelegate
-  }
-
 }
 
 extension SAHistoryNavigationViewController: UINavigationBarDelegate {
