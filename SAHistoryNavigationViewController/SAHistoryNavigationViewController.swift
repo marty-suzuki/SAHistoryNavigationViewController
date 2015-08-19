@@ -44,6 +44,7 @@ public class SAHistoryNavigationViewController: UINavigationController {
   var historyViewController = SAHistoryViewController()
 
   public var historyContentView = UIView()
+  //FIXME: handle rotation
 
   private var coverView = UIView()
   private var screenshotImages = [UIImage]()
