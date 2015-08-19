@@ -15,6 +15,7 @@ SAHistoryNavigationViewController realizes iOS task manager like UI in UINavigat
 
 - [x] iOS task manager like UI
 - [x] Launch Navigation History with Long tap action of Back Bar Button
+- [x] Solved the issue in https://github.com/szk-atmosphere/SAHistoryNavigationViewController where presenting a UIViewController in modal, moves the SAHistoryNavigationViewController behind status bar.
 
 ## Installation
 
