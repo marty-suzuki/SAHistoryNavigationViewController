@@ -38,25 +38,17 @@ extension UIViewController {
 }
 
 public class SAHistoryNavigationViewController: UINavigationController {
-
-  private static let kImageScale: CGFloat = 1.0
-
-  var historyViewController = SAHistoryViewController()
-
   public var historyContentView = UIView()
   //FIXME: handle rotation
 
-  private var coverView = UIView()
+  private static let kImageScale: CGFloat = 1.0
+  private var historyViewController = SAHistoryViewController()
   private var screenshotImages = [UIImage]()
 
   override public func viewDidLoad() {
     super.viewDidLoad()
 
-    coverView.backgroundColor = .grayColor()
-    coverView.hidden = true
-    NSLayoutConstraint.applyAutoLayout(view, target: coverView, index: nil, top: 0.0, left: 0.0, right: 0.0, bottom: 0.0, height: nil, width: nil)
-
-    historyContentView.backgroundColor = .clearColor()
+    historyContentView.backgroundColor = .grayColor()
     historyContentView.hidden = true
     NSLayoutConstraint.applyAutoLayout(view, target: historyContentView, index: nil, top: 0.0, left: 0.0, right: 0.0, bottom: 0.0, height: nil, width: nil)
 
@@ -160,7 +152,6 @@ extension SAHistoryNavigationViewController {
     historyViewController.reload()
     historyViewController.view.alpha = 1.0
 
-    coverView.hidden = false
     historyContentView.hidden = false
 
     setNavigationBarHidden(true, animated: false)
@@ -170,7 +161,8 @@ extension SAHistoryNavigationViewController {
   }
 
   override public func setHistoryBackgroundColor(color: UIColor) {
-    coverView.backgroundColor = color
+    historyContentView.backgroundColor = color
+    super.setHistoryBackgroundColor(color)
   }
 
   override public func contentView() -> UIView? {
@@ -203,7 +195,6 @@ extension SAHistoryNavigationViewController: SAHistoryViewControllerDelegate {
         self.historyViewController.view.transform = CGAffineTransformIdentity
         self.historyViewController.scrollToIndex(index, animated: false)
         }) { (finished) in
-          self.coverView.hidden = true
           self.historyContentView.hidden = true
           self.historyViewController.view.alpha = 0.0
           self.setNavigationBarHidden(false, animated: false)
