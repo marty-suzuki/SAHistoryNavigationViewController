@@ -22,27 +22,28 @@ class SAHistoryNavigationTransitionController: NSObject, UIViewControllerAnimate
         super.init()
     }
     
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
+    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
         return SAHistoryNavigationTransitionController.kDefaultDuration
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        let toViewContoller = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)
-        let fromViewContoller = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
+        guard let
+            containerView = transitionContext.containerView(),
+            fromView = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)?.view,
+            toView = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)?.view
+        else {
+            return
+        }
         
         currentTransitionContext = transitionContext
-        let containerView = transitionContext.containerView()
-        
-        if let fromView = fromViewContoller?.view, toView = toViewContoller?.view {
-            switch navigationControllerOperation {
-                case .Push:
-                    pushAnimation(transitionContext, toView: toView, fromView: fromView, containerView: containerView)
-                case .Pop:
-                    popAnimation(transitionContext, toView: toView, fromView: fromView, containerView: containerView)
-                case .None:
-                    let cancelled = transitionContext.transitionWasCancelled()
-                    transitionContext.completeTransition(!cancelled)
-            }
+        switch navigationControllerOperation {
+            case .Push:
+                pushAnimation(transitionContext, toView: toView, fromView: fromView, containerView: containerView)
+            case .Pop:
+                popAnimation(transitionContext, toView: toView, fromView: fromView, containerView: containerView)
+            case .None:
+                let cancelled = transitionContext.transitionWasCancelled()
+                transitionContext.completeTransition(!cancelled)
         }
     }
 }

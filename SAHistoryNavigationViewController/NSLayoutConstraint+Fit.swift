@@ -11,7 +11,7 @@ import UIKit
 extension NSLayoutConstraint {
     class func applyAutoLayout(superview: UIView, target: UIView, index: Int?, top: Float?, left: Float?, right: Float?, bottom: Float?, height: Float?, width: Float?) {
         
-        target.setTranslatesAutoresizingMaskIntoConstraints(false)
+        target.translatesAutoresizingMaskIntoConstraints = false
         if let index = index {
             superview.insertSubview(target, atIndex: index)
         } else {
@@ -29,7 +29,7 @@ extension NSLayoutConstraint {
         if let bottom = bottom {
             verticalFormat += "-(\(bottom))-|"
         }
-        let verticalConstrains = NSLayoutConstraint.constraintsWithVisualFormat(verticalFormat, options: nil, metrics: nil, views: [ "target" : target ])
+        let verticalConstrains = NSLayoutConstraint.constraintsWithVisualFormat(verticalFormat, options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: [ "target" : target ])
         superview.addConstraints(verticalConstrains)
         
         var horizonFormat = "H:"
@@ -44,7 +44,7 @@ extension NSLayoutConstraint {
         if let right = right {
             horizonFormat += "-(\(right))-|"
         }
-        let horizonConstrains = NSLayoutConstraint.constraintsWithVisualFormat(horizonFormat, options: nil, metrics: nil, views: [ "target" : target ])
+        let horizonConstrains = NSLayoutConstraint.constraintsWithVisualFormat(horizonFormat, options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: [ "target" : target ])
         superview.addConstraints(horizonConstrains)
     }
 }
