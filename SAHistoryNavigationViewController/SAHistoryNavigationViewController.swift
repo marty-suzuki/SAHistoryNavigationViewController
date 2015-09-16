@@ -56,16 +56,14 @@ extension UIView {
 
 extension UIViewController {
     func screenshotFromWindow(scale: CGFloat = 0.0) -> UIImage? {
-
-        if let window = UIApplication.sharedApplication().windows.first as? UIWindow {
-            UIGraphicsBeginImageContextWithOptions(window.frame.size, false, scale)
-            window.drawViewHierarchyInRect(window.bounds, afterScreenUpdates: true)
-            let image = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            return image
+        guard let window = UIApplication.sharedApplication().windows.first else {
+            return nil
         }
-        
-        return nil
+        UIGraphicsBeginImageContextWithOptions(window.frame.size, false, scale)
+        window.drawViewHierarchyInRect(window.bounds, afterScreenUpdates: true)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
     }
 }
 
@@ -74,7 +72,7 @@ extension UIViewController {
     optional func navigationController(navigationController: SAHistoryNavigationViewController, willShowViewController viewController: UIViewController, animated: Bool)
     optional func navigationController(navigationController: SAHistoryNavigationViewController, didShowViewController viewController: UIViewController, animated: Bool)
     
-    optional func navigationControllerSupportedInterfaceOrientations(navigationController: SAHistoryNavigationViewController) -> Int
+    optional func navigationControllerSupportedInterfaceOrientations(navigationController: SAHistoryNavigationViewController) -> UIInterfaceOrientationMask
     
     optional func navigationControllerPreferredInterfaceOrientationForPresentation(navigationController: SAHistoryNavigationViewController) -> UIInterfaceOrientation
     
@@ -110,7 +108,7 @@ public class SAHistoryNavigationViewController: UINavigationController {
     private var _interactivePopGestureEnabled = true
 
     required public init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
     }
     
     override public init(navigationBarClass: AnyClass!, toolbarClass: AnyClass!) {
@@ -148,14 +146,14 @@ public class SAHistoryNavigationViewController: UINavigationController {
         let edgePanGestureRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: "handleEdgeSwipe:")
         edgePanGestureRecognizer.edges = .Left
         view.addGestureRecognizer(edgePanGestureRecognizer)
-        interactivePopGestureRecognizer.requireGestureRecognizerToFail(edgePanGestureRecognizer)
+        interactivePopGestureRecognizer?.requireGestureRecognizerToFail(edgePanGestureRecognizer)
         self.edgePanGestureRecognizer = edgePanGestureRecognizer
         
         delegate = self
     }
     
     override public func pushViewController(viewController: UIViewController, animated: Bool) {
-        if let image = visibleViewController.screenshotFromWindow(scale: SAHistoryNavigationViewController.kImageScale) {
+        if let image = visibleViewController?.screenshotFromWindow(SAHistoryNavigationViewController.kImageScale) {
             screenshotImages += [image]
         }
         
@@ -169,30 +167,29 @@ public class SAHistoryNavigationViewController: UINavigationController {
         return super.popViewControllerAnimated(animated)
     }
     
-    override public func popToRootViewControllerAnimated(animated: Bool) -> [AnyObject]? {
+    public override func popToRootViewControllerAnimated(animated: Bool) -> [UIViewController]? {
         screenshotImages.removeAll(keepCapacity: false)
         return super.popToRootViewControllerAnimated(animated)
     }
     
-    override public func popToViewController(viewController: UIViewController, animated: Bool) -> [AnyObject]? {
-        
+    public override func popToViewController(viewController: UIViewController, animated: Bool) -> [UIViewController]? {
         var index: Int?
-        for (currentIndex, currentViewController) in enumerate(viewControllers) {
-            if currentViewController as? UIViewController == viewController {
+        for (currentIndex, currentViewController) in viewControllers.enumerate() {
+            if currentViewController == viewController {
                 index = currentIndex
                 break
             }
         }
         
         var removeList = [Bool]()
-        for (currentIndex, image) in enumerate(screenshotImages) {
+        for (currentIndex, _) in screenshotImages.enumerate() {
             if currentIndex >= index {
                 removeList += [true]
             } else {
                 removeList += [false]
             }
         }
-        for (currentIndex, shouldRemove) in enumerate(removeList) {
+        for shouldRemove in removeList {
             if shouldRemove {
                 if let index = index {
                     screenshotImages.removeAtIndex(index)
@@ -202,17 +199,14 @@ public class SAHistoryNavigationViewController: UINavigationController {
         return super.popToViewController(viewController, animated: animated)
     }
     
-    override public func setViewControllers(viewControllers: [AnyObject]!, animated: Bool) {
+    public override func setViewControllers(viewControllers: [UIViewController], animated: Bool) {
         super.setViewControllers(viewControllers, animated: animated)
-        for (currentIndex, viewController) in enumerate(viewControllers) {
+        for (currentIndex, viewController) in viewControllers.enumerate() {
             if currentIndex == viewControllers.endIndex {
                 break
             }
-            
-            if let viewController = viewController as? UIViewController {
-                if let image = viewController.screenshotFromWindow(scale: SAHistoryNavigationViewController.kImageScale) {
-                    screenshotImages += [image]
-                }
+            if let image = viewController.screenshotFromWindow(SAHistoryNavigationViewController.kImageScale) {
+                screenshotImages += [image]
             }
         }
     }
@@ -287,7 +281,7 @@ extension SAHistoryNavigationViewController {
         super.showHistory()
         
         //screenshotImages += [visibleViewController.view.screenshotImage(scale: kImageScale)]
-        if let image = visibleViewController.screenshotFromWindow(scale: SAHistoryNavigationViewController.kImageScale) {
+        if let image = visibleViewController?.screenshotFromWindow(SAHistoryNavigationViewController.kImageScale) {
             screenshotImages += [image]
         }
 
@@ -325,30 +319,27 @@ extension SAHistoryNavigationViewController {
 
 extension SAHistoryNavigationViewController: SAHistoryViewControllerDelegate {
     func didSelectIndex(index: Int) {
+        var destinationViewController: UIViewController?
+        for (currentIndex, viewController) in viewControllers.enumerate() {
+            if currentIndex == index {
+                destinationViewController = viewController
+                break
+            }
+        }
+    
+        if let viewController = destinationViewController {
+            popToViewController(viewController, animated: false)
+        }
         
-        if let viewControllers = self.viewControllers as? [UIViewController] {
-            var destinationViewController: UIViewController?
-            for (currentIndex, viewController) in enumerate(viewControllers) {
-                if currentIndex == index {
-                    destinationViewController = viewController
-                    break
-                }
-            }
         
-            if let viewController = destinationViewController {
-                popToViewController(viewController, animated: false)
-            }
-            
-            
-            UIView.animateWithDuration(0.25, delay: 0.0, options: .CurveEaseOut, animations: {
-                self.historyViewController.view.transform = CGAffineTransformIdentity
-                self.historyViewController.scrollToIndex(index, animated: false)
-            }) { (finished) in
-                self.coverView.hidden = true
-                self.historyContentView.hidden = true
-                self.historyViewController.view.alpha = 0.0
-                self.setNavigationBarHidden(false, animated: false)
-            }
+        UIView.animateWithDuration(0.25, delay: 0.0, options: .CurveEaseOut, animations: {
+            self.historyViewController.view.transform = CGAffineTransformIdentity
+            self.historyViewController.scrollToIndex(index, animated: false)
+        }) { finished in
+            self.coverView.hidden = true
+            self.historyContentView.hidden = true
+            self.historyViewController.view.alpha = 0.0
+            self.setNavigationBarHidden(false, animated: false)
         }
     }
 }
@@ -356,9 +347,9 @@ extension SAHistoryNavigationViewController: SAHistoryViewControllerDelegate {
 extension SAHistoryNavigationViewController: UIGestureRecognizerDelegate {
     public func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
         
-        if let backItem = visibleViewController.navigationController?.navigationBar.backItem {
+        if let _ = visibleViewController?.navigationController?.navigationBar.backItem {
             var height = 64.0
-            if visibleViewController.navigationController?.navigationBarHidden == true {
+            if visibleViewController?.navigationController?.navigationBarHidden == true {
                 height = 44.0
             }
             let backButtonFrame = CGRect(x: 0.0, y :0.0,  width: 100.0, height: height)
@@ -386,11 +377,11 @@ extension SAHistoryNavigationViewController: UINavigationControllerDelegate {
         _navigationDelegate?.navigationController?(self, didShowViewController: viewController, animated: animated)
     }
     
-    public func navigationControllerSupportedInterfaceOrientations(navigationController: UINavigationController) -> Int {
+    public func navigationControllerSupportedInterfaceOrientations(navigationController: UINavigationController) -> UIInterfaceOrientationMask {
         if let supportedInterfaceOrientations = _navigationDelegate?.navigationControllerSupportedInterfaceOrientations?(self) {
             return supportedInterfaceOrientations
         }
-        return UIInterfaceOrientation.Unknown.rawValue
+        return .All
     }
     
     public func navigationControllerPreferredInterfaceOrientationForPresentation(navigationController: UINavigationController) -> UIInterfaceOrientation {

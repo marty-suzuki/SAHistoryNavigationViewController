@@ -18,6 +18,8 @@ SAHistoryNavigationViewController realizes iOS task manager like UI in UINavigat
 
 - [x] iOS task manager like UI
 - [x] Launch Navigation History with Long tap action of Back Bar Button
+- [x] Support Swift2.0
+- [ ] Support 3D Touch
 
 ## Installation
 
@@ -116,7 +118,7 @@ This is delegate methods.
 @objc public protocol SAHistoryNavigationViewControllerDelegate : NSObjectProtocol {
     optional func navigationController(navigationController: SAHistoryNavigationViewController, willShowViewController viewController: UIViewController, animated: Bool)
     optional func navigationController(navigationController: SAHistoryNavigationViewController, didShowViewController viewController: UIViewController, animated: Bool)
-    optional func navigationControllerSupportedInterfaceOrientations(navigationController: SAHistoryNavigationViewController) -> Int
+    optional func navigationControllerSupportedInterfaceOrientations(navigationController: SAHistoryNavigationViewController) -> UIInterfaceOrientationMask
     optional func navigationControllerPreferredInterfaceOrientationForPresentation(navigationController: SAHistoryNavigationViewController) -> UIInterfaceOrientation
     optional func navigationController(navigationController: SAHistoryNavigationViewController, willHandleEdgeSwipe gesture: UIScreenEdgePanGestureRecognizer)
     optional func navigationController(navigationController: SAHistoryNavigationViewController, didHandleEdgeSwipe gesture: UIScreenEdgePanGestureRecognizer)
