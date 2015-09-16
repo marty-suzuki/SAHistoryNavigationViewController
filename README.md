@@ -25,7 +25,7 @@ SAHistoryNavigationViewController realizes iOS task manager like UI in UINavigat
 
 #### CocoaPods
 
-SAHistoryNavigationViewController is available through [CocoaPods](http://cocoapods.org). If you have cocoapods 0.36.0 or greater, you can install
+SAHistoryNavigationViewController is available through [CocoaPods](http://cocoapods.org). If you have cocoapods 0.38.0 or greater, you can install
 it, simply add the following line to your Podfile:
 
     pod "SAHistoryNavigationViewController"
@@ -134,7 +134,7 @@ This is delegate methods.
 
 ## Requirements
 
-- Xcode 6.3 or greater
+- Xcode 7.0 or greater
 - iOS7.0(manually only) or greater
 
 ## Author
