@@ -49,7 +49,7 @@ public class SAHistoryNavigationViewController: UINavigationController {
 
   private static let kImageScale: CGFloat = 1.0
   private var historyViewController = SAHistoryViewController()
-  private var screenshotImages = [UIImage]()
+  private var screenshots = [UIImage]()
 
   override public func viewDidLoad() {
     super.viewDidLoad()
@@ -74,20 +74,20 @@ public class SAHistoryNavigationViewController: UINavigationController {
 
   override public func pushViewController(viewController: UIViewController, animated: Bool) {
     if let image = visibleViewController.screenshotFromWindow(scale: SAHistoryNavigationViewController.kImageScale) {
-      screenshotImages += [image]
+      screenshots += [image]
     }
     super.pushViewController(viewController, animated: animated)
   }
 
   override public func popToRootViewControllerAnimated(animated: Bool) -> [AnyObject]? {
-    screenshotImages.removeAll(keepCapacity: false)
+    screenshots.removeAll(keepCapacity: false)
     return super.popToRootViewControllerAnimated(animated)
   }
 
   override public func popToViewController(viewController: UIViewController, animated: Bool) -> [AnyObject]? {
     if let vcs = viewControllers as? [UIViewController],
       let index = find(vcs, viewController) {
-        screenshotImages.removeRange(index..<screenshotImages.count)
+        screenshots.removeRange(index..<screenshots.count)
     }
     return super.popToViewController(viewController, animated: animated)
   }
@@ -101,7 +101,7 @@ public class SAHistoryNavigationViewController: UINavigationController {
 
       if let viewController = viewController as? UIViewController {
         if let image = viewController.screenshotFromWindow(scale: SAHistoryNavigationViewController.kImageScale) {
-          screenshotImages += [image]
+          screenshots += [image]
         }
       }
     }
@@ -110,7 +110,7 @@ public class SAHistoryNavigationViewController: UINavigationController {
 
 extension SAHistoryNavigationViewController: UINavigationBarDelegate {
   public func navigationBar(navigationBar: UINavigationBar, didPopItem item: UINavigationItem) {
-    screenshotImages.removeRange(navigationBar.items.count..<screenshotImages.count)
+    screenshots.removeRange(navigationBar.items.count..<screenshots.count)
   }
 }
 
@@ -119,12 +119,12 @@ extension SAHistoryNavigationViewController {
     super.showHistory()
 
     if let image = visibleViewController.screenshotFromWindow(scale: SAHistoryNavigationViewController.kImageScale) {
-      screenshotImages += [image]
+      screenshots += [image]
     }
 
     historyDelegate?.historyControllerDidShowHistory(self, viewController: visibleViewController)
 
-    historyViewController.images = screenshotImages
+    historyViewController.images = screenshots
     historyViewController.currentIndex = viewControllers.count - 1
     historyViewController.reload()
     historyViewController.view.alpha = 1.0
