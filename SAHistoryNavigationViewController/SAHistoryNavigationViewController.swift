@@ -110,7 +110,7 @@ public class SAHistoryNavigationViewController: UINavigationController {
 
 extension SAHistoryNavigationViewController: UINavigationBarDelegate {
   public func navigationBar(navigationBar: UINavigationBar, didPopItem item: UINavigationItem) {
-    screenshotImages.removeLast()
+    screenshotImages.removeRange(navigationBar.items.count..<screenshotImages.count)
   }
 }
 
