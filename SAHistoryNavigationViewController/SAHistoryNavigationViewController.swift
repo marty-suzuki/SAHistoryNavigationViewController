@@ -42,8 +42,14 @@ struct ScreenShot {
   var navigationItem: UINavigationItem
 }
 
+@objc public protocol SAHistoryNavigationViewControllerDelegate {
+  func historyControllerDidShowHistory(controller: SAHistoryNavigationViewController, viewController: UIViewController)
+}
+
 public class SAHistoryNavigationViewController: UINavigationController {
   public var historyContentView = UIView()
+  public weak var historyDelegate: SAHistoryNavigationViewControllerDelegate?
+
   //FIXME: handle rotation
 
   private static let kImageScale: CGFloat = 1.0
@@ -122,6 +128,8 @@ extension SAHistoryNavigationViewController {
     if let image = visibleViewController.screenshotFromWindow(scale: SAHistoryNavigationViewController.kImageScale) {
       screenshots += [ScreenShot(image: image, navigationItem: visibleViewController.navigationItem)]
     }
+
+    historyDelegate?.historyControllerDidShowHistory(self, viewController: visibleViewController)
 
     historyViewController.images = screenshots.map() { $0.image }
     historyViewController.currentIndex = viewControllers.count - 1
