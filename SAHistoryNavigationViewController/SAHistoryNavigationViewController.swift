@@ -79,29 +79,9 @@ public class SAHistoryNavigationViewController: UINavigationController {
   }
 
   override public func popToViewController(viewController: UIViewController, animated: Bool) -> [AnyObject]? {
-    var index: Int?
-    for (currentIndex, currentViewController) in enumerate(viewControllers) {
-      if currentViewController as? UIViewController == viewController {
-        index = currentIndex
-        break
-      }
-    }
-
-    var removeList = [Bool]()
-    for (currentIndex, image) in enumerate(screenshotImages) {
-      if currentIndex >= index {
-        removeList += [true]
-      } else {
-        removeList += [false]
-      }
-    }
-
-    for (currentIndex, shouldRemove) in enumerate(removeList) {
-      if shouldRemove {
-        if let index = index {
-          screenshotImages.removeAtIndex(index)
-        }
-      }
+    if let vcs = viewControllers as? [UIViewController],
+      let index = find(vcs, viewController) {
+        screenshotImages.removeRange(index..<screenshotImages.count)
     }
     return super.popToViewController(viewController, animated: animated)
   }
