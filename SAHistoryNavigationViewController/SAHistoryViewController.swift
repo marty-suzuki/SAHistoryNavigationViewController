@@ -1,6 +1,6 @@
 //
 //  SAHistoryViewController.swift
-//  SAHistoryNavigationViewControllerSample
+//  SAHistoryNavigationViewController
 //
 //  Created by 鈴木大貴 on 2015/03/26.
 //  Copyright (c) 2015年 鈴木大貴. All rights reserved.
@@ -9,19 +9,20 @@
 import UIKit
 
 protocol SAHistoryViewControllerDelegate: class {
-    func didSelectIndex(index: Int)
+    func historyViewController(viewController: SAHistoryViewController, didSelectIndex index: Int)
 }
 
 class SAHistoryViewController: UIViewController {
-
-    let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
+    private let kLineSpace: CGFloat = 20.0
     
+    weak var contentView: UIView?
+    let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
     var images: [UIImage]?
     var currentIndex: Int = 0
-    
     weak var delegate: SAHistoryViewControllerDelegate?
     
-    private let kLineSpace: CGFloat = 20.0
+    private var selectedIndex: Int?
+    private var isFirstLayoutSubviews = true
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -31,10 +32,20 @@ class SAHistoryViewController: UIViewController {
         super.init(coder: aDecoder)!
     }
     
+    deinit {
+        contentView?.removeFromSuperview()
+        contentView = nil
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        if let contentView = contentView {
+            NSLayoutConstraint.applyAutoLayout(view, target: contentView, index: nil, top: 0.0, left: 0.0, right: 0.0, bottom: 0.0, height: nil, width: nil)
+        }
+        view.backgroundColor = contentView?.backgroundColor
+        
         let size = UIScreen.mainScreen().bounds.size
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.itemSize = size
@@ -50,22 +61,31 @@ class SAHistoryViewController: UIViewController {
         collectionView.backgroundColor = .clearColor()
         collectionView.showsHorizontalScrollIndicator = false
         
-        NSLayoutConstraint.applyAutoLayout(view, target: collectionView, index: nil, top: 0.0, left: 0.0, right: 0.0, bottom: 0.0, height: nil, width: nil)
+        NSLayoutConstraint.applyAutoLayout(view, target: collectionView, index: nil, top: 0.0, left: -Float(size.width), right: -Float(size.width), bottom: 0.0, height: nil, width: nil)
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if isFirstLayoutSubviews {
+            scrollToIndex(currentIndex, animated: false)
+            isFirstLayoutSubviews = false
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    func reload() {
-        collectionView.reloadData()
-        scrollToIndex(currentIndex, animated: false)
+    private func scrollToIndex(index: Int, animated: Bool) {
+        collectionView.scrollToItemAtIndexPath(NSIndexPath(forRow: index, inSection: 0), atScrollPosition: .CenteredHorizontally, animated: animated)
     }
     
-    func scrollToIndex(index: Int, animated: Bool) {
-        let width = UIScreen.mainScreen().bounds.size.width
-        collectionView.setContentOffset(CGPoint(x: (width + kLineSpace) * CGFloat(index), y: 0), animated: animated)
+    func scrollToSelectedIndex(animated: Bool) {
+        guard let index = selectedIndex else {
+            return
+        }
+        scrollToIndex(index, animated: animated)
     }
 }
 
@@ -97,6 +117,8 @@ extension SAHistoryViewController: UICollectionViewDataSource {
 extension SAHistoryViewController: UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         collectionView.deselectItemAtIndexPath(indexPath, animated: false)
-        delegate?.didSelectIndex(indexPath.row)
+        let index = indexPath.row
+        selectedIndex = index
+        delegate?.historyViewController(self, didSelectIndex:index)
     }
 }

@@ -11,6 +11,7 @@
 		0E3D11AF2F57FD9CC649FEA4 /* Pods-SAHistoryNavigationViewController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C73B26E494424D7FE832457C /* Pods-SAHistoryNavigationViewController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3D48627D06179601349C15A3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6353072CFE9F271322AF6DE /* Foundation.framework */; };
 		58E95F27E6DA4CB8BFE65E14 /* Pods-SAHistoryNavigationViewController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 30CEB16C867016EA9A3B020A /* Pods-SAHistoryNavigationViewController-dummy.m */; };
+		9DD2BEA81BDE5DE80042E077 /* SAHistoryViewAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD2BEA61BDE58210042E077 /* SAHistoryViewAnimatedTransitioning.swift */; };
 		AB49A5A1FDEC458D30376933 /* NSLayoutConstraint+Fit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A737C99CB2D0F24419525D8 /* NSLayoutConstraint+Fit.swift */; };
 		ABE0E940B53527112319EA93 /* SAHistoryNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBDEF250860D508670F7719 /* SAHistoryNavigationViewController.swift */; };
 		C999F97E4DFC6712ABC771A3 /* SAHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA58D267A9651740FBDCE03A /* SAHistoryViewController.swift */; };
@@ -42,6 +43,7 @@
 		777B23C03417127A231CEE9B /* Pods-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-frameworks.sh"; sourceTree = "<group>"; };
 		7A5C7C9E33E6FFA54D13F358 /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
 		97EC98541326D8B95323824E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
+		9DD2BEA61BDE58210042E077 /* SAHistoryViewAnimatedTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAHistoryViewAnimatedTransitioning.swift; sourceTree = "<group>"; };
 		ADA5CDA5F303AF05022E4A52 /* Pods-SAHistoryNavigationViewController-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SAHistoryNavigationViewController-Private.xcconfig"; sourceTree = "<group>"; };
 		B3C35EBE9ECDBF16964823E8 /* Pods-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-umbrella.h"; sourceTree = "<group>"; };
 		B6FA0CF690239CBFB155F1EE /* Pods-SAHistoryNavigationViewController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SAHistoryNavigationViewController-prefix.pch"; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				1A737C99CB2D0F24419525D8 /* NSLayoutConstraint+Fit.swift */,
 				FBBDEF250860D508670F7719 /* SAHistoryNavigationViewController.swift */,
 				EA58D267A9651740FBDCE03A /* SAHistoryViewController.swift */,
+				9DD2BEA61BDE58210042E077 /* SAHistoryViewAnimatedTransitioning.swift */,
 			);
 			path = SAHistoryNavigationViewController;
 			sourceTree = "<group>";
@@ -245,7 +248,7 @@
 		6EA6F98A95CB42618A819EB5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = EF372BD3FE9C817700DA7A68 /* Build configuration list for PBXProject "Pods" */;
@@ -282,6 +285,7 @@
 				AB49A5A1FDEC458D30376933 /* NSLayoutConstraint+Fit.swift in Sources */,
 				58E95F27E6DA4CB8BFE65E14 /* Pods-SAHistoryNavigationViewController-dummy.m in Sources */,
 				ABE0E940B53527112319EA93 /* SAHistoryNavigationViewController.swift in Sources */,
+				9DD2BEA81BDE5DE80042E077 /* SAHistoryViewAnimatedTransitioning.swift in Sources */,
 				C999F97E4DFC6712ABC771A3 /* SAHistoryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
