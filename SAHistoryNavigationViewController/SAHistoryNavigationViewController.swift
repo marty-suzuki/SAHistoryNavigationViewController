@@ -56,6 +56,7 @@ public class SAHistoryNavigationViewController: UINavigationController {
     
     private var screenshots = [UIImage]()
     private var historyViewController: SAHistoryViewController?
+    private var interactiveTransition: UIPercentDrivenInteractiveTransition?
     private weak var _historyDelegate: SAHistoryNavigationViewControllerDelegate?
     private let historyContentView = UIView()
 
@@ -80,9 +81,15 @@ public class SAHistoryNavigationViewController: UINavigationController {
         
         historyContentView.backgroundColor = .grayColor()
         
-        let  longPressGesture = UILongPressGestureRecognizer(target: self, action: "detectLongTap:")
-        longPressGesture.delegate = self
-        navigationBar.addGestureRecognizer(longPressGesture)
+        let gestureRecognizer: UIGestureRecognizer
+        if #available(iOS 9, *) {
+            interactiveTransition = UIPercentDrivenInteractiveTransition()
+            gestureRecognizer = SAThirdDimensionalTouchRecognizer(target: self, action: "handleThirdDimensionalTouch:")
+        } else {
+            gestureRecognizer = UILongPressGestureRecognizer(target: self, action: "detectLongTap:")
+        }
+        gestureRecognizer.delegate = self
+        navigationBar.addGestureRecognizer(gestureRecognizer)
         
         navigationBar.delegate = self
     }
@@ -126,6 +133,47 @@ public class SAHistoryNavigationViewController: UINavigationController {
             }
         }
     }
+    
+    @available(iOS 9, *)
+    func handleThirdDimensionalTouch(gesture: SAThirdDimensionalTouchRecognizer) {
+        switch gesture.state {
+        case .Began:
+            guard let image = visibleViewController?.screenshotFromWindow(SAHistoryNavigationViewController.kImageScale) else {
+                return
+            }
+            screenshots += [image]
+            let historyViewController = createHistoryViewController()
+            self.historyViewController = historyViewController
+            setNavigationBarHidden(true, animated: false)
+            presentViewController(historyViewController, animated: true, completion: nil)
+            
+        case .Changed:
+            interactiveTransition?.updateInteractiveTransition(min(0.75, max(0, gesture.percentage)))
+            
+        case .Ended, .Cancelled,  .Failed, .Possible:
+            if gesture.percentage >= 0.75 {
+                interactiveTransition?.finishInteractiveTransition()
+            } else {
+                interactiveTransition?.cancelInteractiveTransition()
+            }
+        }
+    }
+    
+    func detectLongTap(gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .Began {
+            showHistory()
+        }
+    }
+    
+    private func createHistoryViewController() -> SAHistoryViewController {
+        let historyViewController = SAHistoryViewController()
+        historyViewController.delegate = self
+        historyViewController.contentView = historyContentView
+        historyViewController.images = screenshots
+        historyViewController.currentIndex = viewControllers.count - 1
+        historyViewController.transitioningDelegate = self
+        return historyViewController
+    }
 }
 
 extension SAHistoryNavigationViewController: UINavigationBarDelegate {
@@ -142,19 +190,11 @@ extension SAHistoryNavigationViewController {
         guard let image = visibleViewController?.screenshotFromWindow(SAHistoryNavigationViewController.kImageScale) else {
             return
         }
-        
         screenshots += [image]
-        
-        let historyViewController = SAHistoryViewController()
-        historyViewController.delegate = self
-        historyViewController.contentView = historyContentView
-        historyViewController.images = screenshots
-        historyViewController.currentIndex = viewControllers.count - 1
-        historyViewController.transitioningDelegate = self
+        let historyViewController = createHistoryViewController()
         self.historyViewController = historyViewController
-        
         setNavigationBarHidden(true, animated: false)
-        presentViewController(historyViewController, animated: true) { _ in
+        presentViewController(historyViewController, animated: true) {
             guard let visibleViewController = self.visibleViewController else {
                 return
             }
@@ -169,12 +209,6 @@ extension SAHistoryNavigationViewController {
     override public func contentView() -> UIView? {
         return historyContentView
     }
-    
-    func detectLongTap(gesture: UILongPressGestureRecognizer) {
-        if gesture.state == .Began {
-            showHistory()
-        }
-    }
 }
 
 extension SAHistoryNavigationViewController : UIViewControllerTransitioningDelegate {
@@ -187,11 +221,7 @@ extension SAHistoryNavigationViewController : UIViewControllerTransitioningDeleg
     }
     
     public func interactionControllerForPresentation(animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return nil
-    }
-    
-    public func interactionControllerForDismissal(animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return nil
+        return interactiveTransition
     }
 }
 
@@ -212,13 +242,13 @@ extension SAHistoryNavigationViewController: SAHistoryViewControllerDelegate {
 
 extension SAHistoryNavigationViewController: UIGestureRecognizerDelegate {
     public func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
-        if let _ = visibleViewController?.navigationController?.navigationBar.backItem {
+        if let _ = visibleViewController?.navigationController?.navigationBar.backItem, view = gestureRecognizer.view as? UINavigationBar {
             var height = 64.0
             if visibleViewController?.navigationController?.navigationBarHidden == true {
                 height = 44.0
             }
             let backButtonFrame = CGRect(x: 0.0, y :0.0,  width: 100.0, height: height)
-            let touchPoint = gestureRecognizer.locationInView(gestureRecognizer.view)
+            let touchPoint = gestureRecognizer.locationInView(view)
             if CGRectContainsPoint(backButtonFrame, touchPoint) {
                 return true
             }
