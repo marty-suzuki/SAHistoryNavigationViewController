@@ -51,39 +51,19 @@ You can use SAHistoryNavigationViewController as `self.navigationController` in 
 
 ```swift
 extension UINavigationController {
-    public weak var navigationDelegate: SAHistoryNavigationViewControllerDelegate? {
-        set {
-            willSetNavigationDelegate(navigationDelegate)
-        }
-        get {
-            return willGetNavigationDelegate()
-        }
-    }
-    public weak var transitionDelegate: SAHistoryNavigationViewControllerTransitionDelegate? {
-        set {
-            willSetTransitionDelegate(transitionDelegate)
-        }
-        get {
-            return willGetTransitionDelegate()
-        }
-    }
-    public var interactivePopGestureEnabled: Bool {
-        set {
-            willSetInteractivePopGestureEnabled(newValue)
-        }
-        get {
-            return willGetInteractivePopGestureEnabled()
-        }
-    }
-    public func showHistory() {}
-    public func setHistoryBackgroundColor(color: UIColor) {}
-    public func contentView() -> UIView? { return nil }
-    func willSetNavigationDelegate(navigationDelegate: SAHistoryNavigationViewControllerDelegate?) {}
-    func willGetNavigationDelegate() -> SAHistoryNavigationViewControllerDelegate? { return nil }
-    func willSetNavigationTransitioningDelegate(navigationTransitioningDelegate: SAHistoryNavigationViewControllerTransitioningDelegate?) {}
-    func willGetNavigationTransitioningDelegate() -> SAHistoryNavigationViewControllerTransitioningDelegate? { return nil }
-    func willSetInteractivePopGestureEnabled(interactivePopGestureEnabled: Bool) {}
-    func willGetInteractivePopGestureEnabled() -> Bool { return true }
+  public weak var historyDelegate: SAHistoryNavigationViewControllerDelegate? {
+      set {
+          willSetHistoryDelegate(newValue)
+      }
+      get {
+          return willGetHistoryDelegate()
+      }
+  }
+  public func showHistory() {}
+  public func setHistoryBackgroundColor(color: UIColor) {}
+  public func contentView() -> UIView? { return nil }
+  func willSetHistoryDelegate(delegate: SAHistoryNavigationViewControllerDelegate?) {}
+  func willGetHistoryDelegate() -> SAHistoryNavigationViewControllerDelegate? { return nil }
 }
 ```
 
@@ -91,16 +71,16 @@ And you have to initialize like this.
 
 
 ```swift
-	let ViewController = UIViewController()
-	let navigationController = SAHistoryNavigationViewController()
-	navigationController.setViewControllers([ViewController], animated: true)
-	presentViewController(navigationController, animated: true, completion: nil)
+let ViewController = UIViewController()
+let navigationController = SAHistoryNavigationViewController()
+navigationController.setViewControllers([ViewController], animated: true)
+presentViewController(navigationController, animated: true, completion: nil)
 ```
 
 If you want to launch Navigation History without long tap action, use this code.
 
 ```swift
-	navigationController?.showHistory()
+navigationController?.showHistory()
 ```
 
 ## Customize
@@ -108,27 +88,15 @@ If you want to launch Navigation History without long tap action, use this code.
 If you want to customize background of Navigation History, you can use those methods.
 
 ```swift
-	navigationController?.contentView()
-	navigationController?.setHistoryBackgroundColor(color: UIColor)
+navigationController?.contentView()
+navigationController?.setHistoryBackgroundColor(color: UIColor)
 ```
 
 This is delegate methods.
 
 ```swift
-@objc public protocol SAHistoryNavigationViewControllerDelegate : NSObjectProtocol {
-    optional func navigationController(navigationController: SAHistoryNavigationViewController, willShowViewController viewController: UIViewController, animated: Bool)
-    optional func navigationController(navigationController: SAHistoryNavigationViewController, didShowViewController viewController: UIViewController, animated: Bool)
-    optional func navigationControllerSupportedInterfaceOrientations(navigationController: SAHistoryNavigationViewController) -> UIInterfaceOrientationMask
-    optional func navigationControllerPreferredInterfaceOrientationForPresentation(navigationController: SAHistoryNavigationViewController) -> UIInterfaceOrientation
-    optional func navigationController(navigationController: SAHistoryNavigationViewController, willHandleEdgeSwipe gesture: UIScreenEdgePanGestureRecognizer)
-    optional func navigationController(navigationController: SAHistoryNavigationViewController, didHandleEdgeSwipe gesture: UIScreenEdgePanGestureRecognizer)
-}
-```
-
-```swift
-@objc public protocol SAHistoryNavigationViewControllerTransitioningDelegate : NSObjectProtocol {
-    optional func navigationController(navigationController: SAHistoryNavigationViewController, interactionControllerForAnimationController animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning?
-    optional func navigationController(navigationController: SAHistoryNavigationViewController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
+@objc public protocol SAHistoryNavigationViewControllerDelegate: NSObjectProtocol {
+    optional func historyControllerDidShowHistory(controller: SAHistoryNavigationViewController, viewController: UIViewController)
 }
 ```
 

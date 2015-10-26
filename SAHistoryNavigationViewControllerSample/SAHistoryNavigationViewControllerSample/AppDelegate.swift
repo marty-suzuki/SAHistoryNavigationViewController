@@ -11,9 +11,7 @@ import SAHistoryNavigationViewController
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
-
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -23,9 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: false)
         
-        if let navigatioinController = window?.rootViewController as? UINavigationController {
-            navigatioinController.navigationTransitioningDelegate = self
-        }
+        (window?.rootViewController as? UINavigationController)?.historyDelegate = self
         
         return true
     }
@@ -53,8 +49,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
-extension AppDelegate: SAHistoryNavigationViewControllerTransitioningDelegate {
-    func navigationController(navigationController: SAHistoryNavigationViewController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return CustomTransitioningController(operation: operation)
+extension AppDelegate: SAHistoryNavigationViewControllerDelegate {
+    func historyControllerDidShowHistory(controller: SAHistoryNavigationViewController, viewController: UIViewController) {
+        print("did show history")
     }
 }
