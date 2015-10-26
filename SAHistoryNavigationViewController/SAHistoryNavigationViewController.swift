@@ -54,11 +54,10 @@ extension UIViewController {
 public class SAHistoryNavigationViewController: UINavigationController {
     private static let kImageScale: CGFloat = 1.0
     
-    internal var historyContentView = UIView()
-    internal var historyViewController = SAHistoryViewController()
-    
     private var screenshots = [UIImage]()
+    private var historyViewController: SAHistoryViewController?
     private weak var _historyDelegate: SAHistoryNavigationViewControllerDelegate?
+    private let historyContentView = UIView()
 
     required public init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
@@ -80,13 +79,6 @@ public class SAHistoryNavigationViewController: UINavigationController {
         super.viewDidLoad()
         
         historyContentView.backgroundColor = .grayColor()
-        historyContentView.hidden = true
-        NSLayoutConstraint.applyAutoLayout(view, target: historyContentView, index: nil, top: 0.0, left: 0.0, right: 0.0, bottom: 0.0, height: nil, width: nil)
-        
-        historyViewController.delegate = self
-        historyViewController.view.alpha = 0.0
-        let width = UIScreen.mainScreen().bounds.size.width
-        NSLayoutConstraint.applyAutoLayout(view, target: historyViewController.view, index: nil, top: 0.0, left: Float(-width), right: Float(-width), bottom: 0.0, height: nil, width: Float(width * 3))
         
         let  longPressGesture = UILongPressGestureRecognizer(target: self, action: "detectLongTap:")
         longPressGesture.delegate = self
@@ -153,17 +145,16 @@ extension SAHistoryNavigationViewController {
         
         screenshots += [image]
         
+        let historyViewController = SAHistoryViewController()
+        historyViewController.delegate = self
+        historyViewController.contentView = historyContentView
         historyViewController.images = screenshots
         historyViewController.currentIndex = viewControllers.count - 1
-        historyViewController.reload()
-        historyViewController.view.alpha = 1.0
-        
-        historyContentView.hidden = false
+        historyViewController.transitioningDelegate = self
+        self.historyViewController = historyViewController
         
         setNavigationBarHidden(true, animated: false)
-        UIView.animateWithDuration(0.25, delay: 0.0, options: .CurveEaseOut, animations: {
-            self.historyViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.7, 0.7)
-        }) { _ in
+        presentViewController(historyViewController, animated: true) { _ in
             guard let visibleViewController = self.visibleViewController else {
                 return
             }
@@ -186,26 +177,34 @@ extension SAHistoryNavigationViewController {
     }
 }
 
-extension SAHistoryNavigationViewController: SAHistoryViewControllerDelegate {
-    func didSelectIndex(index: Int) {
-        var destinationViewController: UIViewController?
-        for (currentIndex, viewController) in viewControllers.enumerate() {
-            if currentIndex == index {
-                destinationViewController = viewController
-                break
-            }
-        }
+extension SAHistoryNavigationViewController : UIViewControllerTransitioningDelegate {
+    public func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return SAHistoryViewAnimatedTransitioning(isPresenting: true)
+    }
+    
+    public func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return SAHistoryViewAnimatedTransitioning(isPresenting: false)
+    }
+    
+    public func interactionControllerForPresentation(animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return nil
+    }
+    
+    public func interactionControllerForDismissal(animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return nil
+    }
+}
 
-        if let viewController = destinationViewController {
-            popToViewController(viewController, animated: false)
+extension SAHistoryNavigationViewController: SAHistoryViewControllerDelegate {
+    func historyViewController(viewController: SAHistoryViewController, didSelectIndex index: Int) {
+        if viewControllers.count - 1 < index {
+            return
         }
         
-        UIView.animateWithDuration(0.25, delay: 0.0, options: .CurveEaseOut, animations: {
-            self.historyViewController.view.transform = CGAffineTransformIdentity
-            self.historyViewController.scrollToIndex(index, animated: false)
-        }) { finished in
-            self.historyContentView.hidden = true
-            self.historyViewController.view.alpha = 0.0
+        popToViewController(viewControllers[index], animated: false)
+        
+        viewController.dismissViewControllerAnimated(true) { finished in
+            self.historyViewController = nil
             self.setNavigationBarHidden(false, animated: false)
         }
     }
