@@ -54,11 +54,13 @@ extension UIViewController {
 public class SAHistoryNavigationViewController: UINavigationController {
     private static let kImageScale: CGFloat = 1.0
     
+    public var thirdDimensionalTouchThreshold: CGFloat = 0.5
+
+    private var interactiveTransition: UIPercentDrivenInteractiveTransition?    
     private var screenshots = [UIImage]()
     private var historyViewController: SAHistoryViewController?
-    private var interactiveTransition: UIPercentDrivenInteractiveTransition?
-    private weak var _historyDelegate: SAHistoryNavigationViewControllerDelegate?
     private let historyContentView = UIView()
+    private weak var _historyDelegate: SAHistoryNavigationViewControllerDelegate?
 
     required public init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
@@ -83,8 +85,13 @@ public class SAHistoryNavigationViewController: UINavigationController {
         
         let gestureRecognizer: UIGestureRecognizer
         if #available(iOS 9, *) {
-            interactiveTransition = UIPercentDrivenInteractiveTransition()
-            gestureRecognizer = SAThirdDimensionalTouchRecognizer(target: self, action: "handleThirdDimensionalTouch:")
+            if traitCollection.forceTouchCapability == .Available {
+                interactiveTransition = UIPercentDrivenInteractiveTransition()
+                gestureRecognizer = SAThirdDimensionalTouchRecognizer(target: self, action: "handleThirdDimensionalTouch:", threshold: thirdDimensionalTouchThreshold)
+                (gestureRecognizer as? SAThirdDimensionalTouchRecognizer)?.minimumPressDuration = 0.2
+            } else {
+                gestureRecognizer = UILongPressGestureRecognizer(target: self, action: "detectLongTap:")
+            }
         } else {
             gestureRecognizer = UILongPressGestureRecognizer(target: self, action: "detectLongTap:")
         }
@@ -116,10 +123,11 @@ public class SAHistoryNavigationViewController: UINavigationController {
     }
     
     public override func popToViewController(viewController: UIViewController, animated: Bool) -> [UIViewController]? {
+        let vcs = super.popToViewController(viewController, animated: animated)
         if let index = viewControllers.indexOf(viewController) {
-                screenshots.removeRange(index..<screenshots.count)
+            screenshots.removeRange(index..<screenshots.count)
         }
-        return super.popToViewController(viewController, animated: animated)
+        return vcs
     }
     
     public override func setViewControllers(viewControllers: [UIViewController], animated: Bool) {
@@ -142,20 +150,28 @@ public class SAHistoryNavigationViewController: UINavigationController {
                 return
             }
             screenshots += [image]
+            
             let historyViewController = createHistoryViewController()
             self.historyViewController = historyViewController
-            setNavigationBarHidden(true, animated: false)
             presentViewController(historyViewController, animated: true, completion: nil)
             
         case .Changed:
-            interactiveTransition?.updateInteractiveTransition(min(0.75, max(0, gesture.percentage)))
+            interactiveTransition?.updateInteractiveTransition(min(gesture.threshold, max(0, gesture.percentage)))
             
-        case .Ended, .Cancelled,  .Failed, .Possible:
-            if gesture.percentage >= 0.75 {
+        case .Ended:
+            screenshots.removeLast()
+            if gesture.percentage >= gesture.threshold {
                 interactiveTransition?.finishInteractiveTransition()
+                guard let visibleViewController = self.visibleViewController else {
+                    return
+                }
+                historyDelegate?.historyControllerDidShowHistory?(self, viewController: visibleViewController)
             } else {
                 interactiveTransition?.cancelInteractiveTransition()
             }
+        
+        case .Cancelled, .Failed, .Possible:
+            screenshots.removeLast()
         }
     }
     
@@ -173,15 +189,6 @@ public class SAHistoryNavigationViewController: UINavigationController {
         historyViewController.currentIndex = viewControllers.count - 1
         historyViewController.transitioningDelegate = self
         return historyViewController
-    }
-}
-
-extension SAHistoryNavigationViewController: UINavigationBarDelegate {
-    public func navigationBar(navigationBar: UINavigationBar, didPopItem item: UINavigationItem) {
-        guard let items = navigationBar.items else {
-            return
-        }
-        screenshots.removeRange(items.count..<screenshots.count)
     }
 }
 
@@ -208,6 +215,15 @@ extension SAHistoryNavigationViewController {
     
     override public func contentView() -> UIView? {
         return historyContentView
+    }
+}
+
+extension SAHistoryNavigationViewController: UINavigationBarDelegate {
+    public func navigationBar(navigationBar: UINavigationBar, didPopItem item: UINavigationItem) {
+        guard let items = navigationBar.items else {
+            return
+        }
+        screenshots.removeRange(items.count..<screenshots.count)
     }
 }
 

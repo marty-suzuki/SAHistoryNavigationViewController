@@ -7,6 +7,9 @@
 [![Version](https://img.shields.io/cocoapods/v/SAHistoryNavigationViewController.svg?style=flat)](http://cocoapods.org/pods/SAHistoryNavigationViewController)
 [![License](https://img.shields.io/cocoapods/l/SAHistoryNavigationViewController.svg?style=flat)](http://cocoapods.org/pods/SAHistoryNavigationViewController)
 
+**Support 3D Touch for iOS9!!**
+
+![](./SampleImage/3dtouch.gif)
 ![](./SampleImage/sample.gif)
 
 SAHistoryNavigationViewController realizes iOS task manager like UI in UINavigationContoller.
@@ -19,7 +22,7 @@ SAHistoryNavigationViewController realizes iOS task manager like UI in UINavigat
 - [x] iOS task manager like UI
 - [x] Launch Navigation History with Long tap action of Back Bar Button
 - [x] Support Swift2.0
-- [ ] Support 3D Touch
+- [x] Support 3D Touch (If device is not supported 3D Touch, automatically replacing to long tap gesture.)
 
 ## Installation
 
@@ -103,7 +106,7 @@ This is delegate methods.
 ## Requirements
 
 - Xcode 7.0 or greater
-- iOS7.0(manually only) or greater
+- iOS8.0 or greater
 
 ## Author
 

@@ -7,37 +7,38 @@
 //
 
 import UIKit.UIGestureRecognizerSubclass
+import AudioToolbox.AudioServices
 
 @available(iOS 9, *)
-class SAThirdDimensionalTouchRecognizer: UIGestureRecognizer {
+class SAThirdDimensionalTouchRecognizer: UILongPressGestureRecognizer {
     private(set) var percentage: CGFloat = 0
+    var threshold: CGFloat = 1
     
-    override init(target: AnyObject?, action: Selector) {
+    init(target: AnyObject?, action: Selector, threshold: CGFloat) {
+        self.threshold = threshold
         super.init(target: target, action: action)
-    }
-    
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent) {
-        super.touchesBegan(touches, withEvent: event)
-        state = .Began
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent) {
         super.touchesMoved(touches, withEvent: event)
-        state = .Changed
+        
+        guard let touch = touches.first else {
+            return
+        }
+        percentage = max(0, min(1, touch.force / touch.maximumPossibleForce))
+        if percentage > threshold && state == .Changed {
+            state = .Ended
+            AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+        }
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent) {
         super.touchesEnded(touches, withEvent: event)
-        state = .Ended
-    }
-    
-    override func touchesCancelled(touches: Set<UITouch>, withEvent event: UIEvent) {
-        super.touchesCancelled(touches, withEvent: event)
-        state = .Changed
+        state = .Failed
     }
     
     override func reset() {
         super.reset()
-        state = .Possible
+        percentage = 0
     }
 }
