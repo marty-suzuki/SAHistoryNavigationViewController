@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MisterFusion
 
 protocol SAHistoryViewControllerDelegate: class {
     func historyViewController(viewController: SAHistoryViewController, didSelectIndex index: Int)
@@ -42,7 +43,14 @@ class SAHistoryViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         if let contentView = contentView {
-            NSLayoutConstraint.applyAutoLayout(view, target: contentView, index: nil, top: 0.0, left: 0.0, right: 0.0, bottom: 0.0, height: nil, width: nil)
+            view.addSubview(contentView)
+            contentView.translatesAutoresizingMaskIntoConstraints = false
+            view.addConstraints(
+                contentView.Top,
+                contentView.Bottom,
+                contentView.Left,
+                contentView.Right
+            )
         }
         view.backgroundColor = contentView?.backgroundColor
         
@@ -61,7 +69,14 @@ class SAHistoryViewController: UIViewController {
         collectionView.backgroundColor = .clearColor()
         collectionView.showsHorizontalScrollIndicator = false
         
-        NSLayoutConstraint.applyAutoLayout(view, target: collectionView, index: nil, top: 0.0, left: -Float(size.width), right: -Float(size.width), bottom: 0.0, height: nil, width: nil)
+        view.addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        view.addConstraints(
+            collectionView.Top,
+            collectionView.Bottom,
+            collectionView.CenterX,
+            collectionView.Width |==| view.Width |*| 3
+        )
     }
 
     override func viewDidLayoutSubviews() {

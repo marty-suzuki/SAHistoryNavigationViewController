@@ -17,7 +17,7 @@
 		37E3BCF61AC3D57600A81554 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37E3BCF41AC3D57600A81554 /* LaunchScreen.xib */; };
 		37E3BD021AC3D57600A81554 /* SAHistoryNavigationViewControllerSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3BD011AC3D57600A81554 /* SAHistoryNavigationViewControllerSampleTests.swift */; };
 		37E3BD581AC50A5700A81554 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E3BD571AC50A5700A81554 /* QuartzCore.framework */; };
-		F716EB89838168081B56AD11 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71751ACF9E74B8ED274C4A63 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		F716EB89838168081B56AD11 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71751ACF9E74B8ED274C4A63 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */

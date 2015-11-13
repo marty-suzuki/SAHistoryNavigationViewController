@@ -9,6 +9,7 @@
 
 **Support 3D Touch for iOS9!!**
 
+![](./SampleImage/touch.gif)
 ![](./SampleImage/3dtouch.gif)
 ![](./SampleImage/sample.gif)
 
@@ -107,6 +108,7 @@ This is delegate methods.
 
 - Xcode 7.0 or greater
 - iOS8.0 or greater
+- [MisterFusion](https://github.com/szk-atmosphere/MisterFusion)
 
 ## Author
 

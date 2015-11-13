@@ -247,9 +247,8 @@ extension SAHistoryNavigationViewController: SAHistoryViewControllerDelegate {
             return
         }
         
-        popToViewController(viewControllers[index], animated: false)
-        
         viewController.dismissViewControllerAnimated(true) { finished in
+            self.popToViewController(self.viewControllers[index], animated: false)
             self.historyViewController = nil
             self.setNavigationBarHidden(false, animated: false)
         }

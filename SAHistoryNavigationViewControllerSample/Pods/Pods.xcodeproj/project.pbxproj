@@ -7,308 +7,434 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		05E2E2E8250583C0ED82A426 /* Pods-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B3C35EBE9ECDBF16964823E8 /* Pods-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0E3D11AF2F57FD9CC649FEA4 /* Pods-SAHistoryNavigationViewController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C73B26E494424D7FE832457C /* Pods-SAHistoryNavigationViewController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3755E9CD1BDE9C0C004F7D1C /* SAThirdDimensionalTouchRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3755E9CB1BDE9C07004F7D1C /* SAThirdDimensionalTouchRecognizer.swift */; };
-		3D48627D06179601349C15A3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6353072CFE9F271322AF6DE /* Foundation.framework */; };
-		58E95F27E6DA4CB8BFE65E14 /* Pods-SAHistoryNavigationViewController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 30CEB16C867016EA9A3B020A /* Pods-SAHistoryNavigationViewController-dummy.m */; };
-		9DD2BEA81BDE5DE80042E077 /* SAHistoryViewAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD2BEA61BDE58210042E077 /* SAHistoryViewAnimatedTransitioning.swift */; };
-		AB49A5A1FDEC458D30376933 /* NSLayoutConstraint+Fit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A737C99CB2D0F24419525D8 /* NSLayoutConstraint+Fit.swift */; };
-		ABE0E940B53527112319EA93 /* SAHistoryNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBDEF250860D508670F7719 /* SAHistoryNavigationViewController.swift */; };
-		C999F97E4DFC6712ABC771A3 /* SAHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA58D267A9651740FBDCE03A /* SAHistoryViewController.swift */; };
-		D118AC73962CAAC8E78A7388 /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0690AC4B4D2D4E0957276 /* Pods-dummy.m */; };
-		EC7F7BA3F5E5E37D59060796 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6353072CFE9F271322AF6DE /* Foundation.framework */; };
+		08B3E463B7FEE9E79E08F1BF74F735BF /* SAHistoryNavigationViewController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 366D6A0BBB2E2361BF267257300070F1 /* SAHistoryNavigationViewController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0F5990428CFEB4A980437E4D23C5DFEB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCAD41A9428B4419CB98E34DF2133F02 /* UIKit.framework */; };
+		16848D15E0B9CB819BDBC6827C82F38C /* MisterFusion-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BF2BA2E4DA64495ED07F3A5E32B16806 /* MisterFusion-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		266177BD339BE60F60A264E2FBB26F59 /* Pods-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2BCC458FDD5F692BBB2BFC64BB5701FC /* Pods-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		31418B32D983ED010B383CE8D9FECE33 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 289E16B1D9659561CA4F89D83049E191 /* Foundation.framework */; };
+		60D3D4030D97AB01DE1192FB2EF9CDDE /* SAThirdDimensionalTouchRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4436FC6C8ED1944D5FFF8DFD2CD99E /* SAThirdDimensionalTouchRecognizer.swift */; };
+		63377AC52B5103967658B185E79A6F66 /* SAHistoryViewAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E8DB32F13087B6290B398A96507CD0 /* SAHistoryViewAnimatedTransitioning.swift */; };
+		6D55F631C67FE66E6B3D2271D4162471 /* SAHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3A4EE247CF2AB877AFB36BB4CD235 /* SAHistoryViewController.swift */; };
+		73AE1EB67C404A9AB508D1B77DF18434 /* MisterFusion-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C52CE8260066D390AF95B62A1F48619 /* MisterFusion-dummy.m */; };
+		7D9AA30C5B9DB3402964C364E6493BE7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 289E16B1D9659561CA4F89D83049E191 /* Foundation.framework */; };
+		9436E94A384332A664410A32FA885723 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCAD41A9428B4419CB98E34DF2133F02 /* UIKit.framework */; };
+		998E58097DA982B8F17BCE1DF769C16E /* SAHistoryNavigationTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A68BD53AB9376FAA74FBC44F986DB8 /* SAHistoryNavigationTransitionController.swift */; };
+		9E1CE35692B16E9D3404A4DA50015393 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D6D61678B02381A62BE6D458154836 /* AudioToolbox.framework */; };
+		A43A04C19F11AFABCFB11B3DC3321E01 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 289E16B1D9659561CA4F89D83049E191 /* Foundation.framework */; };
+		C4A6874AA859C61CAEEED78AEB4E8E8B /* MisterFusion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4088D047289A0B346219868CDB5DDC /* MisterFusion.framework */; };
+		C61CD808FC344DBD2E9E426F4A29BEDF /* MisterFusion.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FABFC063031134E482A7214C6FC441 /* MisterFusion.swift */; };
+		CA96A9114CD13E3A09000929D1ECB587 /* SAHistoryNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1145AE94B474385EE7A676BAB6976D5 /* SAHistoryNavigationViewController.swift */; };
+		DC5BB9B75E44193A717814E2900E9E3F /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 894E5DA93A9F359521A89826BE6DA777 /* Pods-dummy.m */; };
+		F601DF31D50026AD03408C6BCB5D2082 /* SAHistoryNavigationViewController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FB6B93CD713CAC8CE768A12BE223DAA /* SAHistoryNavigationViewController-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		6C47958950CCA1AA11718E61 /* PBXContainerItemProxy */ = {
+		940DFDC7940134AA461C3A4066CB6CB7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 6EA6F98A95CB42618A819EB5 /* Project object */;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 22BD1B7041A32BB2B485D2B0;
-			remoteInfo = "Pods-SAHistoryNavigationViewController";
+			remoteGlobalIDString = 5EA2788DDCED9ABACC432611514F662F;
+			remoteInfo = SAHistoryNavigationViewController;
+		};
+		B21C4B629785FA1A65F10902560D7777 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2CB481FA530D525826AE616F1D6882CF;
+			remoteInfo = MisterFusion;
+		};
+		C3BF13FA86DEDA559C94B301C12F3A62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2CB481FA530D525826AE616F1D6882CF;
+			remoteInfo = MisterFusion;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1A737C99CB2D0F24419525D8 /* NSLayoutConstraint+Fit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Fit.swift"; sourceTree = "<group>"; };
-		2505612A18756E23A2BE58DF /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
-		265E1DA5A06264FE133A14C7 /* SAHistoryNavigationViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SAHistoryNavigationViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		30CEB16C867016EA9A3B020A /* Pods-SAHistoryNavigationViewController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SAHistoryNavigationViewController-dummy.m"; sourceTree = "<group>"; };
-		3755E9CB1BDE9C07004F7D1C /* SAThirdDimensionalTouchRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAThirdDimensionalTouchRecognizer.swift; sourceTree = "<group>"; };
-		4129EA8CDDA6900C6D30CB6C /* Pods-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-environment.h"; sourceTree = "<group>"; };
-		52C528C3213CB8F8432E5F4B /* Pods.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Pods.modulemap; sourceTree = "<group>"; };
-		5B4E51E8F1924885BCEDCA0C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
-		5EC0690AC4B4D2D4E0957276 /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
-		6297CE37624F699EB2EC1659 /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		76B57780E199BD29A51E7751 /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
-		777B23C03417127A231CEE9B /* Pods-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-frameworks.sh"; sourceTree = "<group>"; };
-		7A5C7C9E33E6FFA54D13F358 /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
-		97EC98541326D8B95323824E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
-		9DD2BEA61BDE58210042E077 /* SAHistoryViewAnimatedTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAHistoryViewAnimatedTransitioning.swift; sourceTree = "<group>"; };
-		ADA5CDA5F303AF05022E4A52 /* Pods-SAHistoryNavigationViewController-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SAHistoryNavigationViewController-Private.xcconfig"; sourceTree = "<group>"; };
-		B3C35EBE9ECDBF16964823E8 /* Pods-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-umbrella.h"; sourceTree = "<group>"; };
-		B6FA0CF690239CBFB155F1EE /* Pods-SAHistoryNavigationViewController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SAHistoryNavigationViewController-prefix.pch"; sourceTree = "<group>"; };
-		C4EEE39C6B80A902CE066FFA /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C73B26E494424D7FE832457C /* Pods-SAHistoryNavigationViewController-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SAHistoryNavigationViewController-umbrella.h"; sourceTree = "<group>"; };
-		D6353072CFE9F271322AF6DE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		DDECCD3F5D10637828F7D3E9 /* Pods-SAHistoryNavigationViewController.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-SAHistoryNavigationViewController.modulemap"; sourceTree = "<group>"; };
-		E87FFE1630DBB67FA5709684 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EA58D267A9651740FBDCE03A /* SAHistoryViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SAHistoryViewController.swift; sourceTree = "<group>"; };
-		ED1F0E5574BAE5A48AC93730 /* Pods-SAHistoryNavigationViewController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SAHistoryNavigationViewController.xcconfig"; sourceTree = "<group>"; };
-		FBBDEF250860D508670F7719 /* SAHistoryNavigationViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SAHistoryNavigationViewController.swift; sourceTree = "<group>"; };
-		FF61670BDCC4D5FCE5C088BE /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		03F3A4EE247CF2AB877AFB36BB4CD235 /* SAHistoryViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SAHistoryViewController.swift; sourceTree = "<group>"; };
+		0A47E7C6855EDDBB25F81C893627C25D /* MisterFusion.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MisterFusion.xcconfig; sourceTree = "<group>"; };
+		11FE07E02C373D77514F409F6D5B03E0 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1A4088D047289A0B346219868CDB5DDC /* MisterFusion.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MisterFusion.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BD542E909255AB4B3DCCF76E07A3DE9 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C52CE8260066D390AF95B62A1F48619 /* MisterFusion-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MisterFusion-dummy.m"; sourceTree = "<group>"; };
+		22D6D61678B02381A62BE6D458154836 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
+		289E16B1D9659561CA4F89D83049E191 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		2A5F12BD346B1DEC9B324370D98D1F5E /* SAHistoryNavigationViewController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SAHistoryNavigationViewController-prefix.pch"; sourceTree = "<group>"; };
+		2BCC458FDD5F692BBB2BFC64BB5701FC /* Pods-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-umbrella.h"; sourceTree = "<group>"; };
+		30B6F118E0EB1DEA2DED6B1898A8AF38 /* MisterFusion.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MisterFusion.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		366D6A0BBB2E2361BF267257300070F1 /* SAHistoryNavigationViewController-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SAHistoryNavigationViewController-umbrella.h"; sourceTree = "<group>"; };
+		4B4436FC6C8ED1944D5FFF8DFD2CD99E /* SAThirdDimensionalTouchRecognizer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SAThirdDimensionalTouchRecognizer.swift; sourceTree = "<group>"; };
+		4FB6B93CD713CAC8CE768A12BE223DAA /* SAHistoryNavigationViewController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SAHistoryNavigationViewController-dummy.m"; sourceTree = "<group>"; };
+		6E47E90ACED87A88741D64594AD91D12 /* MisterFusion-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MisterFusion-prefix.pch"; sourceTree = "<group>"; };
+		73E8DB32F13087B6290B398A96507CD0 /* SAHistoryViewAnimatedTransitioning.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SAHistoryViewAnimatedTransitioning.swift; sourceTree = "<group>"; };
+		79A9DEDC89FE8336BF5FEDAAF75BF7FC /* Pods.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Pods.modulemap; sourceTree = "<group>"; };
+		7F9052914E55A7D00132D421092F43E4 /* SAHistoryNavigationViewController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SAHistoryNavigationViewController.xcconfig; sourceTree = "<group>"; };
+		87B213035BAC5F75386F62D3C75D2342 /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
+		894E5DA93A9F359521A89826BE6DA777 /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
+		977577C045EDA9D9D1F46E2598D19FC7 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
+		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		BC93E0E840E59E5A8EEED03005A74849 /* SAHistoryNavigationViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SAHistoryNavigationViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF2BA2E4DA64495ED07F3A5E32B16806 /* MisterFusion-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MisterFusion-umbrella.h"; sourceTree = "<group>"; };
+		CBC0F7C552B739C909B650A0F42F7F38 /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
+		CECC0448158CCC14850666FE353D8A68 /* SAHistoryNavigationViewController.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SAHistoryNavigationViewController.modulemap; sourceTree = "<group>"; };
+		D0405803033A2A777B8E4DFA0C1800ED /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
+		D3FABFC063031134E482A7214C6FC441 /* MisterFusion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MisterFusion.swift; path = MisterFusion/MisterFusion.swift; sourceTree = "<group>"; };
+		D7A68BD53AB9376FAA74FBC44F986DB8 /* SAHistoryNavigationTransitionController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SAHistoryNavigationTransitionController.swift; sourceTree = "<group>"; };
+		DA312349A49333542E6F4B36B329960E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
+		DB915214EF9330423DEF462F79AE6B30 /* MisterFusion.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = MisterFusion.modulemap; sourceTree = "<group>"; };
+		E73A3DF5BD2A538B9EEB60EBF5C67F98 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E7F21354943D9F42A70697D5A5EF72E9 /* Pods-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-frameworks.sh"; sourceTree = "<group>"; };
+		E8446514FBAD26C0E18F24A5715AEF67 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1145AE94B474385EE7A676BAB6976D5 /* SAHistoryNavigationViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SAHistoryNavigationViewController.swift; sourceTree = "<group>"; };
+		FCAD41A9428B4419CB98E34DF2133F02 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		671A9043B77CBE68A36048F5 /* Frameworks */ = {
+		BEBF1C984BE4966190CB3C89E2CDD677 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC7F7BA3F5E5E37D59060796 /* Foundation.framework in Frameworks */,
+				9E1CE35692B16E9D3404A4DA50015393 /* AudioToolbox.framework in Frameworks */,
+				31418B32D983ED010B383CE8D9FECE33 /* Foundation.framework in Frameworks */,
+				C4A6874AA859C61CAEEED78AEB4E8E8B /* MisterFusion.framework in Frameworks */,
+				9436E94A384332A664410A32FA885723 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A82C682883C001993BD92BEB /* Frameworks */ = {
+		C87EEE48C3797E7C64FD87C63B465296 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D48627D06179601349C15A3 /* Foundation.framework in Frameworks */,
+				7D9AA30C5B9DB3402964C364E6493BE7 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DECFC48DC6F69DF8E98243658AD5A952 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A43A04C19F11AFABCFB11B3DC3321E01 /* Foundation.framework in Frameworks */,
+				0F5990428CFEB4A980437E4D23C5DFEB /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		21C17F39CD7B7231779041DC /* Targets Support Files */ = {
+		3484E07DC780EA555B85466BBC7C067F /* MisterFusion */ = {
 			isa = PBXGroup;
 			children = (
-				696AA6971F8A9593839299B7 /* Pods */,
+				D3FABFC063031134E482A7214C6FC441 /* MisterFusion.swift */,
+				B7CE60140A032A0C1FCDFCE93F29F859 /* Support Files */,
 			);
-			name = "Targets Support Files";
+			path = MisterFusion;
 			sourceTree = "<group>";
 		};
-		238CB53A4B9D11816861896B /* Frameworks */ = {
+		3BA1C64B92291EEB2678D8D8A8ECE155 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				389A80F7E9E23B54C0674EDA /* iOS */,
+				1A4088D047289A0B346219868CDB5DDC /* MisterFusion.framework */,
+				44470B6AC7952EB70F5A6DD09BCAEC27 /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		389A80F7E9E23B54C0674EDA /* iOS */ = {
+		44470B6AC7952EB70F5A6DD09BCAEC27 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				D6353072CFE9F271322AF6DE /* Foundation.framework */,
+				22D6D61678B02381A62BE6D458154836 /* AudioToolbox.framework */,
+				289E16B1D9659561CA4F89D83049E191 /* Foundation.framework */,
+				FCAD41A9428B4419CB98E34DF2133F02 /* UIKit.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		4F778BAC291FA2BA9D08A2FF /* Support Files */ = {
+		469CA8AD98A5D02B0339498C82244F9E /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E87FFE1630DBB67FA5709684 /* Info.plist */,
-				DDECCD3F5D10637828F7D3E9 /* Pods-SAHistoryNavigationViewController.modulemap */,
-				ED1F0E5574BAE5A48AC93730 /* Pods-SAHistoryNavigationViewController.xcconfig */,
-				ADA5CDA5F303AF05022E4A52 /* Pods-SAHistoryNavigationViewController-Private.xcconfig */,
-				30CEB16C867016EA9A3B020A /* Pods-SAHistoryNavigationViewController-dummy.m */,
-				B6FA0CF690239CBFB155F1EE /* Pods-SAHistoryNavigationViewController-prefix.pch */,
-				C73B26E494424D7FE832457C /* Pods-SAHistoryNavigationViewController-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "SAHistoryNavigationViewControllerSample/Pods/Target Support Files/Pods-SAHistoryNavigationViewController";
-			sourceTree = "<group>";
-		};
-		4FAB40A24339E4140B2E495D = {
-			isa = PBXGroup;
-			children = (
-				6297CE37624F699EB2EC1659 /* Podfile */,
-				8D21D98DA6AD644DE474ECF0 /* Development Pods */,
-				238CB53A4B9D11816861896B /* Frameworks */,
-				B061ED51237A573E82A5DA7C /* Products */,
-				21C17F39CD7B7231779041DC /* Targets Support Files */,
-			);
-			sourceTree = "<group>";
-		};
-		628696E0C2658C7E0D607846 /* SAHistoryNavigationViewController */ = {
-			isa = PBXGroup;
-			children = (
-				1A737C99CB2D0F24419525D8 /* NSLayoutConstraint+Fit.swift */,
-				FBBDEF250860D508670F7719 /* SAHistoryNavigationViewController.swift */,
-				EA58D267A9651740FBDCE03A /* SAHistoryViewController.swift */,
-				9DD2BEA61BDE58210042E077 /* SAHistoryViewAnimatedTransitioning.swift */,
-				3755E9CB1BDE9C07004F7D1C /* SAThirdDimensionalTouchRecognizer.swift */,
-			);
-			path = SAHistoryNavigationViewController;
-			sourceTree = "<group>";
-		};
-		696AA6971F8A9593839299B7 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				C4EEE39C6B80A902CE066FFA /* Info.plist */,
-				52C528C3213CB8F8432E5F4B /* Pods.modulemap */,
-				2505612A18756E23A2BE58DF /* Pods-acknowledgements.markdown */,
-				7A5C7C9E33E6FFA54D13F358 /* Pods-acknowledgements.plist */,
-				5EC0690AC4B4D2D4E0957276 /* Pods-dummy.m */,
-				4129EA8CDDA6900C6D30CB6C /* Pods-environment.h */,
-				777B23C03417127A231CEE9B /* Pods-frameworks.sh */,
-				76B57780E199BD29A51E7751 /* Pods-resources.sh */,
-				B3C35EBE9ECDBF16964823E8 /* Pods-umbrella.h */,
-				5B4E51E8F1924885BCEDCA0C /* Pods.debug.xcconfig */,
-				97EC98541326D8B95323824E /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			path = "Target Support Files/Pods";
-			sourceTree = "<group>";
-		};
-		8D21D98DA6AD644DE474ECF0 /* Development Pods */ = {
-			isa = PBXGroup;
-			children = (
-				EFBE1FF21E3BB83A473F1592 /* SAHistoryNavigationViewController */,
+				6D2BB64B2D1EE073E72CD5D4C17578DD /* SAHistoryNavigationViewController */,
 			);
 			name = "Development Pods";
 			sourceTree = "<group>";
 		};
-		B061ED51237A573E82A5DA7C /* Products */ = {
+		4C272ADC8ACDE0BF4C2B44330B63E573 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				FF61670BDCC4D5FCE5C088BE /* Pods.framework */,
-				265E1DA5A06264FE133A14C7 /* SAHistoryNavigationViewController.framework */,
+				E73A3DF5BD2A538B9EEB60EBF5C67F98 /* Info.plist */,
+				CECC0448158CCC14850666FE353D8A68 /* SAHistoryNavigationViewController.modulemap */,
+				7F9052914E55A7D00132D421092F43E4 /* SAHistoryNavigationViewController.xcconfig */,
+				4FB6B93CD713CAC8CE768A12BE223DAA /* SAHistoryNavigationViewController-dummy.m */,
+				2A5F12BD346B1DEC9B324370D98D1F5E /* SAHistoryNavigationViewController-prefix.pch */,
+				366D6A0BBB2E2361BF267257300070F1 /* SAHistoryNavigationViewController-umbrella.h */,
 			);
-			name = Products;
+			name = "Support Files";
+			path = "SAHistoryNavigationViewControllerSample/Pods/Target Support Files/SAHistoryNavigationViewController";
 			sourceTree = "<group>";
 		};
-		EFBE1FF21E3BB83A473F1592 /* SAHistoryNavigationViewController */ = {
+		6D2BB64B2D1EE073E72CD5D4C17578DD /* SAHistoryNavigationViewController */ = {
 			isa = PBXGroup;
 			children = (
-				628696E0C2658C7E0D607846 /* SAHistoryNavigationViewController */,
-				4F778BAC291FA2BA9D08A2FF /* Support Files */,
+				BA7C5829D38A52F855D166FDC2C8A1D1 /* SAHistoryNavigationViewController */,
+				4C272ADC8ACDE0BF4C2B44330B63E573 /* Support Files */,
 			);
 			name = SAHistoryNavigationViewController;
 			path = ../..;
 			sourceTree = "<group>";
 		};
+		75D98FF52E597A11900E131B6C4E1ADA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E8446514FBAD26C0E18F24A5715AEF67 /* Info.plist */,
+				79A9DEDC89FE8336BF5FEDAAF75BF7FC /* Pods.modulemap */,
+				D0405803033A2A777B8E4DFA0C1800ED /* Pods-acknowledgements.markdown */,
+				87B213035BAC5F75386F62D3C75D2342 /* Pods-acknowledgements.plist */,
+				894E5DA93A9F359521A89826BE6DA777 /* Pods-dummy.m */,
+				E7F21354943D9F42A70697D5A5EF72E9 /* Pods-frameworks.sh */,
+				CBC0F7C552B739C909B650A0F42F7F38 /* Pods-resources.sh */,
+				2BCC458FDD5F692BBB2BFC64BB5701FC /* Pods-umbrella.h */,
+				977577C045EDA9D9D1F46E2598D19FC7 /* Pods.debug.xcconfig */,
+				DA312349A49333542E6F4B36B329960E /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			path = "Target Support Files/Pods";
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
+				469CA8AD98A5D02B0339498C82244F9E /* Development Pods */,
+				3BA1C64B92291EEB2678D8D8A8ECE155 /* Frameworks */,
+				D7B481F2DA17056028CDEC9082CD7A6B /* Pods */,
+				B047972AB07C8A53C95727F9BA0B2594 /* Products */,
+				B7B80995527643776607AFFA75B91E24 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		B047972AB07C8A53C95727F9BA0B2594 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				30B6F118E0EB1DEA2DED6B1898A8AF38 /* MisterFusion.framework */,
+				1BD542E909255AB4B3DCCF76E07A3DE9 /* Pods.framework */,
+				BC93E0E840E59E5A8EEED03005A74849 /* SAHistoryNavigationViewController.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B7B80995527643776607AFFA75B91E24 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				75D98FF52E597A11900E131B6C4E1ADA /* Pods */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		B7CE60140A032A0C1FCDFCE93F29F859 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				11FE07E02C373D77514F409F6D5B03E0 /* Info.plist */,
+				DB915214EF9330423DEF462F79AE6B30 /* MisterFusion.modulemap */,
+				0A47E7C6855EDDBB25F81C893627C25D /* MisterFusion.xcconfig */,
+				1C52CE8260066D390AF95B62A1F48619 /* MisterFusion-dummy.m */,
+				6E47E90ACED87A88741D64594AD91D12 /* MisterFusion-prefix.pch */,
+				BF2BA2E4DA64495ED07F3A5E32B16806 /* MisterFusion-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/MisterFusion";
+			sourceTree = "<group>";
+		};
+		BA7C5829D38A52F855D166FDC2C8A1D1 /* SAHistoryNavigationViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D7A68BD53AB9376FAA74FBC44F986DB8 /* SAHistoryNavigationTransitionController.swift */,
+				F1145AE94B474385EE7A676BAB6976D5 /* SAHistoryNavigationViewController.swift */,
+				73E8DB32F13087B6290B398A96507CD0 /* SAHistoryViewAnimatedTransitioning.swift */,
+				03F3A4EE247CF2AB877AFB36BB4CD235 /* SAHistoryViewController.swift */,
+				4B4436FC6C8ED1944D5FFF8DFD2CD99E /* SAThirdDimensionalTouchRecognizer.swift */,
+			);
+			path = SAHistoryNavigationViewController;
+			sourceTree = "<group>";
+		};
+		D7B481F2DA17056028CDEC9082CD7A6B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3484E07DC780EA555B85466BBC7C067F /* MisterFusion */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		D63E2260E4A66CA4DC274019 /* Headers */ = {
+		4E09E6797051DB82A874C01AEEB8E617 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05E2E2E8250583C0ED82A426 /* Pods-umbrella.h in Headers */,
+				266177BD339BE60F60A264E2FBB26F59 /* Pods-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E2EC3CC5C073A037029B0B91 /* Headers */ = {
+		572DD5AFDBCA4064A937CEAFDBFCE8DA /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E3D11AF2F57FD9CC649FEA4 /* Pods-SAHistoryNavigationViewController-umbrella.h in Headers */,
+				16848D15E0B9CB819BDBC6827C82F38C /* MisterFusion-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5B2D5BECEB931B3A9F7A2FD81D1C377F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08B3E463B7FEE9E79E08F1BF74F735BF /* SAHistoryNavigationViewController-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		22BD1B7041A32BB2B485D2B0 /* Pods-SAHistoryNavigationViewController */ = {
+		2CB481FA530D525826AE616F1D6882CF /* MisterFusion */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0D8779549A29F5C68AF4174F /* Build configuration list for PBXNativeTarget "Pods-SAHistoryNavigationViewController" */;
+			buildConfigurationList = 16B29F03739E2E64893CB4A3559658FE /* Build configuration list for PBXNativeTarget "MisterFusion" */;
 			buildPhases = (
-				CE28597CBF79BD9369498BA9 /* Sources */,
-				671A9043B77CBE68A36048F5 /* Frameworks */,
-				E2EC3CC5C073A037029B0B91 /* Headers */,
+				8DFB3FB0E56FD942DABC879115F56F63 /* Sources */,
+				DECFC48DC6F69DF8E98243658AD5A952 /* Frameworks */,
+				572DD5AFDBCA4064A937CEAFDBFCE8DA /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Pods-SAHistoryNavigationViewController";
-			productName = "Pods-SAHistoryNavigationViewController";
-			productReference = 265E1DA5A06264FE133A14C7 /* SAHistoryNavigationViewController.framework */;
+			name = MisterFusion;
+			productName = MisterFusion;
+			productReference = 30B6F118E0EB1DEA2DED6B1898A8AF38 /* MisterFusion.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		A69291D1B559B88E6F74AEEF /* Pods */ = {
+		594E8D02EC9F8A0A395A8E6DAD32827D /* Pods */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6ED6CD56FEF4E76D1C1A346C /* Build configuration list for PBXNativeTarget "Pods" */;
+			buildConfigurationList = B0C962FB46D6E2682E177B2443D7808B /* Build configuration list for PBXNativeTarget "Pods" */;
 			buildPhases = (
-				01D430C40080DAC8F391A740 /* Sources */,
-				A82C682883C001993BD92BEB /* Frameworks */,
-				D63E2260E4A66CA4DC274019 /* Headers */,
+				888343C50AB1C9F80EE24CA823AEDED9 /* Sources */,
+				C87EEE48C3797E7C64FD87C63B465296 /* Frameworks */,
+				4E09E6797051DB82A874C01AEEB8E617 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				71C872AD824A058FBB4CDA0C /* PBXTargetDependency */,
+				8C31BCA5989663D4506E244C2E85568E /* PBXTargetDependency */,
+				F32B05A8A01BB520FE5B0F6155BDE34D /* PBXTargetDependency */,
 			);
 			name = Pods;
 			productName = Pods;
-			productReference = FF61670BDCC4D5FCE5C088BE /* Pods.framework */;
+			productReference = 1BD542E909255AB4B3DCCF76E07A3DE9 /* Pods.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		5EA2788DDCED9ABACC432611514F662F /* SAHistoryNavigationViewController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C7E5D98E534CA5906E88661DD82B864F /* Build configuration list for PBXNativeTarget "SAHistoryNavigationViewController" */;
+			buildPhases = (
+				A2071FE8B813F898EC38AB42561A523F /* Sources */,
+				BEBF1C984BE4966190CB3C89E2CDD677 /* Frameworks */,
+				5B2D5BECEB931B3A9F7A2FD81D1C377F /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A2A788FC12BB1A4223D8467998995D5C /* PBXTargetDependency */,
+			);
+			name = SAHistoryNavigationViewController;
+			productName = SAHistoryNavigationViewController;
+			productReference = BC93E0E840E59E5A8EEED03005A74849 /* SAHistoryNavigationViewController.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		6EA6F98A95CB42618A819EB5 /* Project object */ = {
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0710;
-				LastUpgradeCheck = 0510;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 			};
-			buildConfigurationList = EF372BD3FE9C817700DA7A68 /* Build configuration list for PBXProject "Pods" */;
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 4FAB40A24339E4140B2E495D;
-			productRefGroup = B061ED51237A573E82A5DA7C /* Products */;
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = B047972AB07C8A53C95727F9BA0B2594 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A69291D1B559B88E6F74AEEF /* Pods */,
-				22BD1B7041A32BB2B485D2B0 /* Pods-SAHistoryNavigationViewController */,
+				2CB481FA530D525826AE616F1D6882CF /* MisterFusion */,
+				594E8D02EC9F8A0A395A8E6DAD32827D /* Pods */,
+				5EA2788DDCED9ABACC432611514F662F /* SAHistoryNavigationViewController */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		01D430C40080DAC8F391A740 /* Sources */ = {
+		888343C50AB1C9F80EE24CA823AEDED9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D118AC73962CAAC8E78A7388 /* Pods-dummy.m in Sources */,
+				DC5BB9B75E44193A717814E2900E9E3F /* Pods-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CE28597CBF79BD9369498BA9 /* Sources */ = {
+		8DFB3FB0E56FD942DABC879115F56F63 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB49A5A1FDEC458D30376933 /* NSLayoutConstraint+Fit.swift in Sources */,
-				3755E9CD1BDE9C0C004F7D1C /* SAThirdDimensionalTouchRecognizer.swift in Sources */,
-				58E95F27E6DA4CB8BFE65E14 /* Pods-SAHistoryNavigationViewController-dummy.m in Sources */,
-				ABE0E940B53527112319EA93 /* SAHistoryNavigationViewController.swift in Sources */,
-				9DD2BEA81BDE5DE80042E077 /* SAHistoryViewAnimatedTransitioning.swift in Sources */,
-				C999F97E4DFC6712ABC771A3 /* SAHistoryViewController.swift in Sources */,
+				73AE1EB67C404A9AB508D1B77DF18434 /* MisterFusion-dummy.m in Sources */,
+				C61CD808FC344DBD2E9E426F4A29BEDF /* MisterFusion.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A2071FE8B813F898EC38AB42561A523F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				998E58097DA982B8F17BCE1DF769C16E /* SAHistoryNavigationTransitionController.swift in Sources */,
+				F601DF31D50026AD03408C6BCB5D2082 /* SAHistoryNavigationViewController-dummy.m in Sources */,
+				CA96A9114CD13E3A09000929D1ECB587 /* SAHistoryNavigationViewController.swift in Sources */,
+				63377AC52B5103967658B185E79A6F66 /* SAHistoryViewAnimatedTransitioning.swift in Sources */,
+				6D55F631C67FE66E6B3D2271D4162471 /* SAHistoryViewController.swift in Sources */,
+				60D3D4030D97AB01DE1192FB2EF9CDDE /* SAThirdDimensionalTouchRecognizer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		71C872AD824A058FBB4CDA0C /* PBXTargetDependency */ = {
+		8C31BCA5989663D4506E244C2E85568E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "Pods-SAHistoryNavigationViewController";
-			target = 22BD1B7041A32BB2B485D2B0 /* Pods-SAHistoryNavigationViewController */;
-			targetProxy = 6C47958950CCA1AA11718E61 /* PBXContainerItemProxy */;
+			name = MisterFusion;
+			target = 2CB481FA530D525826AE616F1D6882CF /* MisterFusion */;
+			targetProxy = C3BF13FA86DEDA559C94B301C12F3A62 /* PBXContainerItemProxy */;
+		};
+		A2A788FC12BB1A4223D8467998995D5C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MisterFusion;
+			target = 2CB481FA530D525826AE616F1D6882CF /* MisterFusion */;
+			targetProxy = B21C4B629785FA1A65F10902560D7777 /* PBXContainerItemProxy */;
+		};
+		F32B05A8A01BB520FE5B0F6155BDE34D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SAHistoryNavigationViewController;
+			target = 5EA2788DDCED9ABACC432611514F662F /* SAHistoryNavigationViewController */;
+			targetProxy = 940DFDC7940134AA461C3A4066CB6CB7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		5BE956F937321BC989D96BF5 /* Release */ = {
+		360F462B4866C915303F0B338AF21FB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ADA5CDA5F303AF05022E4A52 /* Pods-SAHistoryNavigationViewController-Private.xcconfig */;
+			baseConfigurationReference = 7F9052914E55A7D00132D421092F43E4 /* SAHistoryNavigationViewController.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -317,12 +443,40 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-SAHistoryNavigationViewController/Pods-SAHistoryNavigationViewController-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Pods-SAHistoryNavigationViewController/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/SAHistoryNavigationViewController/SAHistoryNavigationViewController-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SAHistoryNavigationViewController/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Pods-SAHistoryNavigationViewController/Pods-SAHistoryNavigationViewController.modulemap";
+				MODULEMAP_FILE = "Target Support Files/SAHistoryNavigationViewController/SAHistoryNavigationViewController.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = SAHistoryNavigationViewController;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		4544A00B7B0D2C4F190B2516C2830940 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F9052914E55A7D00132D421092F43E4 /* SAHistoryNavigationViewController.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SAHistoryNavigationViewController/SAHistoryNavigationViewController-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SAHistoryNavigationViewController/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SAHistoryNavigationViewController/SAHistoryNavigationViewController.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = SAHistoryNavigationViewController;
 				SDKROOT = iphoneos;
@@ -333,45 +487,10 @@
 			};
 			name = Release;
 		};
-		5FF86FA6795A0E663ED6985E /* Release */ = {
+		647146E94AEC35D12EF0DEF3548920B6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 977577C045EDA9D9D1F46E2598D19FC7 /* Pods.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "${SRCROOT}/../build";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		6C0F7A719400DE82C9A1E6F7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B4E51E8F1924885BCEDCA0C /* Pods.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -383,6 +502,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods/Pods.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
@@ -398,65 +518,7 @@
 			};
 			name = Debug;
 		};
-		D8ACB585CECF858C59B0A8D3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 97EC98541326D8B95323824E /* Pods.release.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Pods/Pods.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = Pods;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		F0F89F86AC48067746FC20C7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = ADA5CDA5F303AF05022E4A52 /* Pods-SAHistoryNavigationViewController-Private.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-SAHistoryNavigationViewController/Pods-SAHistoryNavigationViewController-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Pods-SAHistoryNavigationViewController/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Pods-SAHistoryNavigationViewController/Pods-SAHistoryNavigationViewController.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = SAHistoryNavigationViewController;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		F1D5435CACC9DA0510D64879 /* Debug */ = {
+		A70CDAD61F90AC503C7D04CC22DA2923 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -495,37 +557,165 @@
 			};
 			name = Debug;
 		};
+		E33FA458519D185ED9EBDF776989C33F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA312349A49333542E6F4B36B329960E /* Pods.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods/Pods.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		E85ADAEB09CCEF0B446C94EB667DCA18 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A47E7C6855EDDBB25F81C893627C25D /* MisterFusion.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/MisterFusion/MisterFusion-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/MisterFusion/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/MisterFusion/MisterFusion.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = MisterFusion;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		F1DC2D1D059EBF80C0EC8D37389C96C6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A47E7C6855EDDBB25F81C893627C25D /* MisterFusion.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/MisterFusion/MisterFusion-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/MisterFusion/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/MisterFusion/MisterFusion.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = MisterFusion;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		FB45FFD90572718D82AB9092B750F0CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0D8779549A29F5C68AF4174F /* Build configuration list for PBXNativeTarget "Pods-SAHistoryNavigationViewController" */ = {
+		16B29F03739E2E64893CB4A3559658FE /* Build configuration list for PBXNativeTarget "MisterFusion" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F0F89F86AC48067746FC20C7 /* Debug */,
-				5BE956F937321BC989D96BF5 /* Release */,
+				F1DC2D1D059EBF80C0EC8D37389C96C6 /* Debug */,
+				E85ADAEB09CCEF0B446C94EB667DCA18 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6ED6CD56FEF4E76D1C1A346C /* Build configuration list for PBXNativeTarget "Pods" */ = {
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6C0F7A719400DE82C9A1E6F7 /* Debug */,
-				D8ACB585CECF858C59B0A8D3 /* Release */,
+				A70CDAD61F90AC503C7D04CC22DA2923 /* Debug */,
+				FB45FFD90572718D82AB9092B750F0CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EF372BD3FE9C817700DA7A68 /* Build configuration list for PBXProject "Pods" */ = {
+		B0C962FB46D6E2682E177B2443D7808B /* Build configuration list for PBXNativeTarget "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F1D5435CACC9DA0510D64879 /* Debug */,
-				5FF86FA6795A0E663ED6985E /* Release */,
+				647146E94AEC35D12EF0DEF3548920B6 /* Debug */,
+				E33FA458519D185ED9EBDF776989C33F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C7E5D98E534CA5906E88661DD82B864F /* Build configuration list for PBXNativeTarget "SAHistoryNavigationViewController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				360F462B4866C915303F0B338AF21FB4 /* Debug */,
+				4544A00B7B0D2C4F190B2516C2830940 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 6EA6F98A95CB42618A819EB5 /* Project object */;
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 }

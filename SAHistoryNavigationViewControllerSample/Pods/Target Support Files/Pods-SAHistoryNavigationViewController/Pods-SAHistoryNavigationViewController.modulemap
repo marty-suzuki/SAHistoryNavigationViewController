@@ -1,6 +1,0 @@
-framework module SAHistoryNavigationViewController {
-  umbrella header "Pods-SAHistoryNavigationViewController-umbrella.h"
-
-  export *
-  module * { export * }
-}
