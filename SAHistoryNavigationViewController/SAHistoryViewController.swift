@@ -45,7 +45,7 @@ class SAHistoryViewController: UIViewController {
         if let contentView = contentView {
             view.addSubview(contentView)
             contentView.translatesAutoresizingMaskIntoConstraints = false
-            view.addConstraints(
+            view.addLayoutConstraints(
                 contentView.Top,
                 contentView.Bottom,
                 contentView.Left,
@@ -71,7 +71,7 @@ class SAHistoryViewController: UIViewController {
         
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        view.addConstraints(
+        view.addLayoutConstraints(
             collectionView.Top,
             collectionView.Bottom,
             collectionView.CenterX,

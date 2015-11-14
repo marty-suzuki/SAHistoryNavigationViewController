@@ -8,7 +8,7 @@
 
 import UIKit
 
-public struct MisterFusion {
+public class MisterFusion: NSObject {
     private let item: UIView?
     private let attribute: NSLayoutAttribute?
     private let relatedBy: NSLayoutRelation?
@@ -17,6 +17,42 @@ public struct MisterFusion {
     private let multiplier: CGFloat?
     private let constant: CGFloat?
     private let priority: UILayoutPriority?
+    
+    init(item: UIView?, attribute: NSLayoutAttribute?, relatedBy: NSLayoutRelation?, toItem: UIView?, toAttribute: NSLayoutAttribute?, multiplier: CGFloat?, constant: CGFloat?, priority: UILayoutPriority?) {
+        self.item = item
+        self.attribute = attribute
+        self.relatedBy = relatedBy
+        self.toItem = toItem
+        self.toAttribute = toAttribute
+        self.multiplier = multiplier
+        self.constant = constant
+        self.priority = priority
+        super.init()
+    }
+    
+    public var Equal: MisterFusion -> MisterFusion {
+        return { [unowned self] in self |==| $0 }
+    }
+    
+    public var LessThanOrEqual: MisterFusion -> MisterFusion {
+        return { [unowned self] in self |<=| $0 }
+    }
+    
+    public var GreaterThanOrEqual: MisterFusion -> MisterFusion {
+        return { [unowned self] in self |>=| $0 }
+    }
+    
+    public var Multiplier: CGFloat -> MisterFusion {
+        return { [unowned self] in self |*| $0 }
+    }
+    
+    public var Constant: CGFloat -> MisterFusion {
+        return { [unowned self] in self |+| $0 }
+    }
+    
+    public var Priority: UILayoutPriority -> MisterFusion {
+        return { [unowned self] in self |<>| $0 }
+    }
 }
 
 infix operator |==| { associativity left precedence 100 }
@@ -114,7 +150,7 @@ extension UIView {
         return MisterFusion(item: self, attribute: attribute, relatedBy: nil, toItem: nil, toAttribute: nil, multiplier: nil, constant: nil, priority: nil)
     }
     
-    public func addConstraint(misterFusion: MisterFusion) -> NSLayoutConstraint {
+    public func addLayoutConstraint(misterFusion: MisterFusion) -> NSLayoutConstraint {
         let item: UIView = misterFusion.item ?? self
         let attribute: NSLayoutAttribute = misterFusion.attribute ?? .NotAnAttribute
         let relatedBy: NSLayoutRelation = misterFusion.relatedBy ?? .Equal
@@ -128,7 +164,11 @@ extension UIView {
         return constraint
     }
     
-    public func addConstraints(misterFusions: MisterFusion...) -> [NSLayoutConstraint] {
-        return misterFusions.map { addConstraint($0) }
+    public func addLayoutConstraints(misterFusions: [MisterFusion]) -> [NSLayoutConstraint] {
+        return misterFusions.map { addLayoutConstraint($0) }
+    }
+    
+    public func addLayoutConstraints(misterFusions: MisterFusion...) -> [NSLayoutConstraint] {
+        return misterFusions.map { addLayoutConstraint($0) }
     }
 }

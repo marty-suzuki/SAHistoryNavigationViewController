@@ -1,6 +1,6 @@
 PODS:
-  - MisterFusion (0.1.0)
-  - SAHistoryNavigationViewController (2.1.0):
+  - MisterFusion (0.3.0)
+  - SAHistoryNavigationViewController (2.2.0):
     - MisterFusion
 
 DEPENDENCIES:
@@ -11,7 +11,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  MisterFusion: 6f993f02cce39987ab13e2e602ee1c1c920c2918
-  SAHistoryNavigationViewController: b3771eb85c10b32f0a111f033768ccca77132dd7
+  MisterFusion: 03b91f8fe6247e9fb611d66fa8fc07d309ddf4a2
+  SAHistoryNavigationViewController: 0881e9661e961ec3fd44a4ecc54cbbd29decadf4
 
 COCOAPODS: 0.39.0
