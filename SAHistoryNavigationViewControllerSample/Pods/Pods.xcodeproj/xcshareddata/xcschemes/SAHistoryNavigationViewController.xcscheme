@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'AE30F8143AB77A7C325BAAAA'
+               BlueprintIdentifier = '670DB5A19D2FAAA9B673B480'
                BlueprintName = 'SAHistoryNavigationViewController'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'SAHistoryNavigationViewController.framework'>
