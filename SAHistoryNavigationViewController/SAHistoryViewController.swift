@@ -62,7 +62,7 @@ class SAHistoryViewController: UIViewController {
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.itemSize = size
             layout.minimumInteritemSpacing = 0.0
-            layout.minimumLineSpacing = 20.0
+            layout.minimumLineSpacing = self.dynamicType.LineSpace
             layout.sectionInset = UIEdgeInsets(top: 0.0, left: size.width, bottom: 0.0, right: size.width)
             layout.scrollDirection = .Horizontal
         }
