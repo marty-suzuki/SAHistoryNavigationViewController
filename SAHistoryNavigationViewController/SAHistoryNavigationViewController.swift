@@ -101,8 +101,6 @@ public class SAHistoryNavigationViewController: UINavigationController {
         }
         gestureRecognizer.delegate = self
         navigationBar.addGestureRecognizer(gestureRecognizer)
-        
-        navigationBar.delegate = self
     }
     
     override func willSetHistoryDelegate(delegate: SAHistoryNavigationViewControllerDelegate?) {
