@@ -8,45 +8,6 @@
 
 import UIKit
 
-extension UINavigationController {
-    public weak var historyDelegate: SAHistoryNavigationViewControllerDelegate? {
-        set {
-            willSetHistoryDelegate(newValue)
-        }
-        get {
-            return willGetHistoryDelegate()
-        }
-    }
-    public func showHistory() {}
-    public func setHistoryBackgroundColor(color: UIColor) {}
-    public func contentView() -> UIView? { return nil }
-    func willSetHistoryDelegate(delegate: SAHistoryNavigationViewControllerDelegate?) {}
-    func willGetHistoryDelegate() -> SAHistoryNavigationViewControllerDelegate? { return nil }
-}
-
-extension UIView {
-    func screenshotImage(scale: CGFloat = 0.0) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(frame.size, false, scale)
-        drawViewHierarchyInRect(bounds, afterScreenUpdates: true)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image
-    }
-}
-
-extension UIViewController {
-    func screenshotFromWindow(scale: CGFloat = 0.0) -> UIImage? {
-        guard let window = UIApplication.sharedApplication().windows.first else {
-            return nil
-        }
-        UIGraphicsBeginImageContextWithOptions(window.frame.size, false, scale)
-        window.drawViewHierarchyInRect(window.bounds, afterScreenUpdates: true)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image
-    }
-}
-
 @objc public protocol SAHistoryNavigationViewControllerDelegate: NSObjectProtocol {
     optional func historyControllerDidShowHistory(controller: SAHistoryNavigationViewController, viewController: UIViewController)
 }
