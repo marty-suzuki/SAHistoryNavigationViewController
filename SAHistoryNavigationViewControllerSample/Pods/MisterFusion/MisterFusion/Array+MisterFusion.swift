@@ -6,7 +6,7 @@
 //  Copyright © 2015年 Taiki Suzuki. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension Array where Element: NSLayoutConstraint {
     public func firstItem(view: UIView) -> [NSLayoutConstraint] {

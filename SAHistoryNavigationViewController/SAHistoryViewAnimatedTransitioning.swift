@@ -9,16 +9,20 @@
 import UIKit
 
 class SAHistoryViewAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransitioning {
+    //MARK: - Static Constants
     static private let Duration: NSTimeInterval = 0.25
     static private let Scale: CGFloat = 0.7
     
+    //MARK: - Properties
     private var isPresenting = true
     
+    //MARK: - Initializers
     init(isPresenting: Bool) {
         super.init()
         self.isPresenting = isPresenting
     }
     
+    //MARK - Life cycle
     func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
         return SAHistoryViewAnimatedTransitioning.Duration
     }
@@ -42,7 +46,10 @@ class SAHistoryViewAnimatedTransitioning: NSObject, UIViewControllerAnimatedTran
             popAniamtion(transitionContext, containerView: containerView, toVC: toVC, fromVC: fromVC)
         }
     }
-    
+}
+
+//MARK: - Animations
+extension SAHistoryViewAnimatedTransitioning {
     private func pushAniamtion(transitionContext: UIViewControllerContextTransitioning, containerView: UIView, toVC: UIViewController, fromVC: UIViewController) {
         guard let hvc = toVC as? SAHistoryViewController else {
             return

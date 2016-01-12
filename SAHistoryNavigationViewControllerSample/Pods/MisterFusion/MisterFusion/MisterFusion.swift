@@ -17,8 +17,24 @@ public class MisterFusion: NSObject {
     private let multiplier: CGFloat?
     private let constant: CGFloat?
     private let priority: UILayoutPriority?
+    private let horizontalSizeClass: UIUserInterfaceSizeClass?
+    private let verticalSizeClass: UIUserInterfaceSizeClass?
     
-    init(item: UIView?, attribute: NSLayoutAttribute?, relatedBy: NSLayoutRelation?, toItem: UIView?, toAttribute: NSLayoutAttribute?, multiplier: CGFloat?, constant: CGFloat?, priority: UILayoutPriority?) {
+    override public var description: String {
+        return "\(super.description)\n" +
+               "item               : \(item)\n" +
+               "attribute          : \(attribute?.rawValue))\n" +
+               "relatedBy          : \(relatedBy?.rawValue))\n" +
+               "toItem             : \(toItem)\n" +
+               "toAttribute        : \(toAttribute?.rawValue))\n" +
+               "multiplier         : \(multiplier)\n" +
+               "constant           : \(constant)\n" +
+               "priority           : \(priority)\n" +
+               "horizontalSizeClass: \(horizontalSizeClass?.rawValue)\n" +
+               "verticalSizeClass  : \(verticalSizeClass?.rawValue)\n"
+    }
+    
+    init(item: UIView?, attribute: NSLayoutAttribute?, relatedBy: NSLayoutRelation?, toItem: UIView?, toAttribute: NSLayoutAttribute?, multiplier: CGFloat?, constant: CGFloat?, priority: UILayoutPriority?, horizontalSizeClass: UIUserInterfaceSizeClass?, verticalSizeClass: UIUserInterfaceSizeClass?) {
         self.item = item
         self.attribute = attribute
         self.relatedBy = relatedBy
@@ -27,6 +43,8 @@ public class MisterFusion: NSObject {
         self.multiplier = multiplier
         self.constant = constant
         self.priority = priority
+        self.horizontalSizeClass = horizontalSizeClass
+        self.verticalSizeClass = verticalSizeClass
         super.init()
     }
     
@@ -78,51 +96,75 @@ public class MisterFusion: NSObject {
             return me |=| $0
         }
     }
+    
+    public var HorizontalSizeClass: UIUserInterfaceSizeClass -> MisterFusion? {
+        return { [weak self] in
+            guard let me = self else { return nil }
+            return me <-> $0
+        }
+    }
+    
+    public var VerticalSizeClass: UIUserInterfaceSizeClass -> MisterFusion? {
+        return { [weak self] in
+            guard let me = self else { return nil }
+            return me <|> $0
+        }
+    }
 }
 
 infix operator |==| { associativity left precedence 100 }
 public func |==| (left: MisterFusion, right: MisterFusion) -> MisterFusion {
-    return MisterFusion(item: left.item, attribute: left.attribute, relatedBy: .Equal, toItem: right.item, toAttribute: right.attribute, multiplier: nil, constant: nil, priority: nil)
+    return MisterFusion(item: left.item, attribute: left.attribute, relatedBy: .Equal, toItem: right.item, toAttribute: right.attribute, multiplier: nil, constant: nil, priority: nil, horizontalSizeClass: nil, verticalSizeClass: nil)
 }
 
 infix operator |<=| { associativity left precedence 100 }
 public func |<=| (left: MisterFusion, right: MisterFusion) -> MisterFusion {
-    return MisterFusion(item: left.item, attribute: left.attribute, relatedBy: .LessThanOrEqual, toItem: right.item, toAttribute: right.attribute, multiplier: nil, constant: nil, priority: nil)
+    return MisterFusion(item: left.item, attribute: left.attribute, relatedBy: .LessThanOrEqual, toItem: right.item, toAttribute: right.attribute, multiplier: nil, constant: nil, priority: nil, horizontalSizeClass: nil, verticalSizeClass: nil)
 }
 
 infix operator |>=| { associativity left precedence 100 }
 public func |>=| (left: MisterFusion, right: MisterFusion) -> MisterFusion {
-    return MisterFusion(item: left.item, attribute: left.attribute, relatedBy: .GreaterThanOrEqual, toItem: right.item, toAttribute: right.attribute, multiplier: nil, constant: nil, priority: nil)
+    return MisterFusion(item: left.item, attribute: left.attribute, relatedBy: .GreaterThanOrEqual, toItem: right.item, toAttribute: right.attribute, multiplier: nil, constant: nil, priority: nil, horizontalSizeClass: nil, verticalSizeClass: nil)
 }
 
 infix operator |+| { associativity left precedence 100 }
 public func |+| (left: MisterFusion, right: CGFloat) -> MisterFusion {
-    return MisterFusion(item: left.item, attribute: left.attribute, relatedBy: left.relatedBy, toItem: left.toItem, toAttribute: left.toAttribute, multiplier: left.multiplier, constant: right, priority: left.priority)
+    return MisterFusion(item: left.item, attribute: left.attribute, relatedBy: left.relatedBy, toItem: left.toItem, toAttribute: left.toAttribute, multiplier: left.multiplier, constant: right, priority: left.priority, horizontalSizeClass: left.horizontalSizeClass, verticalSizeClass: left.verticalSizeClass)
 }
 
 infix operator |-| { associativity left precedence 100 }
 public func |-| (left: MisterFusion, right: CGFloat) -> MisterFusion {
-    return MisterFusion(item: left.item, attribute: left.attribute, relatedBy: left.relatedBy, toItem: left.toItem, toAttribute: left.toAttribute, multiplier: left.multiplier, constant: -right, priority: left.priority)
+    return MisterFusion(item: left.item, attribute: left.attribute, relatedBy: left.relatedBy, toItem: left.toItem, toAttribute: left.toAttribute, multiplier: left.multiplier, constant: -right, priority: left.priority, horizontalSizeClass: left.horizontalSizeClass, verticalSizeClass: left.verticalSizeClass)
 }
 
 infix operator |*| { associativity left precedence 100 }
 public func |*| (left: MisterFusion, right: CGFloat) -> MisterFusion {
-    return MisterFusion(item: left.item, attribute: left.attribute, relatedBy: left.relatedBy, toItem: left.toItem, toAttribute: left.toAttribute, multiplier: right, constant: left.constant, priority: left.priority)
+    return MisterFusion(item: left.item, attribute: left.attribute, relatedBy: left.relatedBy, toItem: left.toItem, toAttribute: left.toAttribute, multiplier: right, constant: left.constant, priority: left.priority, horizontalSizeClass: left.horizontalSizeClass, verticalSizeClass: left.verticalSizeClass)
 }
 
 infix operator |/| { associativity left precedence 100 }
 public func |/| (left: MisterFusion, right: CGFloat) -> MisterFusion {
-    return MisterFusion(item: left.item, attribute: left.attribute, relatedBy: left.relatedBy, toItem: left.toItem, toAttribute: left.toAttribute, multiplier: 1 / right, constant: left.constant, priority: left.priority)
+    return MisterFusion(item: left.item, attribute: left.attribute, relatedBy: left.relatedBy, toItem: left.toItem, toAttribute: left.toAttribute, multiplier: 1 / right, constant: left.constant, priority: left.priority, horizontalSizeClass: left.horizontalSizeClass, verticalSizeClass: left.verticalSizeClass)
 }
 
 infix operator |<>| { associativity left precedence 100 }
 public func |<>| (left: MisterFusion, right: UILayoutPriority) -> MisterFusion {
-    return MisterFusion(item: left.item, attribute: left.attribute, relatedBy: left.relatedBy, toItem: left.toItem, toAttribute: left.toAttribute, multiplier: left.multiplier, constant: left.constant, priority: right)
+    return MisterFusion(item: left.item, attribute: left.attribute, relatedBy: left.relatedBy, toItem: left.toItem, toAttribute: left.toAttribute, multiplier: left.multiplier, constant: left.constant, priority: right, horizontalSizeClass: left.horizontalSizeClass, verticalSizeClass: left.verticalSizeClass)
 }
 
 infix operator |=| { associativity left precedence 100 }
 public func |=| (left: MisterFusion, right: CGFloat) -> MisterFusion {
-    return MisterFusion(item: left.item, attribute: left.attribute, relatedBy: .Equal, toItem: nil, toAttribute: .NotAnAttribute, multiplier: left.multiplier, constant: right, priority: left.priority)
+    return MisterFusion(item: left.item, attribute: left.attribute, relatedBy: .Equal, toItem: nil, toAttribute: .NotAnAttribute, multiplier: left.multiplier, constant: right, priority: left.priority, horizontalSizeClass: left.horizontalSizeClass, verticalSizeClass: left.verticalSizeClass)
+}
+
+infix operator <-> { associativity left precedence 100 }
+public func <-> (left: MisterFusion, right: UIUserInterfaceSizeClass) -> MisterFusion {
+    return MisterFusion(item: left.item, attribute: left.attribute, relatedBy: .Equal, toItem: left.toItem, toAttribute: left.toAttribute, multiplier: left.multiplier, constant: left.constant, priority: left.priority, horizontalSizeClass: right, verticalSizeClass: left.verticalSizeClass)
+}
+
+infix operator <|> { associativity left precedence 100 }
+public func <|> (left: MisterFusion, right: UIUserInterfaceSizeClass) -> MisterFusion {
+    return MisterFusion(item: left.item, attribute: left.attribute, relatedBy: .Equal, toItem: left.toItem, toAttribute: left.toAttribute, multiplier: left.multiplier, constant: left.constant, priority: left.priority, horizontalSizeClass: left.horizontalSizeClass, verticalSizeClass: right)
 }
 
 extension UIView {
@@ -177,11 +219,20 @@ extension UIView {
     public var CenterYWithinMargins: MisterFusion { return createMisterFusion(.CenterYWithinMargins) }
     
     private func createMisterFusion(attribute: NSLayoutAttribute) -> MisterFusion {
-        return MisterFusion(item: self, attribute: attribute, relatedBy: nil, toItem: nil, toAttribute: nil, multiplier: nil, constant: nil, priority: nil)
+        return MisterFusion(item: self, attribute: attribute, relatedBy: nil, toItem: nil, toAttribute: nil, multiplier: nil, constant: nil, priority: nil, horizontalSizeClass: nil, verticalSizeClass: nil)
     }
     
-    public func addLayoutConstraint(misterFusion: MisterFusion) -> NSLayoutConstraint {
+    public func addLayoutConstraint(misterFusion: MisterFusion) -> NSLayoutConstraint? {
         let item: UIView = misterFusion.item ?? self
+        let traitCollection = UIApplication.sharedApplication().keyWindow?.traitCollection
+        if let horizontalSizeClass = misterFusion.horizontalSizeClass
+            where horizontalSizeClass != traitCollection?.horizontalSizeClass {
+            return nil
+        }
+        if let verticalSizeClass = misterFusion.verticalSizeClass
+            where verticalSizeClass != traitCollection?.verticalSizeClass {
+            return nil
+        }
         let attribute: NSLayoutAttribute = misterFusion.attribute ?? .NotAnAttribute
         let relatedBy: NSLayoutRelation = misterFusion.relatedBy ?? .Equal
         let toAttribute: NSLayoutAttribute = misterFusion.toAttribute ?? attribute
@@ -195,14 +246,14 @@ extension UIView {
     }
     
     public func addLayoutConstraints(misterFusions: [MisterFusion]) -> [NSLayoutConstraint] {
-        return misterFusions.map { addLayoutConstraint($0) }
+        return misterFusions.map { addLayoutConstraint($0) }.filter { $0 != nil }.map { $0! }
     }
     
     public func addLayoutConstraints(misterFusions: MisterFusion...) -> [NSLayoutConstraint] {
         return addLayoutConstraints(misterFusions)
     }
     
-    public func addLayoutSubview(subview: UIView, andConstraint misterFusion: MisterFusion) -> NSLayoutConstraint {
+    public func addLayoutSubview(subview: UIView, andConstraint misterFusion: MisterFusion) -> NSLayoutConstraint? {
         addSubview(subview)
         subview.translatesAutoresizingMaskIntoConstraints = false
         return addLayoutConstraint(misterFusion)

@@ -8,52 +8,15 @@
 
 import UIKit
 
-extension UINavigationController {
-    public weak var historyDelegate: SAHistoryNavigationViewControllerDelegate? {
-        set {
-            willSetHistoryDelegate(newValue)
-        }
-        get {
-            return willGetHistoryDelegate()
-        }
-    }
-    public func showHistory() {}
-    public func setHistoryBackgroundColor(color: UIColor) {}
-    public func contentView() -> UIView? { return nil }
-    func willSetHistoryDelegate(delegate: SAHistoryNavigationViewControllerDelegate?) {}
-    func willGetHistoryDelegate() -> SAHistoryNavigationViewControllerDelegate? { return nil }
-}
-
-extension UIView {
-    func screenshotImage(scale: CGFloat = 0.0) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(frame.size, false, scale)
-        drawViewHierarchyInRect(bounds, afterScreenUpdates: true)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image
-    }
-}
-
-extension UIViewController {
-    func screenshotFromWindow(scale: CGFloat = 0.0) -> UIImage? {
-        guard let window = UIApplication.sharedApplication().windows.first else {
-            return nil
-        }
-        UIGraphicsBeginImageContextWithOptions(window.frame.size, false, scale)
-        window.drawViewHierarchyInRect(window.bounds, afterScreenUpdates: true)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image
-    }
-}
-
 @objc public protocol SAHistoryNavigationViewControllerDelegate: NSObjectProtocol {
     optional func historyControllerDidShowHistory(controller: SAHistoryNavigationViewController, viewController: UIViewController)
 }
 
 public class SAHistoryNavigationViewController: UINavigationController {
-    private static let kImageScale: CGFloat = 1.0
+    //MARK: - Static constants
+    private static let ImageScale: CGFloat = 1.0
     
+    //MARK: - Properties
     public var thirdDimensionalTouchThreshold: CGFloat = 0.5
 
     private var interactiveTransition: UIPercentDrivenInteractiveTransition?    
@@ -62,6 +25,7 @@ public class SAHistoryNavigationViewController: UINavigationController {
     private let historyContentView = UIView()
     private weak var _historyDelegate: SAHistoryNavigationViewControllerDelegate?
 
+    //MARK: - Initializers
     required public init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
     }
@@ -78,6 +42,7 @@ public class SAHistoryNavigationViewController: UINavigationController {
         super.init(rootViewController: rootViewController)
     }
     
+    //MARK: Life cycle
     override public func viewDidLoad() {
         super.viewDidLoad()
         
@@ -97,8 +62,6 @@ public class SAHistoryNavigationViewController: UINavigationController {
         }
         gestureRecognizer.delegate = self
         navigationBar.addGestureRecognizer(gestureRecognizer)
-        
-        navigationBar.delegate = self
     }
     
     override func willSetHistoryDelegate(delegate: SAHistoryNavigationViewControllerDelegate?) {
@@ -110,10 +73,9 @@ public class SAHistoryNavigationViewController: UINavigationController {
     }
     
     override public func pushViewController(viewController: UIViewController, animated: Bool) {
-        if let image = visibleViewController?.screenshotFromWindow(SAHistoryNavigationViewController.kImageScale) {
+        if let image = visibleViewController?.screenshotFromWindow(self.dynamicType.ImageScale) {
             screenshots += [image]
         }
-        
         super.pushViewController(viewController, animated: animated)
     }
     
@@ -136,7 +98,7 @@ public class SAHistoryNavigationViewController: UINavigationController {
             if currentIndex == viewControllers.endIndex {
                 break
             }
-            if let image = viewController.screenshotFromWindow(SAHistoryNavigationViewController.kImageScale) {
+            if let image = viewController.screenshotFromWindow(self.dynamicType.ImageScale) {
                 screenshots += [image]
             }
         }
@@ -146,7 +108,7 @@ public class SAHistoryNavigationViewController: UINavigationController {
     func handleThirdDimensionalTouch(gesture: SAThirdDimensionalTouchRecognizer) {
         switch gesture.state {
         case .Began:
-            guard let image = visibleViewController?.screenshotFromWindow(SAHistoryNavigationViewController.kImageScale) else {
+            guard let image = visibleViewController?.screenshotFromWindow(self.dynamicType.ImageScale) else {
                 return
             }
             screenshots += [image]
@@ -194,7 +156,7 @@ public class SAHistoryNavigationViewController: UINavigationController {
 
 extension SAHistoryNavigationViewController {
     override public func showHistory() {
-        guard let image = visibleViewController?.screenshotFromWindow(SAHistoryNavigationViewController.kImageScale) else {
+        guard let image = visibleViewController?.screenshotFromWindow(self.dynamicType.ImageScale) else {
             return
         }
         screenshots += [image]
@@ -218,6 +180,7 @@ extension SAHistoryNavigationViewController {
     }
 }
 
+//MARK: - UINavigationBarDelegate
 extension SAHistoryNavigationViewController: UINavigationBarDelegate {
     public func navigationBar(navigationBar: UINavigationBar, didPopItem item: UINavigationItem) {
         guard let items = navigationBar.items else {
@@ -227,6 +190,7 @@ extension SAHistoryNavigationViewController: UINavigationBarDelegate {
     }
 }
 
+//MARK: - UIViewControllerTransitioningDelegate
 extension SAHistoryNavigationViewController : UIViewControllerTransitioningDelegate {
     public func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return SAHistoryViewAnimatedTransitioning(isPresenting: true)
@@ -241,13 +205,14 @@ extension SAHistoryNavigationViewController : UIViewControllerTransitioningDeleg
     }
 }
 
+//MARK: - SAHistoryViewControllerDelegate
 extension SAHistoryNavigationViewController: SAHistoryViewControllerDelegate {
     func historyViewController(viewController: SAHistoryViewController, didSelectIndex index: Int) {
         if viewControllers.count - 1 < index {
             return
         }
         
-        viewController.dismissViewControllerAnimated(true) { finished in
+        viewController.dismissViewControllerAnimated(true) { _ in
             self.popToViewController(self.viewControllers[index], animated: false)
             self.historyViewController = nil
             self.setNavigationBarHidden(false, animated: false)
@@ -255,13 +220,11 @@ extension SAHistoryNavigationViewController: SAHistoryViewControllerDelegate {
     }
 }
 
+//MRAK: - UIGestureRecognizerDelegate
 extension SAHistoryNavigationViewController: UIGestureRecognizerDelegate {
     public func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
         if let _ = visibleViewController?.navigationController?.navigationBar.backItem, view = gestureRecognizer.view as? UINavigationBar {
-            var height = 64.0
-            if visibleViewController?.navigationController?.navigationBarHidden == true {
-                height = 44.0
-            }
+            let height = visibleViewController?.navigationController?.navigationBarHidden == true ? 44.0 : 64.0
             let backButtonFrame = CGRect(x: 0.0, y :0.0,  width: 100.0, height: height)
             let touchPoint = gestureRecognizer.locationInView(view)
             if CGRectContainsPoint(backButtonFrame, touchPoint) {
