@@ -46,7 +46,9 @@ public class SAHistoryNavigationViewController: UINavigationController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        historyContentView.backgroundColor = .grayColor()
+        if (historyContentView.backgroundColor == nil) {
+            historyContentView.backgroundColor = .grayColor()
+        }
         
         let gestureRecognizer: UIGestureRecognizer
         if #available(iOS 9, *) {
