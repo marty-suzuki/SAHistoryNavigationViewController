@@ -161,11 +161,11 @@ self.view.addLayoutSubview(view, andConstraints:
 
 #### Operators
 
-- `|==|`, `|<=|`, `|>=|` ... `NSLayoutRelation`
+- `|==|`, `|<=|`, `|>=|` ... `NSLayoutRelation` and fixed `Height` and `Width`
 - `|*|`, `|/|` ... `multiplier`
 - `|+|`, `|-|` ... `constant`
 - `|<>|` ... `UILayoutPriority`
-- `|=|` ... For fixed `Height` and `Width`
+- ~~`|=|` ... For fixed `Height` and `Width`~~ (deprecated since 1.1.0, use `|==|`)
 - `<|>` ... `UIUserInterfaceSizeClass` for VerticalSizeClass
 - `<->` ... `UIUserInterfaceSizeClass` for VerticalSizeClass
 
@@ -237,7 +237,10 @@ override func traitCollectionDidChange(previousTraitCollection: UITraitCollectio
 @property (nonatomic, readonly, copy) MisterFusion * __nullable (^ __nonnull Multiplier)(CGFloat);
 //constant
 @property (nonatomic, readonly, copy) MisterFusion * __nullable (^ __nonnull Constant)(CGFloat);
-@property (nonatomic, readonly, copy) MisterFusion * __nullable (^ __nonnull NotRelatedConstant)(CGFloat);
+@property (nonatomic, readonly, copy) MisterFusion * __nullable (^ __nonnull NotRelatedEqualConstant)(CGFloat);
+@property (nonatomic, readonly, copy) MisterFusion * __nullable (^ __nonnull NotRelatedLessThanOrEqualConstant)(CGFloat);
+@property (nonatomic, readonly, copy) MisterFusion * __nullable (^ __nonnull NotRelatedGreaterThanOrEqualConstant)(CGFloat);
+//@property (nonatomic, readonly, copy) MisterFusion * __nullable (^ __nonnull NotRelatedConstant)(CGFloat); (deprecated since 1.1.0, use NotRelatedEqualConstant)
 //UILayoutPriority
 @property (nonatomic, readonly, copy) MisterFusion * __nullable (^ __nonnull Priority)(UILayoutPriority);
 //UIUserInterfaceSizeClass for HorizontalSizeClass

@@ -52,13 +52,13 @@ public class SAHistoryNavigationViewController: UINavigationController {
         if #available(iOS 9, *) {
             if traitCollection.forceTouchCapability == .Available {
                 interactiveTransition = UIPercentDrivenInteractiveTransition()
-                gestureRecognizer = SAThirdDimensionalTouchRecognizer(target: self, action: "handleThirdDimensionalTouch:", threshold: thirdDimensionalTouchThreshold)
+                gestureRecognizer = SAThirdDimensionalTouchRecognizer(target: self, action: #selector(SAHistoryNavigationViewController.handleThirdDimensionalTouch(_:)), threshold: thirdDimensionalTouchThreshold)
                 (gestureRecognizer as? SAThirdDimensionalTouchRecognizer)?.minimumPressDuration = 0.2
             } else {
-                gestureRecognizer = UILongPressGestureRecognizer(target: self, action: "detectLongTap:")
+                gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(SAHistoryNavigationViewController.detectLongTap(_:)))
             }
         } else {
-            gestureRecognizer = UILongPressGestureRecognizer(target: self, action: "detectLongTap:")
+            gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(SAHistoryNavigationViewController.detectLongTap(_:)))
         }
         gestureRecognizer.delegate = self
         navigationBar.addGestureRecognizer(gestureRecognizer)

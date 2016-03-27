@@ -1,6 +1,6 @@
 {
   "name": "SAHistoryNavigationViewController",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "summary": "SAHistoryNavigationViewController realizes iOS task manager like UI in UINavigationContoller.",
   "homepage": "https://github.com/szk-atmosphere/SAHistoryNavigationViewController",
   "license": "MIT",
@@ -9,7 +9,7 @@
   },
   "source": {
     "git": "https://github.com/szk-atmosphere/SAHistoryNavigationViewController.git",
-    "tag": "2.2.2"
+    "tag": "2.3.0"
   },
   "social_media_url": "https://twitter.com/SzkAtmosphere",
   "platforms": {
