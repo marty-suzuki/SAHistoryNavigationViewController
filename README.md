@@ -24,6 +24,7 @@ SAHistoryNavigationViewController realizes iOS task manager like UI in UINavigat
 - [x] Launch Navigation History with Long tap action of Back Bar Button
 - [x] Support Swift2.0
 - [x] Support 3D Touch (If device is not supported 3D Touch, automatically replacing to long tap gesture.)
+- [x] Support Swift2.3
 
 ## Installation
 
@@ -106,7 +107,7 @@ This is delegate methods.
 
 ## Requirements
 
-- Xcode 7.0 or greater
+- Xcode 8.0 or greater
 - iOS8.0 or greater
 - [MisterFusion](https://github.com/szk-atmosphere/MisterFusion)
 

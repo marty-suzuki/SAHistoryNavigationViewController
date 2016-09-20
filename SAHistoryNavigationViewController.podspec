@@ -9,14 +9,14 @@
 
 Pod::Spec.new do |s|
   s.name             = "SAHistoryNavigationViewController"
-  s.version          = "2.3.0"
+  s.version          = "2.4.0"
   s.summary          = "SAHistoryNavigationViewController realizes iOS task manager like UI in UINavigationContoller."
 
-  s.homepage         = "https://github.com/szk-atmosphere/SAHistoryNavigationViewController"
+  s.homepage         = "https://github.com/marty-suzuki/SAHistoryNavigationViewController"
   s.license          = 'MIT'
   s.author           = { "Taiki Suzuki" => "s1180183@gmail.com" }
-  s.source           = { :git => "https://github.com/szk-atmosphere/SAHistoryNavigationViewController.git", :tag => s.version.to_s }
-  s.social_media_url = 'https://twitter.com/SzkAtmosphere'
+  s.source           = { :git => "https://github.com/marty-suzuki/SAHistoryNavigationViewController.git", :tag => s.version.to_s }
+  s.social_media_url = 'https://twitter.com/marty_suzuki'
 
   s.platform     = :ios, '8.0'
   s.requires_arc = true
@@ -28,5 +28,5 @@ Pod::Spec.new do |s|
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   s.frameworks = 'UIKit', 'AudioToolbox'
-  s.dependency 'MisterFusion'
+  s.dependency 'MisterFusion', '~> 1.4.0'
 end

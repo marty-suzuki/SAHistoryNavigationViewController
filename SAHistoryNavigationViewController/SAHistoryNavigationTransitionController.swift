@@ -10,8 +10,10 @@ import UIKit
 
 class SAHistoryNavigationTransitionController: NSObject, UIViewControllerAnimatedTransitioning {
     //MARK: - Static constants
-    private static let kDefaultDuration: NSTimeInterval = 0.3
-    
+    private struct Const {
+        static let defaultDuration: NSTimeInterval = 0.3
+    }
+        
     //MARK: - Properties
     private(set) var navigationControllerOperation: UINavigationControllerOperation
     private var currentTransitionContext: UIViewControllerContextTransitioning?
@@ -26,18 +28,16 @@ class SAHistoryNavigationTransitionController: NSObject, UIViewControllerAnimate
     
     //MARK: Life cycle
     func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
-        return SAHistoryNavigationTransitionController.kDefaultDuration
+        return Const.defaultDuration
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        guard let
-            containerView = transitionContext.containerView(),
-            fromView = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)?.view,
-            toView = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)?.view
-        else {
-            return
-        }
+        guard
+            let fromView = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)?.view,
+            let toView = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)?.view
+        else { return }
         
+        let containerView = transitionContext.containerView()
         currentTransitionContext = transitionContext
         switch navigationControllerOperation {
             case .Push:
@@ -49,42 +49,34 @@ class SAHistoryNavigationTransitionController: NSObject, UIViewControllerAnimate
                 transitionContext.completeTransition(!cancelled)
         }
     }
-}
 
-extension SAHistoryNavigationTransitionController {
     func forceFinish() {
         let navigationControllerOperation = self.navigationControllerOperation
-        if let backgroundView = backgroundView, alphaView = alphaView {
-            let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64((SAHistoryNavigationTransitionController.kDefaultDuration + 0.1) * Double(NSEC_PER_SEC)))
-            dispatch_after(dispatchTime, dispatch_get_main_queue()) { [weak self] in
-                if let currentTransitionContext = self?.currentTransitionContext {
-                    let toViewContoller = currentTransitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)
-                    let fromViewContoller = currentTransitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
-                    
-                    if let fromView = fromViewContoller?.view, toView = toViewContoller?.view {
-                        switch navigationControllerOperation {
-                            case .Push:
-                                self?.pushAniamtionCompletion(currentTransitionContext, toView: toView, fromView: fromView, backgroundView: backgroundView, alphaView: alphaView)
-                            case .Pop:
-                                self?.popAniamtionCompletion(currentTransitionContext, toView: toView, fromView: fromView, backgroundView: backgroundView, alphaView: alphaView)
-                            case .None:
-                                let cancelled = currentTransitionContext.transitionWasCancelled()
-                                currentTransitionContext.completeTransition(!cancelled)
-                        }
-                        self?.currentTransitionContext = nil
-                        self?.backgroundView = nil
-                        self?.alphaView = nil
-                    }
-                }
+        guard let backgroundView = backgroundView, let alphaView = alphaView else { return }
+        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64((Const.defaultDuration + 0.1) * Double(NSEC_PER_SEC)))
+        dispatch_after(dispatchTime, dispatch_get_main_queue()) { [weak self] in
+            guard let currentTransitionContext = self?.currentTransitionContext else { return }
+            let toViewContoller = currentTransitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)
+            let fromViewContoller = currentTransitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
+                
+            guard let fromView = fromViewContoller?.view, let toView = toViewContoller?.view else { return }
+            switch navigationControllerOperation {
+                case .Push:
+                    self?.pushAniamtionCompletion(currentTransitionContext, toView: toView, fromView: fromView, backgroundView: backgroundView, alphaView: alphaView)
+                case .Pop:
+                    self?.popAniamtionCompletion(currentTransitionContext, toView: toView, fromView: fromView, backgroundView: backgroundView, alphaView: alphaView)
+                case .None:
+                    let cancelled = currentTransitionContext.transitionWasCancelled()
+                    currentTransitionContext.completeTransition(!cancelled)
             }
+            self?.currentTransitionContext = nil
+            self?.backgroundView = nil
+            self?.alphaView = nil
         }
     }
-}
 
-//MARK: - Pop animations
-extension SAHistoryNavigationTransitionController {
+    //MARK: - Pop animations
     private func popAnimation(transitionContext: UIViewControllerContextTransitioning, toView: UIView, fromView: UIView, containerView: UIView) {
-        
         let backgroundView = UIView(frame: containerView.bounds)
         backgroundView.backgroundColor = .blackColor()
         containerView.addSubview(backgroundView)
@@ -135,12 +127,9 @@ extension SAHistoryNavigationTransitionController {
         self.backgroundView = nil
         self.alphaView = nil
     }
-}
 
-//MARK: - pushAnimations
-extension SAHistoryNavigationTransitionController {
+    //MARK: - pushAnimations
     private func pushAnimation(transitionContext: UIViewControllerContextTransitioning, toView: UIView, fromView: UIView, containerView: UIView) {
-        
         let backgroundView = UIView(frame: containerView.bounds)
         backgroundView.backgroundColor = .blackColor()
         containerView.addSubview(backgroundView)

@@ -11,9 +11,7 @@ import UIKit
 
 extension UIViewController {
     func screenshotFromWindow(scale: CGFloat = 0.0) -> UIImage? {
-        guard let window = UIApplication.sharedApplication().windows.first else {
-            return nil
-        }
+        guard let window = UIApplication.sharedApplication().windows.first else { return nil }
         UIGraphicsBeginImageContextWithOptions(window.frame.size, false, scale)
         window.drawViewHierarchyInRect(window.bounds, afterScreenUpdates: true)
         let image = UIGraphicsGetImageFromCurrentImageContext()

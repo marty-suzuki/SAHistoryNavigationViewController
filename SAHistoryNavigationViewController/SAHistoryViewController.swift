@@ -15,8 +15,10 @@ protocol SAHistoryViewControllerDelegate: class {
 
 class SAHistoryViewController: UIViewController {
     //MARK: static constants
-    static private let LineSpace: CGFloat = 20.0
-    static private let ReuseIdentifier = "Cell"
+    private struct Const {
+        static let lineSpace: CGFloat = 20.0
+        static let reuseIdentifier = "Cell"
+    }
     
     //MARK: - Properties
     weak var delegate: SAHistoryViewControllerDelegate?
@@ -62,12 +64,12 @@ class SAHistoryViewController: UIViewController {
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.itemSize = size
             layout.minimumInteritemSpacing = 0.0
-            layout.minimumLineSpacing = self.dynamicType.LineSpace
+            layout.minimumLineSpacing = Const.lineSpace
             layout.sectionInset = UIEdgeInsets(top: 0.0, left: size.width, bottom: 0.0, right: size.width)
             layout.scrollDirection = .Horizontal
         }
         
-        collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: self.dynamicType.ReuseIdentifier)
+        collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: Const.reuseIdentifier)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .clearColor()
@@ -114,7 +116,7 @@ extension SAHistoryViewController: UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.dynamicType.ReuseIdentifier, forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Const.reuseIdentifier, forIndexPath: indexPath)
 
         let subviews = cell.subviews
         subviews.forEach {

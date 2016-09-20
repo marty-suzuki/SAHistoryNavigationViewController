@@ -5,6 +5,7 @@
 [![Language](http://img.shields.io/badge/language-swift-brightgreen.svg?style=flat
 )](https://developer.apple.com/swift)
 [![Version](https://img.shields.io/cocoapods/v/MisterFusion.svg?style=flat)](http://cocoapods.org/pods/MisterFusion)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![License](https://img.shields.io/cocoapods/l/MisterFusion.svg?style=flat)](http://cocoapods.org/pods/MisterFusion)
 
 [ManiacDev.com](https://maniacdev.com/) referred.  
@@ -18,6 +19,8 @@ MisterFusion makes more easier to use AutoLayout in Swift & Objective-C code.
 - [x] Simple And Concise Syntax
 - [x] Use in Swift and Objective-C
 - [x] Support Size Class
+- [x] Support Swift2.3
+- [x] Support Swift3 (If you want to use it in Swift3, please use [2.0.0-beta](https://github.com/szk-atmosphere/MisterFusion/tree/2.0.0-beta))
 
 #### MisterFusion Code for Swift
 
@@ -130,6 +133,16 @@ In addtion, import **MisterFusion** like this.
 
     #import <MisterFusion/MisterFusion-Swift.h>
 
+#### Carthage
+
+If you’re using [Carthage](https://github.com/Carthage/Carthage), simply add
+MisterFusion to your `Cartfile`:
+
+```
+github "szk-atmosphere/MisterFusion"
+```
+Make sure to add `MisterFusion.framework` to "Linked Frameworks and Libraries" and "copy-frameworks" Build Phases.
+
 ## Advanced Setting
 
 You can set `multiplier`, `constant` and `priority` like this.
@@ -168,6 +181,7 @@ self.view.addLayoutSubview(view, andConstraints:
 - ~~`|=|` ... For fixed `Height` and `Width`~~ (deprecated since 1.1.0, use `|==|`)
 - `<|>` ... `UIUserInterfaceSizeClass` for VerticalSizeClass
 - `<->` ... `UIUserInterfaceSizeClass` for VerticalSizeClass
+- `-=-` ... Identifier
 
 #### UIView Extensions
 
@@ -178,6 +192,15 @@ public func addLayoutConstraints(misterFusions: [MisterFusion]) -> [NSLayoutCons
 public func addLayoutSubview(subview: UIView, andConstraint misterFusion: MisterFusion) -> NSLayoutConstraint?
 public func addLayoutSubview(subview: UIView, andConstraints misterFusions: [MisterFusion]) -> [NSLayoutConstraint]
 public func addLayoutSubview(subview: UIView, andConstraints misterFusions: MisterFusion...) -> [NSLayoutConstraint]
+public func insertLayoutSubview(subview: UIView, atIndex index: Int, andConstraint misterFusion: MisterFusion) -> NSLayoutConstraint?
+public func insertLayoutSubview(subview: UIView, atIndex index: Int, andConstraints misterFusions: [MisterFusion]) -> [NSLayoutConstraint]
+public func insertLayoutSubview(subview: UIView, atIndex index: Int, andConstraints misterFusions: MisterFusion...) -> [NSLayoutConstraint]
+public func insertLayoutSubview(subview: UIView, belowSubview siblingSubview: UIView, andConstraint misterFusion: MisterFusion) -> NSLayoutConstraint?
+public func insertLayoutSubview(subview: UIView, belowSubview siblingSubview: UIView, andConstraints misterFusions: [MisterFusion]) -> [NSLayoutConstraint]
+public func insertLayoutSubview(subview: UIView, belowSubview siblingSubview: UIView, andConstraints misterFusions: MisterFusion...) -> [NSLayoutConstraint]
+public func insertLayoutSubview(subview: UIView, aboveSubview siblingSubview: UIView, andConstraint misterFusion: MisterFusion) -> NSLayoutConstraint?
+public func insertLayoutSubview(subview: UIView, aboveSubview siblingSubview: UIView, andConstraints misterFusions: [MisterFusion]) -> [NSLayoutConstraint]
+public func insertLayoutSubview(subview: UIView, aboveSubview siblingSubview: UIView, andConstraints misterFusions: MisterFusion...) -> [NSLayoutConstraint]
 ```
 
 #### Array Extensions
@@ -247,16 +270,24 @@ override func traitCollectionDidChange(previousTraitCollection: UITraitCollectio
 @property (nonatomic, readonly, copy) MisterFusion * __nullable (^ __nonnull HorizontalSizeClass)(UIUserInterfaceSizeClass);
 //UIUserInterfaceSizeClass for VerticalSizeClass
 @property (nonatomic, readonly, copy) MisterFusion * __nullable (^ __nonnull VerticalSizeClass)(UIUserInterfaceSizeClass);
+//Identifier
+@property (nonatomic, readonly, copy) MisterFusion * _Nullable (^ _Nonnull Identifier)(NSString * _Nonnull);
 @end
 ```
 
 #### UIView Category
 
 ```objective-c
-- (NSLayoutConstraint * __nullable)addLayoutConstraint:(MisterFusion * __nonnull)misterFusion;
-- (NSArray<NSLayoutConstraint *> * __nonnull)addLayoutConstraints:(NSArray<MisterFusion *> * __nonnull)misterFusions;
-- (NSLayoutConstraint * __nullable)addLayoutSubview:(UIView * __nonnull)subview andConstraint:(MisterFusion * __nonnull)misterFusion;
-- (NSArray<NSLayoutConstraint *> * __nonnull)addLayoutSubview:(UIView * __nonnull)subview andConstraints:(NSArray<MisterFusion *> * __nonnull)misterFusions;
+- (NSLayoutConstraint * _Nullable)addLayoutConstraint:(MisterFusion * _Nonnull)misterFusion;
+- (NSArray<NSLayoutConstraint *> * _Nonnull)addLayoutConstraints:(NSArray<MisterFusion *> * _Nonnull)misterFusions;
+- (NSLayoutConstraint * _Nullable)addLayoutSubview:(UIView * _Nonnull)subview andConstraint:(MisterFusion * _Nonnull)misterFusion;
+- (NSArray<NSLayoutConstraint *> * _Nonnull)addLayoutSubview:(UIView * _Nonnull)subview andConstraints:(NSArray<MisterFusion *> * _Nonnull)misterFusions;
+- (NSLayoutConstraint * _Nullable)insertLayoutSubview:(UIView * _Nonnull)subview atIndex:(NSInteger)index andConstraint:(MisterFusion * _Nonnull)misterFusion;
+- (NSArray<NSLayoutConstraint *> * _Nonnull)insertLayoutSubview:(UIView * _Nonnull)subview atIndex:(NSInteger)index andConstraints:(NSArray<MisterFusion *> * _Nonnull)misterFusions;
+- (NSLayoutConstraint * _Nullable)insertLayoutSubview:(UIView * _Nonnull)subview belowSubview:(UIView * _Nonnull)siblingSubview andConstraint:(MisterFusion * _Nonnull)misterFusion;
+- (NSArray<NSLayoutConstraint *> * _Nonnull)insertLayoutSubview:(UIView * _Nonnull)subview belowSubview:(UIView * _Nonnull)siblingSubview andConstraints:(NSArray<MisterFusion *> * _Nonnull)misterFusions;
+- (NSLayoutConstraint * _Nullable)insertLayoutSubview:(UIView * _Nonnull)subview aboveSubview:(UIView * _Nonnull)siblingSubview andConstraint:(MisterFusion * _Nonnull)misterFusion;
+- (NSArray<NSLayoutConstraint *> * _Nonnull)insertLayoutSubview:(UIView * _Nonnull)subview aboveSubview:(UIView * _Nonnull)siblingSubview andConstraints:(NSArray<MisterFusion *> * _Nonnull)misterFusions;
 ```
 
 #### NSArray Category

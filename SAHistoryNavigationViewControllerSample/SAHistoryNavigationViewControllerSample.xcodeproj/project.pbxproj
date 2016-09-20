@@ -17,7 +17,7 @@
 		37E3BCF61AC3D57600A81554 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37E3BCF41AC3D57600A81554 /* LaunchScreen.xib */; };
 		37E3BD021AC3D57600A81554 /* SAHistoryNavigationViewControllerSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3BD011AC3D57600A81554 /* SAHistoryNavigationViewControllerSampleTests.swift */; };
 		37E3BD581AC50A5700A81554 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E3BD571AC50A5700A81554 /* QuartzCore.framework */; };
-		F716EB89838168081B56AD11 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71751ACF9E74B8ED274C4A63 /* Pods.framework */; };
+		FB04EA6C094AF91887D960ED /* Pods_SAHistoryNavigationViewControllerSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D79C691AB7AC9BAFEAA7D13 /* Pods_SAHistoryNavigationViewControllerSample.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,7 +31,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		02C5A8649590E4434C1405A2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		09C56927A8464E4F94642ACE /* Pods-SAHistoryNavigationViewControllerSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SAHistoryNavigationViewControllerSample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SAHistoryNavigationViewControllerSample/Pods-SAHistoryNavigationViewControllerSample.debug.xcconfig"; sourceTree = "<group>"; };
+		0D79C691AB7AC9BAFEAA7D13 /* Pods_SAHistoryNavigationViewControllerSample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SAHistoryNavigationViewControllerSample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37C5DC5D1ACB6EAB00C8FD0C /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
 		37C5DC5F1ACB6EBD00C8FD0C /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		37C5DC611ACB704A00C8FD0C /* TimelineViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewCell.swift; sourceTree = "<group>"; };
@@ -48,7 +49,7 @@
 		37E3BD571AC50A5700A81554 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		71751ACF9E74B8ED274C4A63 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DD2BEA41BDE485B0042E077 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
-		D18C8BA5C7CF7C47522EDB80 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		F923866AC2F14FCFEE2E3695 /* Pods-SAHistoryNavigationViewControllerSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SAHistoryNavigationViewControllerSample.release.xcconfig"; path = "Pods/Target Support Files/Pods-SAHistoryNavigationViewControllerSample/Pods-SAHistoryNavigationViewControllerSample.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +58,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37E3BD581AC50A5700A81554 /* QuartzCore.framework in Frameworks */,
-				F716EB89838168081B56AD11 /* Pods.framework in Frameworks */,
+				FB04EA6C094AF91887D960ED /* Pods_SAHistoryNavigationViewControllerSample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,8 +89,8 @@
 				37E3BCE81AC3D57600A81554 /* SAHistoryNavigationViewControllerSample */,
 				37E3BCFE1AC3D57600A81554 /* SAHistoryNavigationViewControllerSampleTests */,
 				37E3BCE71AC3D57600A81554 /* Products */,
-				6C68133942126B29DCDA2801 /* Pods */,
 				9E12D08F8741E3189AA871D1 /* Frameworks */,
+				7D7C24A0D43B47FFBA5C1C61 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -141,11 +142,11 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		6C68133942126B29DCDA2801 /* Pods */ = {
+		7D7C24A0D43B47FFBA5C1C61 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				02C5A8649590E4434C1405A2 /* Pods.debug.xcconfig */,
-				D18C8BA5C7CF7C47522EDB80 /* Pods.release.xcconfig */,
+				09C56927A8464E4F94642ACE /* Pods-SAHistoryNavigationViewControllerSample.debug.xcconfig */,
+				F923866AC2F14FCFEE2E3695 /* Pods-SAHistoryNavigationViewControllerSample.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -155,6 +156,7 @@
 			children = (
 				37E3BD571AC50A5700A81554 /* QuartzCore.framework */,
 				71751ACF9E74B8ED274C4A63 /* Pods.framework */,
+				0D79C691AB7AC9BAFEAA7D13 /* Pods_SAHistoryNavigationViewControllerSample.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -166,12 +168,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 37E3BD051AC3D57600A81554 /* Build configuration list for PBXNativeTarget "SAHistoryNavigationViewControllerSample" */;
 			buildPhases = (
-				1BDC2D12E40B8C611F86D8E1 /* Check Pods Manifest.lock */,
+				94BEDF9F09FD079835A57BB7 /* [CP] Check Pods Manifest.lock */,
 				37E3BCE21AC3D57600A81554 /* Sources */,
 				37E3BCE31AC3D57600A81554 /* Frameworks */,
 				37E3BCE41AC3D57600A81554 /* Resources */,
-				A86FF23071FAD23E34141BA8 /* Embed Pods Frameworks */,
-				7BC15DC1CF9B175261E6E601 /* Copy Pods Resources */,
+				A794D1628907A2FBC4224A45 /* [CP] Embed Pods Frameworks */,
+				3332529E4257111BA67BA384 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -212,9 +214,11 @@
 				TargetAttributes = {
 					37E3BCE51AC3D57600A81554 = {
 						CreatedOnToolsVersion = 6.2;
+						LastSwiftMigration = 0800;
 					};
 					37E3BCFA1AC3D57600A81554 = {
 						CreatedOnToolsVersion = 6.2;
+						LastSwiftMigration = 0800;
 						TestTargetID = 37E3BCE51AC3D57600A81554;
 					};
 				};
@@ -260,49 +264,49 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1BDC2D12E40B8C611F86D8E1 /* Check Pods Manifest.lock */ = {
+		3332529E4257111BA67BA384 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SAHistoryNavigationViewControllerSample/Pods-SAHistoryNavigationViewControllerSample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7BC15DC1CF9B175261E6E601 /* Copy Pods Resources */ = {
+		94BEDF9F09FD079835A57BB7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		A86FF23071FAD23E34141BA8 /* Embed Pods Frameworks */ = {
+		A794D1628907A2FBC4224A45 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SAHistoryNavigationViewControllerSample/Pods-SAHistoryNavigationViewControllerSample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -437,7 +441,7 @@
 		};
 		37E3BD061AC3D57600A81554 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 02C5A8649590E4434C1405A2 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 09C56927A8464E4F94642ACE /* Pods-SAHistoryNavigationViewControllerSample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SAHistoryNavigationViewControllerSample/Info.plist;
@@ -445,12 +449,13 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "szk-atmosphere.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
 		37E3BD071AC3D57600A81554 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D18C8BA5C7CF7C47522EDB80 /* Pods.release.xcconfig */;
+			baseConfigurationReference = F923866AC2F14FCFEE2E3695 /* Pods-SAHistoryNavigationViewControllerSample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SAHistoryNavigationViewControllerSample/Info.plist;
@@ -458,6 +463,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "szk-atmosphere.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -474,6 +480,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "szk-atmosphere.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SAHistoryNavigationViewControllerSample.app/SAHistoryNavigationViewControllerSample";
 			};
 			name = Debug;
@@ -487,6 +494,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "szk-atmosphere.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SAHistoryNavigationViewControllerSample.app/SAHistoryNavigationViewControllerSample";
 			};
 			name = Release;
