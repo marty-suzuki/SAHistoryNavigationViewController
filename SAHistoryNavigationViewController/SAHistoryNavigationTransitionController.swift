@@ -10,15 +10,15 @@ import UIKit
 
 class SAHistoryNavigationTransitionController: NSObject, UIViewControllerAnimatedTransitioning {
     //MARK: - Static constants
-    private struct Const {
-        static let defaultDuration: NSTimeInterval = 0.3
+    fileprivate struct Const {
+        static let defaultDuration: TimeInterval = 0.3
     }
         
     //MARK: - Properties
-    private(set) var navigationControllerOperation: UINavigationControllerOperation
-    private var currentTransitionContext: UIViewControllerContextTransitioning?
-    private var backgroundView: UIView?
-    private var alphaView: UIView?
+    fileprivate(set) var navigationControllerOperation: UINavigationControllerOperation
+    fileprivate var currentTransitionContext: UIViewControllerContextTransitioning?
+    fileprivate var backgroundView: UIView?
+    fileprivate var alphaView: UIView?
     
     //MARK: - Initializers
     required init(operation: UINavigationControllerOperation) {
@@ -27,25 +27,25 @@ class SAHistoryNavigationTransitionController: NSObject, UIViewControllerAnimate
     }
     
     //MARK: Life cycle
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return Const.defaultDuration
     }
     
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard
-            let fromView = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)?.view,
-            let toView = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)?.view
+            let fromView = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)?.view,
+            let toView = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)?.view
         else { return }
         
-        let containerView = transitionContext.containerView()
+        let containerView = transitionContext.containerView
         currentTransitionContext = transitionContext
         switch navigationControllerOperation {
-            case .Push:
+            case .push:
                 pushAnimation(transitionContext, toView: toView, fromView: fromView, containerView: containerView)
-            case .Pop:
+            case .pop:
                 popAnimation(transitionContext, toView: toView, fromView: fromView, containerView: containerView)
-            case .None:
-                let cancelled = transitionContext.transitionWasCancelled()
+            case .none:
+                let cancelled = transitionContext.transitionWasCancelled
                 transitionContext.completeTransition(!cancelled)
         }
     }
@@ -53,20 +53,20 @@ class SAHistoryNavigationTransitionController: NSObject, UIViewControllerAnimate
     func forceFinish() {
         let navigationControllerOperation = self.navigationControllerOperation
         guard let backgroundView = backgroundView, let alphaView = alphaView else { return }
-        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64((Const.defaultDuration + 0.1) * Double(NSEC_PER_SEC)))
-        dispatch_after(dispatchTime, dispatch_get_main_queue()) { [weak self] in
+        let dispatchTime = DispatchTime.now() + Double(Int64((Const.defaultDuration + 0.1) * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: dispatchTime) { [weak self] in
             guard let currentTransitionContext = self?.currentTransitionContext else { return }
-            let toViewContoller = currentTransitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)
-            let fromViewContoller = currentTransitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
+            let toViewContoller = currentTransitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)
+            let fromViewContoller = currentTransitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)
                 
             guard let fromView = fromViewContoller?.view, let toView = toViewContoller?.view else { return }
             switch navigationControllerOperation {
-                case .Push:
+                case .push:
                     self?.pushAniamtionCompletion(currentTransitionContext, toView: toView, fromView: fromView, backgroundView: backgroundView, alphaView: alphaView)
-                case .Pop:
+                case .pop:
                     self?.popAniamtionCompletion(currentTransitionContext, toView: toView, fromView: fromView, backgroundView: backgroundView, alphaView: alphaView)
-                case .None:
-                    let cancelled = currentTransitionContext.transitionWasCancelled()
+                case .none:
+                    let cancelled = currentTransitionContext.transitionWasCancelled
                     currentTransitionContext.completeTransition(!cancelled)
             }
             self?.currentTransitionContext = nil
@@ -76,9 +76,9 @@ class SAHistoryNavigationTransitionController: NSObject, UIViewControllerAnimate
     }
 
     //MARK: - Pop animations
-    private func popAnimation(transitionContext: UIViewControllerContextTransitioning, toView: UIView, fromView: UIView, containerView: UIView) {
+    fileprivate func popAnimation(_ transitionContext: UIViewControllerContextTransitioning, toView: UIView, fromView: UIView, containerView: UIView) {
         let backgroundView = UIView(frame: containerView.bounds)
-        backgroundView.backgroundColor = .blackColor()
+        backgroundView.backgroundColor = .black
         containerView.addSubview(backgroundView)
         self.backgroundView = backgroundView
         
@@ -86,7 +86,7 @@ class SAHistoryNavigationTransitionController: NSObject, UIViewControllerAnimate
         containerView.addSubview(toView)
         
         let alphaView = UIView(frame: containerView.bounds)
-        alphaView.backgroundColor = .blackColor()
+        alphaView.backgroundColor = .black
         containerView.addSubview(alphaView)
         self.alphaView = alphaView
         
@@ -102,17 +102,17 @@ class SAHistoryNavigationTransitionController: NSObject, UIViewControllerAnimate
         toView.frame.origin.x = -(toView.frame.size.width / 4.0)
         alphaView.alpha = 0.4
         
-        UIView.animateWithDuration(transitionDuration(transitionContext), delay: 0.0, options: .CurveEaseOut, animations: {
+        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, options: .curveEaseOut, animations: {
             toView.frame.origin.x = 0
             fromView.frame.origin.x = containerView.frame.size.width
             alphaView.alpha = 0.0
         }, completion: completion)
     }
     
-    private func popAniamtionCompletion(transitionContext: UIViewControllerContextTransitioning, toView: UIView, fromView: UIView, backgroundView: UIView, alphaView: UIView) {
-        let cancelled = transitionContext.transitionWasCancelled()
+    fileprivate func popAniamtionCompletion(_ transitionContext: UIViewControllerContextTransitioning, toView: UIView, fromView: UIView, backgroundView: UIView, alphaView: UIView) {
+        let cancelled = transitionContext.transitionWasCancelled
         if cancelled {
-            toView.transform = CGAffineTransformIdentity
+            toView.transform = CGAffineTransform.identity
             toView.removeFromSuperview()
         } else {
             fromView.removeFromSuperview()
@@ -129,9 +129,9 @@ class SAHistoryNavigationTransitionController: NSObject, UIViewControllerAnimate
     }
 
     //MARK: - pushAnimations
-    private func pushAnimation(transitionContext: UIViewControllerContextTransitioning, toView: UIView, fromView: UIView, containerView: UIView) {
+    fileprivate func pushAnimation(_ transitionContext: UIViewControllerContextTransitioning, toView: UIView, fromView: UIView, containerView: UIView) {
         let backgroundView = UIView(frame: containerView.bounds)
-        backgroundView.backgroundColor = .blackColor()
+        backgroundView.backgroundColor = .black
         containerView.addSubview(backgroundView)
         self.backgroundView = backgroundView
         
@@ -139,7 +139,7 @@ class SAHistoryNavigationTransitionController: NSObject, UIViewControllerAnimate
         containerView.addSubview(fromView)
         
         let alphaView = UIView(frame: containerView.bounds)
-        alphaView.backgroundColor = .blackColor()
+        alphaView.backgroundColor = .black
         alphaView.alpha = 0.0
         containerView.addSubview(alphaView)
         self.alphaView = alphaView
@@ -154,20 +154,20 @@ class SAHistoryNavigationTransitionController: NSObject, UIViewControllerAnimate
             }
         }
         
-        UIView.animateWithDuration(transitionDuration(transitionContext), delay: 0.0, options: .CurveEaseOut, animations: {
+        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, options: .curveEaseOut, animations: {
             fromView.frame.origin.x = -(fromView.frame.size.width / 4.0)
             toView.frame.origin.x = 0.0
             alphaView.alpha = 0.4
         }, completion: completion)
     }
     
-    private func pushAniamtionCompletion(transitionContext: UIViewControllerContextTransitioning, toView: UIView, fromView: UIView, backgroundView: UIView, alphaView: UIView) {
-        let cancelled = transitionContext.transitionWasCancelled()
+    fileprivate func pushAniamtionCompletion(_ transitionContext: UIViewControllerContextTransitioning, toView: UIView, fromView: UIView, backgroundView: UIView, alphaView: UIView) {
+        let cancelled = transitionContext.transitionWasCancelled
         if cancelled {
             toView.removeFromSuperview()
         }
         
-        fromView.transform = CGAffineTransformIdentity
+        fromView.transform = CGAffineTransform.identity
         backgroundView.removeFromSuperview()
         fromView.removeFromSuperview()
         alphaView.removeFromSuperview()

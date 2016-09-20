@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "SAHistoryNavigationViewController"
-  s.version          = "2.4.0"
+  s.version          = "3.0.0"
   s.summary          = "SAHistoryNavigationViewController realizes iOS task manager like UI in UINavigationContoller."
 
   s.homepage         = "https://github.com/marty-suzuki/SAHistoryNavigationViewController"
@@ -28,5 +28,5 @@ Pod::Spec.new do |s|
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   s.frameworks = 'UIKit', 'AudioToolbox'
-  s.dependency 'MisterFusion', '~> 1.4.0'
+  s.dependency 'MisterFusion'
 end

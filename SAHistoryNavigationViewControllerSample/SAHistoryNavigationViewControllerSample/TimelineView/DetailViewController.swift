@@ -38,15 +38,15 @@ class DetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    private func setIconImage(image: UIImage?) {
+    fileprivate func setIconImage(_ image: UIImage?) {
         if let image = image {
-            iconButton.setImage(image, forState: .Normal)
+            iconButton.setImage(image, for: UIControlState())
         }
     }
     
-    @IBAction func didTapIconButton(sender: UIButton) {
+    @IBAction func didTapIconButton(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewControllerWithIdentifier("TimelineViewController")
+        let viewController = storyboard.instantiateViewController(withIdentifier: "TimelineViewController")
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

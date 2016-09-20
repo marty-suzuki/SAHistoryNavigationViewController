@@ -20,17 +20,17 @@ MisterFusion makes more easier to use AutoLayout in Swift & Objective-C code.
 - [x] Use in Swift and Objective-C
 - [x] Support Size Class
 - [x] Support Swift2.3
-- [x] Support Swift3 (If you want to use it in Swift3, please use [2.0.0-beta](https://github.com/szk-atmosphere/MisterFusion/tree/2.0.0-beta))
+- [x] Support Swift3
 
 #### MisterFusion Code for Swift
 
 ```swift
 let view = UIView()
 self.view.addLayoutSubview(view, andConstraints:
-    view.Top    |+| 10,
-    view.Right  |-| 10,
-    view.Left   |+| 10,
-    view.Bottom |-| 10
+    view.top    |+| 10,
+    view.right  |-| 10,
+    view.left   |+| 10,
+    view.bottom |-| 10
 )
 ```
 
@@ -43,10 +43,10 @@ let view = UIView()
 self.view.addSubview(view)
 view.translatesAutoresizingMaskIntoConstraints = false
 self.view.addConstraints([
-    NSLayoutConstraint(item: view, attribute: .Top,    relatedBy: .Equal, toItem: self.view, attribute: .Top,    multiplier: 1, constant:  10),
-    NSLayoutConstraint(item: view, attribute: .Right,  relatedBy: .Equal, toItem: self.view, attribute: .Right,  multiplier: 1, constant: -10),
-    NSLayoutConstraint(item: view, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant:  10),
-    NSLayoutConstraint(item: view, attribute: .Bottom, relatedBy: .Equal, toItem: self.view, attribute: .Bottom, multiplier: 1, constant: -10),
+    NSLayoutConstraint(item: view, attribute: .top,    relatedBy: .equal, toItem: self.view, attribute: .top,    multiplier: 1, constant:  10),
+    NSLayoutConstraint(item: view, attribute: .right,  relatedBy: .equal, toItem: self.view, attribute: .right,  multiplier: 1, constant: -10),
+    NSLayoutConstraint(item: view, attribute: .left,   relatedBy: .equal, toItem: self.view, attribute: .left,   multiplier: 1, constant:  10),
+    NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1, constant: -10),
 ])
 ```
 
@@ -86,31 +86,31 @@ If you want to realize layout like a above image, needed code is only this.
 
 ```swift
 let redView = UIView()
-redView.backgroundColor = .redColor()
+redView.backgroundColor = .red()
 self.view.addLayoutSubview(redView, andConstraints:
-    redView.Top   |+| 10,
-    redView.Right |-| 10,
-    redView.Left  |+| 10
+    redView.top   |+| 10,
+    redView.right |-| 10,
+    redView.left  |+| 10
 )
 
 let yellowView = UIView()
-yellowView.backgroundColor = .yellowColor()
+yellowView.backgroundColor = .yellow()
 self.view.addLayoutSubview(yellowView, andConstraints:
-    yellowView.Top    |==| redView.Bottom |+| 10,
-    yellowView.Left   |+|  10,
-    yellowView.Bottom |-|  10,
-    yellowView.Height |==| redView.Height
+    yellowView.top    |==| redView.bottom |+| 10,
+    yellowView.left   |+|  10,
+    yellowView.bottom |-|  10,
+    yellowView.height |==| redView.height
 )
 
 let greenView = UIView()
-greenView.backgroundColor = .greenColor()
+greenView.backgroundColor = .green()
 self.view.addLayoutSubview(greenView, andConstraints:
-    greenView.Top    |==| redView.Bottom    |+| 10,
-    greenView.Left   |==| yellowView.Right  |+| 10,
-    greenView.Bottom |-|  10,
-    greenView.Right  |-|  10,
-    greenView.Width  |==| yellowView.Width,
-    greenView.Height |==| yellowView.Height
+    greenView.top    |==| redView.bottom    |+| 10,
+    greenView.left   |==| yellowView.right  |+| 10,
+    greenView.bottom |-|  10,
+    greenView.right  |-|  10,
+    greenView.width  |==| yellowView.width,
+    greenView.height |==| yellowView.height
 )
 ```
 
@@ -121,7 +121,7 @@ self.view.addLayoutSubview(greenView, andConstraints:
 MisterFusion is available through [CocoaPods](http://cocoapods.org). If you have cocoapods 0.39.0 or greater, you can install
 it, simply add the following line to your Podfile:
 
-	pod "MisterFusion"
+	pod 'MisterFusion'
 
 In addtion, import **MisterFusion** like this.
 
@@ -152,10 +152,10 @@ You can set `multiplier`, `constant` and `priority` like this.
 
 ```swift
 self.view.addLayoutSubview(view, andConstraints:
-    view.Top    |==| self.view.Top    |*| 1 |+| 10 |<>| UILayoutPriorityRequired,
-    view.Right  |==| self.view.Right  |*| 1 |-| 10 |<>| UILayoutPriorityRequired,
-    view.Left   |==| self.view.Left   |*| 1 |+| 10 |<>| UILayoutPriorityRequired,
-    view.Bottom |==| self.view.Bottom |*| 1 |-| 10 |<>| UILayoutPriorityRequired
+    view.top    |==| self.view.top    |*| 1 |+| 10 |<>| UILayoutPriorityRequired,
+    view.right  |==| self.view.right  |*| 1 |-| 10 |<>| UILayoutPriorityRequired,
+    view.left   |==| self.view.left   |*| 1 |+| 10 |<>| UILayoutPriorityRequired,
+    view.bottom |==| self.view.bottom |*| 1 |-| 10 |<>| UILayoutPriorityRequired
 )
 ```
 
@@ -174,43 +174,42 @@ self.view.addLayoutSubview(view, andConstraints:
 
 #### Operators
 
-- `|==|`, `|<=|`, `|>=|` ... `NSLayoutRelation` and fixed `Height` and `Width`
+- `|==|`, `|<=|`, `|>=|` ... `NSLayoutRelation` and fixed `height` and `width`
 - `|*|`, `|/|` ... `multiplier`
 - `|+|`, `|-|` ... `constant`
 - `|<>|` ... `UILayoutPriority`
-- ~~`|=|` ... For fixed `Height` and `Width`~~ (deprecated since 1.1.0, use `|==|`)
 - `<|>` ... `UIUserInterfaceSizeClass` for VerticalSizeClass
-- `<->` ... `UIUserInterfaceSizeClass` for VerticalSizeClass
+- `<->` ... `UIUserInterfaceSizeClass` for HorizontalSizeClass
 - `-=-` ... Identifier
 
 #### UIView Extensions
 
 ```swift
-public func addLayoutConstraint(misterFusion: MisterFusion) -> NSLayoutConstraint?
-public func addLayoutConstraints(misterFusions: MisterFusion...) -> [NSLayoutConstraint]
-public func addLayoutConstraints(misterFusions: [MisterFusion]) -> [NSLayoutConstraint]
-public func addLayoutSubview(subview: UIView, andConstraint misterFusion: MisterFusion) -> NSLayoutConstraint?
-public func addLayoutSubview(subview: UIView, andConstraints misterFusions: [MisterFusion]) -> [NSLayoutConstraint]
-public func addLayoutSubview(subview: UIView, andConstraints misterFusions: MisterFusion...) -> [NSLayoutConstraint]
-public func insertLayoutSubview(subview: UIView, atIndex index: Int, andConstraint misterFusion: MisterFusion) -> NSLayoutConstraint?
-public func insertLayoutSubview(subview: UIView, atIndex index: Int, andConstraints misterFusions: [MisterFusion]) -> [NSLayoutConstraint]
-public func insertLayoutSubview(subview: UIView, atIndex index: Int, andConstraints misterFusions: MisterFusion...) -> [NSLayoutConstraint]
-public func insertLayoutSubview(subview: UIView, belowSubview siblingSubview: UIView, andConstraint misterFusion: MisterFusion) -> NSLayoutConstraint?
-public func insertLayoutSubview(subview: UIView, belowSubview siblingSubview: UIView, andConstraints misterFusions: [MisterFusion]) -> [NSLayoutConstraint]
-public func insertLayoutSubview(subview: UIView, belowSubview siblingSubview: UIView, andConstraints misterFusions: MisterFusion...) -> [NSLayoutConstraint]
-public func insertLayoutSubview(subview: UIView, aboveSubview siblingSubview: UIView, andConstraint misterFusion: MisterFusion) -> NSLayoutConstraint?
-public func insertLayoutSubview(subview: UIView, aboveSubview siblingSubview: UIView, andConstraints misterFusions: [MisterFusion]) -> [NSLayoutConstraint]
-public func insertLayoutSubview(subview: UIView, aboveSubview siblingSubview: UIView, andConstraints misterFusions: MisterFusion...) -> [NSLayoutConstraint]
+public func addLayoutConstraint(_ misterFusion: MisterFusion) -> NSLayoutConstraint?
+public func addLayoutConstraints(_ misterFusions: MisterFusion...) -> [NSLayoutConstraint]
+public func addLayoutConstraints(_ misterFusions: [MisterFusion]) -> [NSLayoutConstraint]
+public func addLayoutSubview(_ subview: UIView, andConstraint misterFusion: MisterFusion) -> NSLayoutConstraint?
+public func addLayoutSubview(_ subview: UIView, andConstraints misterFusions: [MisterFusion]) -> [NSLayoutConstraint]
+public func addLayoutSubview(_ subview: UIView, andConstraints misterFusions: MisterFusion...) -> [NSLayoutConstraint]
+public func insertLayoutSubview(_ subview: UIView, at index: Int, andConstraint misterFusion: MisterFusion) -> NSLayoutConstraint?
+public func insertLayoutSubview(_ subview: UIView, at index: Int, andConstraints misterFusions: [MisterFusion]) -> [NSLayoutConstraint]
+public func insertLayoutSubview(_ subview: UIView, at index: Int, andConstraints misterFusions: MisterFusion...) -> [NSLayoutConstraint]
+public func insertLayoutSubview(_ subview: UIView, belowSubview siblingSubview: UIView, andConstraint misterFusion: MisterFusion) -> NSLayoutConstraint?
+public func insertLayoutSubview(_ subview: UIView, belowSubview siblingSubview: UIView, andConstraints misterFusions: [MisterFusion]) -> [NSLayoutConstraint]
+public func insertLayoutSubview(_ subview: UIView, belowSubview siblingSubview: UIView, andConstraints misterFusions: MisterFusion...) -> [NSLayoutConstraint]
+public func insertLayoutSubview(_ subview: UIView, aboveSubview siblingSubview: UIView, andConstraint misterFusion: MisterFusion) -> NSLayoutConstraint?
+public func insertLayoutSubview(_ subview: UIView, aboveSubview siblingSubview: UIView, andConstraints misterFusions: [MisterFusion]) -> [NSLayoutConstraint]
+public func insertLayoutSubview(_ subview: UIView, aboveSubview siblingSubview: UIView, andConstraints misterFusions: MisterFusion...) -> [NSLayoutConstraint]
 ```
 
 #### Array Extensions
 
 ```swift
-public func firstItem(view: UIView) -> [NSLayoutConstraint]    
-public func firstAttribute(attribute: NSLayoutAttribute) -> [NSLayoutConstraint]   
-public func relation(relation: NSLayoutRelation) -> [NSLayoutConstraint]  
-public func secondItem(view: UIView) -> [NSLayoutConstraint]    
-public func secondAttribute(attribute: NSLayoutAttribute) -> [NSLayoutConstraint]
+public func firstItem(_ view: UIView) -> [NSLayoutConstraint]    
+public func firstAttribute(_ attribute: NSLayoutAttribute) -> [NSLayoutConstraint]   
+public func relation(_ relation: NSLayoutRelation) -> [NSLayoutConstraint]  
+public func secondItem(_ view: UIView) -> [NSLayoutConstraint]    
+public func secondAttribute(_ attribute: NSLayoutAttribute) -> [NSLayoutConstraint]
 ```
 
 You can get added `NSLayoutConstraint` with those functions.
@@ -218,10 +217,10 @@ This is a example.
 
 ```swift
 let bottomConstraint: NSLayoutConstraint = self.view.addLayoutSubview(view, andConstraints:
-    view.Top    |+| 10,
-    view.Right  |-| 10,
-    view.Left   |+| 10,
-    view.Bottom |-| 10
+    view.top    |+| 10,
+    view.right  |-| 10,
+    view.left   |+| 10,
+    view.bottom |-| 10
 ).firstAttribute(.Bottom).first
 ```
 
@@ -238,9 +237,9 @@ override func traitCollectionDidChange(previousTraitCollection: UITraitCollectio
         redView.removeConstraint(whiteViewHeightConstraint)
     }
     self.whiteViewWidthConstraint = redView.addLayoutConstraints(
-        whiteView.Width |-| 20 <|> .Compact <-> .Regular,
-        whiteView.Width |*| 0.5 |-| 10 <|> .Regular <-> .Compact
-    ).firstAttribute(.Width).first
+        whiteView.width |-| 20 <|> .compact <-> .regular,
+        whiteView.width |*| 0.5 |-| 10 <|> .regular <-> .compact
+    ).firstAttribute(.width).first
 }
 ```
 
@@ -331,7 +330,7 @@ This is an example Regular, Compact size for iPhone6s+.
 
 ## Requirements
 
-- Xcode 7.0 or greater
+- Xcode 8.0 or greater
 - iOS 8.0 or greater
 
 ## Author

@@ -18,8 +18,8 @@ extension UINavigationController {
         }
     }
     public func showHistory() {}
-    public func setHistoryBackgroundColor(color: UIColor) {}
+    public func setHistoryBackgroundColor(_ color: UIColor) {}
     public func contentView() -> UIView? { return nil }
-    func willSetHistoryDelegate(delegate: SAHistoryNavigationViewControllerDelegate?) {}
+    func willSetHistoryDelegate(_ delegate: SAHistoryNavigationViewControllerDelegate?) {}
     func willGetHistoryDelegate() -> SAHistoryNavigationViewControllerDelegate? { return nil }
 }

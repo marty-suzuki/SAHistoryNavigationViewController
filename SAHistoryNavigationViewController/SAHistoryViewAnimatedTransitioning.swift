@@ -10,13 +10,13 @@ import UIKit
 
 class SAHistoryViewAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransitioning {
     //MARK: - Static Constants
-    private struct Const {
-        static let duration: NSTimeInterval = 0.25
+    fileprivate struct Const {
+        static let duration: TimeInterval = 0.25
         static let scale: CGFloat = 0.7
     }
     
     //MARK: - Properties
-    private var isPresenting = true
+    fileprivate var isPresenting = true
     
     //MARK: - Initializers
     init(isPresenting: Bool) {
@@ -25,68 +25,66 @@ class SAHistoryViewAnimatedTransitioning: NSObject, UIViewControllerAnimatedTran
     }
     
     //MARK - Life cycle
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return Const.duration
     }
 
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard
-            let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey),
-            let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
+            let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to),
+            let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)
         else { return }
-        let containerView = transitionContext.containerView()
+        let containerView = transitionContext.containerView
         if isPresenting {
             pushAniamtion(transitionContext, containerView: containerView, toVC: toVC, fromVC: fromVC)
             return
         }
         popAniamtion(transitionContext, containerView: containerView, toVC: toVC, fromVC: fromVC)
     }
-}
 
-//MARK: - Animations
-extension SAHistoryViewAnimatedTransitioning {
-    private func pushAniamtion(transitionContext: UIViewControllerContextTransitioning, containerView: UIView, toVC: UIViewController, fromVC: UIViewController) {
+    //MARK: - Animations
+    fileprivate func pushAniamtion(_ transitionContext: UIViewControllerContextTransitioning, containerView: UIView, toVC: UIViewController, fromVC: UIViewController) {
         guard let hvc = toVC as? SAHistoryViewController else { return }
         
         containerView.addSubview(toVC.view)
-        fromVC.view.hidden = true
+        fromVC.view.isHidden = true
         hvc.view.frame = containerView.bounds
-        hvc.collectionView.transform = CGAffineTransformIdentity
+        hvc.collectionView.transform = CGAffineTransform.identity
 
-        UIView.animateWithDuration(transitionDuration(transitionContext), delay: 0, options: .CurveEaseOut, animations: {
-            hvc.collectionView.transform = CGAffineTransformMakeScale(Const.scale, Const.scale)
+        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0, options: .curveEaseOut, animations: {
+            hvc.collectionView.transform = CGAffineTransform(scaleX: Const.scale, y: Const.scale)
         }) { finished in
-            let cancelled = transitionContext.transitionWasCancelled()
+            let cancelled = transitionContext.transitionWasCancelled
             if cancelled {
-                fromVC.view.hidden = false
-                hvc.collectionView.transform = CGAffineTransformIdentity
+                fromVC.view.isHidden = false
+                hvc.collectionView.transform = CGAffineTransform.identity
                 hvc.view.removeFromSuperview()
             } else {
-                hvc.view.hidden = false
+                hvc.view.isHidden = false
                 fromVC.view.removeFromSuperview()
             }
             transitionContext.completeTransition(!cancelled)
         }
     }
     
-    private func popAniamtion(transitionContext: UIViewControllerContextTransitioning, containerView: UIView, toVC: UIViewController, fromVC: UIViewController) {
+    fileprivate func popAniamtion(_ transitionContext: UIViewControllerContextTransitioning, containerView: UIView, toVC: UIViewController, fromVC: UIViewController) {
         guard let hvc = fromVC as? SAHistoryViewController else { return }
         
         containerView.addSubview(toVC.view)
-        toVC.view.hidden = true
+        toVC.view.isHidden = true
         hvc.view.frame = containerView.bounds
-        hvc.collectionView.transform = CGAffineTransformMakeScale(Const.scale, Const.scale)
+        hvc.collectionView.transform = CGAffineTransform(scaleX: Const.scale, y: Const.scale)
         
-        UIView.animateWithDuration(transitionDuration(transitionContext), delay: 0, options: .CurveEaseOut, animations: {
-            hvc.collectionView.transform = CGAffineTransformIdentity
+        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0, options: .curveEaseOut, animations: {
+            hvc.collectionView.transform = CGAffineTransform.identity
             hvc.scrollToSelectedIndex(false)
         }) { finished in
-            let cancelled = transitionContext.transitionWasCancelled()
+            let cancelled = transitionContext.transitionWasCancelled
             if cancelled {
-                hvc.collectionView.transform = CGAffineTransformIdentity
+                hvc.collectionView.transform = CGAffineTransform.identity
                 toVC.view.removeFromSuperview()
             } else {
-                toVC.view.hidden = false
+                toVC.view.isHidden = false
                 hvc.view.removeFromSuperview()
             }
             transitionContext.completeTransition(!cancelled)

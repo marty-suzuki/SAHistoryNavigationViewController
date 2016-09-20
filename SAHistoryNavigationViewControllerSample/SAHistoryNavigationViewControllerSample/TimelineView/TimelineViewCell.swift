@@ -22,21 +22,21 @@ class TimelineViewCell: UITableViewCell {
         iconImageView.layer.masksToBounds = true
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
-    func setIconImage(image: UIImage) {
+    func setIconImage(_ image: UIImage) {
         iconImageView.image = image
     }
     
-    func setMainText(text: String) {
+    func setMainText(_ text: String) {
         mainTextLabel.text = text
     }
     
-    func setUsername(name: String) {
+    func setUsername(_ name: String) {
         usernameLabel.text = name
     }
 }

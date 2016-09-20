@@ -11,7 +11,7 @@ import AudioToolbox.AudioServices
 
 @available(iOS 9, *)
 class SAThirdDimensionalTouchRecognizer: UILongPressGestureRecognizer {
-    private(set) var percentage: CGFloat = 0
+    fileprivate(set) var percentage: CGFloat = 0
     var threshold: CGFloat = 1
     
     init(target: AnyObject?, action: Selector, threshold: CGFloat) {
@@ -19,22 +19,22 @@ class SAThirdDimensionalTouchRecognizer: UILongPressGestureRecognizer {
         super.init(target: target, action: action)
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent) {
-        super.touchesMoved(touches, withEvent: event)
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
+        super.touchesMoved(touches, with: event)
         
         guard let touch = touches.first else {
             return
         }
         percentage = max(0, min(1, touch.force / touch.maximumPossibleForce))
-        if percentage > threshold && state == .Changed {
-            state = .Ended
+        if percentage > threshold && state == .changed {
+            state = .ended
             AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
         }
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent) {
-        super.touchesEnded(touches, withEvent: event)
-        state = .Failed
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
+        super.touchesEnded(touches, with: event)
+        state = .failed
     }
     
     override func reset() {

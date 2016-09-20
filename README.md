@@ -25,6 +25,7 @@ SAHistoryNavigationViewController realizes iOS task manager like UI in UINavigat
 - [x] Support Swift2.0
 - [x] Support 3D Touch (If device is not supported 3D Touch, automatically replacing to long tap gesture.)
 - [x] Support Swift2.3
+- [x] Sipport Swift3
 
 ## Installation
 
