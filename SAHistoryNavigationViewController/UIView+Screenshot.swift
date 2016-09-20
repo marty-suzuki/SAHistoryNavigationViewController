@@ -9,9 +9,9 @@
 import UIKit
 
 extension UIView {
-    func screenshotImage(scale: CGFloat = 0.0) -> UIImage? {
+    func screenshotImage(_ scale: CGFloat = 0.0) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(frame.size, false, scale)
-        drawViewHierarchyInRect(bounds, afterScreenUpdates: true)
+        drawHierarchy(in: bounds, afterScreenUpdates: true)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image
