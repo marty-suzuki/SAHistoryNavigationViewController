@@ -31,6 +31,7 @@ extension Array where Element: NSLayoutConstraint {
 }
 
 extension NSArray {
+    @available(*, unavailable)
     public var FirstItem: UIView -> NSArray {
         guard let array = self as? [NSLayoutConstraint] else {
             return { _ in return [] }
@@ -40,6 +41,7 @@ extension NSArray {
         }
     }
     
+    @available(*, unavailable)
     public var FirstAttribute: NSLayoutAttribute -> NSArray {
         guard let array = self as? [NSLayoutConstraint] else {
             return { _ in return [] }
@@ -49,6 +51,7 @@ extension NSArray {
         }
     }
     
+    @available(*, unavailable)
     public var SecondItem: UIView -> NSArray {
         guard let array = self as? [NSLayoutConstraint] else {
             return { _ in return [] }
@@ -58,6 +61,7 @@ extension NSArray {
         }
     }
     
+    @available(*, unavailable)
     public var SecondAttribute: NSLayoutAttribute -> NSArray {
         guard let array = self as? [NSLayoutConstraint] else {
             return { _ in return [] }
@@ -67,6 +71,7 @@ extension NSArray {
         }
     }
     
+    @available(*, unavailable)
     public var Reration: NSLayoutRelation -> NSArray {
         guard let array = self as? [NSLayoutConstraint] else {
             return { _ in return [] }

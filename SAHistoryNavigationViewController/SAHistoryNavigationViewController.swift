@@ -14,8 +14,10 @@ import UIKit
 
 public class SAHistoryNavigationViewController: UINavigationController {
     //MARK: - Static constants
-    private static let ImageScale: CGFloat = 1.0
-    
+    private struct Const {
+        static let imageScale: CGFloat = 1.0
+    }
+        
     //MARK: - Properties
     public var thirdDimensionalTouchThreshold: CGFloat = 0.5
 
@@ -75,7 +77,7 @@ public class SAHistoryNavigationViewController: UINavigationController {
     }
     
     override public func pushViewController(viewController: UIViewController, animated: Bool) {
-        if let image = visibleViewController?.screenshotFromWindow(self.dynamicType.ImageScale) {
+        if let image = visibleViewController?.screenshotFromWindow(Const.imageScale) {
             screenshots += [image]
         }
         super.pushViewController(viewController, animated: animated)
@@ -97,12 +99,9 @@ public class SAHistoryNavigationViewController: UINavigationController {
     public override func setViewControllers(viewControllers: [UIViewController], animated: Bool) {
         super.setViewControllers(viewControllers, animated: animated)
         for (currentIndex, viewController) in viewControllers.enumerate() {
-            if currentIndex == viewControllers.endIndex {
-                break
-            }
-            if let image = viewController.screenshotFromWindow(self.dynamicType.ImageScale) {
-                screenshots += [image]
-            }
+            if currentIndex == viewControllers.endIndex { break }
+            guard let image = viewController.screenshotFromWindow(Const.imageScale) else { continue }
+            screenshots += [image]
         }
     }
     
@@ -110,9 +109,7 @@ public class SAHistoryNavigationViewController: UINavigationController {
     func handleThirdDimensionalTouch(gesture: SAThirdDimensionalTouchRecognizer) {
         switch gesture.state {
         case .Began:
-            guard let image = visibleViewController?.screenshotFromWindow(self.dynamicType.ImageScale) else {
-                return
-            }
+            guard let image = visibleViewController?.screenshotFromWindow(Const.imageScale) else { return }
             screenshots += [image]
             
             let historyViewController = createHistoryViewController()
@@ -126,9 +123,7 @@ public class SAHistoryNavigationViewController: UINavigationController {
             screenshots.removeLast()
             if gesture.percentage >= gesture.threshold {
                 interactiveTransition?.finishInteractiveTransition()
-                guard let visibleViewController = self.visibleViewController else {
-                    return
-                }
+                guard let visibleViewController = self.visibleViewController else { return }
                 historyDelegate?.historyControllerDidShowHistory?(self, viewController: visibleViewController)
             } else {
                 interactiveTransition?.cancelInteractiveTransition()
@@ -158,17 +153,13 @@ public class SAHistoryNavigationViewController: UINavigationController {
 
 extension SAHistoryNavigationViewController {
     override public func showHistory() {
-        guard let image = visibleViewController?.screenshotFromWindow(self.dynamicType.ImageScale) else {
-            return
-        }
+        guard let image = visibleViewController?.screenshotFromWindow(Const.imageScale) else { return }
         screenshots += [image]
         let historyViewController = createHistoryViewController()
         self.historyViewController = historyViewController
         setNavigationBarHidden(true, animated: false)
         presentViewController(historyViewController, animated: true) {
-            guard let visibleViewController = self.visibleViewController else {
-                return
-            }
+            guard let visibleViewController = self.visibleViewController else { return }
             self.historyDelegate?.historyControllerDidShowHistory?(self, viewController: visibleViewController)
         }
     }
@@ -185,9 +176,7 @@ extension SAHistoryNavigationViewController {
 //MARK: - UINavigationBarDelegate
 extension SAHistoryNavigationViewController: UINavigationBarDelegate {
     public func navigationBar(navigationBar: UINavigationBar, didPopItem item: UINavigationItem) {
-        guard let items = navigationBar.items else {
-            return
-        }
+        guard let items = navigationBar.items else { return }
         screenshots.removeRange(items.count..<screenshots.count)
     }
 }
@@ -210,10 +199,7 @@ extension SAHistoryNavigationViewController : UIViewControllerTransitioningDeleg
 //MARK: - SAHistoryViewControllerDelegate
 extension SAHistoryNavigationViewController: SAHistoryViewControllerDelegate {
     func historyViewController(viewController: SAHistoryViewController, didSelectIndex index: Int) {
-        if viewControllers.count - 1 < index {
-            return
-        }
-        
+        if viewControllers.count - 1 < index { return }
         viewController.dismissViewControllerAnimated(true) { _ in
             self.popToViewController(self.viewControllers[index], animated: false)
             self.historyViewController = nil
@@ -233,13 +219,9 @@ extension SAHistoryNavigationViewController: UIGestureRecognizerDelegate {
                 return true
             }
         }
-        
-        if let gestureRecognizer = gestureRecognizer as? UIScreenEdgePanGestureRecognizer {
-            if view == gestureRecognizer.view {
-                return true
-            }
+        if let gestureRecognizer = gestureRecognizer as? UIScreenEdgePanGestureRecognizer where view == gestureRecognizer.view {
+            return true
         }
-        
         return false
     }
 }
