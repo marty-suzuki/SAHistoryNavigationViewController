@@ -53,23 +53,33 @@ In addition, set module to SAHistoryNavigationViewController.
 
 #### Code
 
-You can use SAHistoryNavigationViewController as `self.navigationController` in ViewController, bacause implemented `extension UINavigationController` as below codes and override those methods in SAHistoryNavigationViewController.
+You can use SAHistoryNavigationViewController as `self.sah.navigationController` in any ViewController, bacause implemented `extension SAHistoryExtension` as below codes.
 
 ```swift
-extension UINavigationController {
-  public weak var historyDelegate: SAHistoryNavigationViewControllerDelegate? {
-      set {
-          willSetHistoryDelegate(newValue)
-      }
-      get {
-          return willGetHistoryDelegate()
-      }
-  }
-  public func showHistory() {}
-  public func setHistoryBackgroundColor(color: UIColor) {}
-  public func contentView() -> UIView? { return nil }
-  func willSetHistoryDelegate(delegate: SAHistoryNavigationViewControllerDelegate?) {}
-  func willGetHistoryDelegate() -> SAHistoryNavigationViewControllerDelegate? { return nil }
+public protocol SAHistoryCompatible {
+    associatedtype CompatibleType
+    var sah: CompatibleType { get }
+}
+
+public extension SAHistoryCompatible {
+    public var sah: SAHistoryExtension<Self> {
+        return SAHistoryExtension(self)
+    }
+}
+
+public final class SAHistoryExtension<Base> {
+    public let base: Base
+    public init(_ base: Base) {
+        self.base = base
+    }
+}
+
+extension UIViewController: SAHistoryCompatible {}
+
+extension SAHistoryExtension where Base: UIViewController {
+    public var navigationController: SAHistoryNavigationViewController? {
+        return base.navigationController as? SAHistoryNavigationViewController
+    }
 }
 ```
 
@@ -86,7 +96,8 @@ presentViewController(navigationController, animated: true, completion: nil)
 If you want to launch Navigation History without long tap action, use this code.
 
 ```swift
-navigationController?.showHistory()
+//In any UIViewController
+self.sah.navigationController?.showHistory()
 ```
 
 ## Customize
@@ -94,8 +105,9 @@ navigationController?.showHistory()
 If you want to customize background of Navigation History, you can use those methods.
 
 ```swift
-navigationController?.contentView()
-navigationController?.setHistoryBackgroundColor(color: UIColor)
+//In any UIViewController
+self.sah.navigationController?.contentView
+self.sah.navigationController?.historyBackgroundColor
 ```
 
 This is delegate methods.

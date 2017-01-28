@@ -9,7 +9,7 @@
 
 import UIKit
 
-extension UIViewController {
+extension SAHistoryExtension where Base: UIViewController {
     func screenshotFromWindow(_ scale: CGFloat = 0.0) -> UIImage? {
         guard let window = UIApplication.shared.windows.first else { return nil }
         UIGraphicsBeginImageContextWithOptions(window.frame.size, false, scale)

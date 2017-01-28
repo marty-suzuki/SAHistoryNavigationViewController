@@ -21,13 +21,13 @@
 		5AA4B3E335E57D3B14C9A6920ECDD9FA /* Pods-SAHistoryNavigationViewControllerSample-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = AB19AA94F07C2DEADE7E91FAE8860E98 /* Pods-SAHistoryNavigationViewControllerSample-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		64BEFCA84FF6CBA82189E65D28676A05 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B795DBD92A6FB5414D65CF8679CCA117 /* Foundation.framework */; };
 		83CA7E470518BCD5EF6000402C12F7DC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 759128F340A595990497D09BC6D6E11C /* UIKit.framework */; };
-		86CCCCFB4AAA492713EB1B047140477C /* UINavigationController+History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242431A1CC0E6E966EB4275C6166459E /* UINavigationController+History.swift */; };
 		8E1F60F1AA8F7D8101494716B8397AEE /* SAHistoryNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED67F40658BE5315E7515EFFAFF6865 /* SAHistoryNavigationViewController.swift */; };
 		A03C84FA56C1EFBCE51BD48F9EBD5CD3 /* MisterFusion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD92E11A3E6901130A5BC1931244D3B /* MisterFusion.swift */; };
 		A0A2EE06369AE505E791D6B5FF3CDC55 /* SAHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9609A19907B1BDCDC3FBC985A38FF415 /* SAHistoryViewController.swift */; };
 		AB0EF981593E1B07A77CB6C96A07000E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B795DBD92A6FB5414D65CF8679CCA117 /* Foundation.framework */; };
 		DAC6940463D46ADFDB5CC94C95F4C2AC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B795DBD92A6FB5414D65CF8679CCA117 /* Foundation.framework */; };
 		E97A332AFCB13BB4E1857CA5BCB2A357 /* MisterFusion-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D0028AD92BEB6711AE873F6A24F06FF7 /* MisterFusion-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ED85364A1E3CD08500A4FDC7 /* SAHistoryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8536491E3CD08500A4FDC7 /* SAHistoryExtension.swift */; };
 		F1118070D198435DA2EC650385F9D4EB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F89A7C308FC6C82D4854F06F7EF5A81 /* AudioToolbox.framework */; };
 		F42FB14D5AE77132A0258445216608B8 /* SAHistoryNavigationViewController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFBB106DA5DB50A69936AF627E3002A /* SAHistoryNavigationViewController-dummy.m */; };
 /* End PBXBuildFile section */
@@ -63,7 +63,6 @@
 		1A4088D047289A0B346219868CDB5DDC /* MisterFusion.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MisterFusion.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BC174B4D7F56B3E33F0A267F1BAA31C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2066B18DFC6AB957F0A6CA7F463D059E /* Pods-SAHistoryNavigationViewControllerSample.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-SAHistoryNavigationViewControllerSample.modulemap"; sourceTree = "<group>"; };
-		242431A1CC0E6E966EB4275C6166459E /* UINavigationController+History.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UINavigationController+History.swift"; sourceTree = "<group>"; };
 		2AEB163CA0FE333FDA766F3229D8D836 /* Pods_SAHistoryNavigationViewControllerSample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SAHistoryNavigationViewControllerSample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CFBB106DA5DB50A69936AF627E3002A /* SAHistoryNavigationViewController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SAHistoryNavigationViewController-dummy.m"; sourceTree = "<group>"; };
 		2ED67F40658BE5315E7515EFFAFF6865 /* SAHistoryNavigationViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SAHistoryNavigationViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +94,7 @@
 		DE503BB9FA087B4D1044E89C0F02C1DA /* Array+MisterFusion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Array+MisterFusion.swift"; path = "MisterFusion/Array+MisterFusion.swift"; sourceTree = "<group>"; };
 		E21DAAE5113FFA990B502812EE8F0C8E /* SAHistoryNavigationViewController.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SAHistoryNavigationViewController.modulemap; sourceTree = "<group>"; };
 		E6737565E31A1D99FA589ACECC37FCC9 /* UIViewController+Screenshot.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIViewController+Screenshot.swift"; sourceTree = "<group>"; };
+		ED8536491E3CD08500A4FDC7 /* SAHistoryExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAHistoryExtension.swift; sourceTree = "<group>"; };
 		F5F0646FCB22A73B26B5AABE857713BF /* MisterFusion-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MisterFusion-prefix.pch"; sourceTree = "<group>"; };
 		F65238D966F0D302F0C13808DBCE930E /* SAHistoryNavigationViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SAHistoryNavigationViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -270,9 +270,9 @@
 				2FB4DB223FB53BE7B622F47B9E0418F0 /* SAHistoryViewAnimatedTransitioning.swift */,
 				9609A19907B1BDCDC3FBC985A38FF415 /* SAHistoryViewController.swift */,
 				B7924B690600464B4BB52241249E7CC7 /* SAThirdDimensionalTouchRecognizer.swift */,
-				242431A1CC0E6E966EB4275C6166459E /* UINavigationController+History.swift */,
 				BB370C083F81E808BE0BB5CCAACD8A82 /* UIView+Screenshot.swift */,
 				E6737565E31A1D99FA589ACECC37FCC9 /* UIViewController+Screenshot.swift */,
+				ED8536491E3CD08500A4FDC7 /* SAHistoryExtension.swift */,
 			);
 			path = SAHistoryNavigationViewController;
 			sourceTree = "<group>";
@@ -423,13 +423,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED85364A1E3CD08500A4FDC7 /* SAHistoryExtension.swift in Sources */,
 				1144E8E56E23E8920F90619358BCA4A6 /* SAHistoryNavigationTransitionController.swift in Sources */,
 				F42FB14D5AE77132A0258445216608B8 /* SAHistoryNavigationViewController-dummy.m in Sources */,
 				8E1F60F1AA8F7D8101494716B8397AEE /* SAHistoryNavigationViewController.swift in Sources */,
 				09B7A93E1BE7BFD01EE778373D8369A5 /* SAHistoryViewAnimatedTransitioning.swift in Sources */,
 				A0A2EE06369AE505E791D6B5FF3CDC55 /* SAHistoryViewController.swift in Sources */,
 				541CC84E0984929D63E6346E4F7D0013 /* SAThirdDimensionalTouchRecognizer.swift in Sources */,
-				86CCCCFB4AAA492713EB1B047140477C /* UINavigationController+History.swift in Sources */,
 				0603F396B0068CCB838955399C38CFCA /* UIView+Screenshot.swift in Sources */,
 				29F7E3EE423421BA5267AD9247204A96 /* UIViewController+Screenshot.swift in Sources */,
 			);

@@ -25,7 +25,18 @@ open class SAHistoryNavigationViewController: UINavigationController {
     fileprivate var screenshots = [UIImage]()
     fileprivate var historyViewController: SAHistoryViewController?
     fileprivate let historyContentView = UIView()
-    fileprivate weak var _historyDelegate: SAHistoryNavigationViewControllerDelegate?
+    public weak var historyDelegate: SAHistoryNavigationViewControllerDelegate?
+    public var historyBackgroundColor: UIColor? {
+        get {
+            return historyContentView.backgroundColor
+        }
+        set {
+            historyContentView.backgroundColor = newValue
+        }
+    }
+    public var contentView: UIView? {
+        return historyContentView
+    }
 
     //MARK: - Initializers
     required public init(coder aDecoder: NSCoder) {
@@ -68,16 +79,8 @@ open class SAHistoryNavigationViewController: UINavigationController {
         navigationBar.addGestureRecognizer(gestureRecognizer)
     }
     
-    override func willSetHistoryDelegate(_ delegate: SAHistoryNavigationViewControllerDelegate?) {
-        _historyDelegate = delegate
-    }
-    
-    override func willGetHistoryDelegate() -> SAHistoryNavigationViewControllerDelegate? {
-        return _historyDelegate
-    }
-    
     override open func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        if let image = visibleViewController?.screenshotFromWindow(Const.imageScale) {
+        if let image = visibleViewController?.sah.screenshotFromWindow(Const.imageScale) {
             screenshots += [image]
         }
         super.pushViewController(viewController, animated: animated)
@@ -100,7 +103,7 @@ open class SAHistoryNavigationViewController: UINavigationController {
         super.setViewControllers(viewControllers, animated: animated)
         for (currentIndex, viewController) in viewControllers.enumerated() {
             if currentIndex == viewControllers.endIndex { break }
-            guard let image = viewController.screenshotFromWindow(Const.imageScale) else { continue }
+            guard let image = viewController.sah.screenshotFromWindow(Const.imageScale) else { continue }
             screenshots += [image]
         }
     }
@@ -109,7 +112,7 @@ open class SAHistoryNavigationViewController: UINavigationController {
     func handleThirdDimensionalTouch(_ gesture: SAThirdDimensionalTouchRecognizer) {
         switch gesture.state {
         case .began:
-            guard let image = visibleViewController?.screenshotFromWindow(Const.imageScale) else { return }
+            guard let image = visibleViewController?.sah.screenshotFromWindow(Const.imageScale) else { return }
             screenshots += [image]
             
             let historyViewController = createHistoryViewController()
@@ -150,8 +153,8 @@ open class SAHistoryNavigationViewController: UINavigationController {
         return historyViewController
     }
 
-    override public func showHistory() {
-        guard let image = visibleViewController?.screenshotFromWindow(Const.imageScale) else { return }
+    public func showHistory() {
+        guard let image = visibleViewController?.sah.screenshotFromWindow(Const.imageScale) else { return }
         screenshots += [image]
         let historyViewController = createHistoryViewController()
         self.historyViewController = historyViewController
@@ -160,14 +163,6 @@ open class SAHistoryNavigationViewController: UINavigationController {
             guard let visibleViewController = self.visibleViewController else { return }
             self.historyDelegate?.historyControllerDidShowHistory?(self, viewController: visibleViewController)
         }
-    }
-    
-    override public func setHistoryBackgroundColor(_ color: UIColor) {
-        historyContentView.backgroundColor = color
-    }
-    
-    override public func contentView() -> UIView? {
-        return historyContentView
     }
 }
 

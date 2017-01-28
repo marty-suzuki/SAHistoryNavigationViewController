@@ -8,10 +8,10 @@
 
 import UIKit
 
-extension UIView {
+extension SAHistoryExtension where Base: UIView {
     func screenshotImage(_ scale: CGFloat = 0.0) -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(frame.size, false, scale)
-        drawHierarchy(in: bounds, afterScreenUpdates: true)
+        UIGraphicsBeginImageContextWithOptions(base.frame.size, false, scale)
+        base.drawHierarchy(in: base.bounds, afterScreenUpdates: true)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image
