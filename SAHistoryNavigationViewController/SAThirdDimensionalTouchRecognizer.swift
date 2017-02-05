@@ -11,6 +11,12 @@ import AudioToolbox.AudioServices
 
 @available(iOS 9, *)
 class SAThirdDimensionalTouchRecognizer: UILongPressGestureRecognizer {
+    
+    private let kSystemSoundID_Vibrate_Peek: SystemSoundID = 1519
+    private let kSystemSoundID_Vibrate_Pop: SystemSoundID = 1520
+    private let kSystemSoundID_Vibrate_Nope: SystemSoundID = 1521
+    
+    
     fileprivate(set) var percentage: CGFloat = 0
     var threshold: CGFloat = 1
     
@@ -28,7 +34,7 @@ class SAThirdDimensionalTouchRecognizer: UILongPressGestureRecognizer {
         percentage = max(0, min(1, touch.force / touch.maximumPossibleForce))
         if percentage > threshold && state == .changed {
             state = .ended
-            AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+            AudioServicesPlayAlertSound(kSystemSoundID_Vibrate_Pop)
         }
     }
     
