@@ -33,6 +33,7 @@ class SAHistoryViewController: UIViewController {
     //MARKL: - Initializers
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.handleOrientationChanged), name: .UIDeviceOrientationDidChange, object: nil)
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -59,12 +60,7 @@ class SAHistoryViewController: UIViewController {
         }
         view.backgroundColor = contentView?.backgroundColor
         
-        let size = UIScreen.main.bounds.size
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.itemSize = size
-            layout.minimumInteritemSpacing = 0.0
-            layout.minimumLineSpacing = Const.lineSpace
-            layout.sectionInset = UIEdgeInsets(top: 0.0, left: size.width, bottom: 0.0, right: size.width)
             layout.scrollDirection = .horizontal
         }
         
@@ -94,6 +90,10 @@ class SAHistoryViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @objc fileprivate func handleOrientationChanged() {
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
 
     //MARK: - Scroll handling
     fileprivate func scrollToIndex(_ index: Int, animated: Bool) {
@@ -105,7 +105,7 @@ class SAHistoryViewController: UIViewController {
         scrollToIndex(index, animated: animated)
     }
 }
-    
+
 //MARK: - UICollectionViewDataSource
 extension SAHistoryViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -114,18 +114,48 @@ extension SAHistoryViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Const.reuseIdentifier, for: indexPath)
-
+        
         let subviews = cell.subviews
         subviews.forEach {
             guard let view = $0 as? UIImageView else { return }
             view.removeFromSuperview()
         }
-    
-        let imageView = UIImageView(frame: cell.bounds)
+        
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
         imageView.image = images?[indexPath.row]
-        cell.addSubview(imageView)
+        cell.addLayoutSubview(imageView, andConstraints:
+            imageView.top,
+            imageView.bottom,
+            imageView.left,
+            imageView.right
+        )
         
         return cell
+    }
+}
+
+//MARK: - UICollectionViewDelegateFlowLayout
+extension SAHistoryViewController: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let windowSize = self.view.window?.bounds.size ?? UIScreen.main.bounds.size
+        let imageSize = images?[indexPath.row].size ?? windowSize
+        let ratio = windowSize.height / imageSize.height
+        return CGSize(width: min(windowSize.width, imageSize.width * ratio), height: windowSize.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return Const.lineSpace
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return Const.lineSpace
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        let size = self.view.window?.bounds.size ?? UIScreen.main.bounds.size
+        return UIEdgeInsets(top: 0.0, left: size.width, bottom: 0.0, right: size.width)
     }
 }
 

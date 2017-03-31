@@ -36,14 +36,14 @@ class SAHistoryViewAnimatedTransitioning: NSObject, UIViewControllerAnimatedTran
         else { return }
         let containerView = transitionContext.containerView
         if isPresenting {
-            pushAniamtion(transitionContext, containerView: containerView, toVC: toVC, fromVC: fromVC)
+            pushAnimation(transitionContext, containerView: containerView, toVC: toVC, fromVC: fromVC)
             return
         }
-        popAniamtion(transitionContext, containerView: containerView, toVC: toVC, fromVC: fromVC)
+        popAnimation(transitionContext, containerView: containerView, toVC: toVC, fromVC: fromVC)
     }
 
     //MARK: - Animations
-    fileprivate func pushAniamtion(_ transitionContext: UIViewControllerContextTransitioning, containerView: UIView, toVC: UIViewController, fromVC: UIViewController) {
+    fileprivate func pushAnimation(_ transitionContext: UIViewControllerContextTransitioning, containerView: UIView, toVC: UIViewController, fromVC: UIViewController) {
         guard let hvc = toVC as? SAHistoryViewController else { return }
         
         containerView.addSubview(toVC.view)
@@ -67,11 +67,12 @@ class SAHistoryViewAnimatedTransitioning: NSObject, UIViewControllerAnimatedTran
         }
     }
     
-    fileprivate func popAniamtion(_ transitionContext: UIViewControllerContextTransitioning, containerView: UIView, toVC: UIViewController, fromVC: UIViewController) {
+    fileprivate func popAnimation(_ transitionContext: UIViewControllerContextTransitioning, containerView: UIView, toVC: UIViewController, fromVC: UIViewController) {
         guard let hvc = fromVC as? SAHistoryViewController else { return }
         
         containerView.addSubview(toVC.view)
         toVC.view.isHidden = true
+        toVC.view.frame = containerView.bounds
         hvc.view.frame = containerView.bounds
         hvc.collectionView.transform = CGAffineTransform(scaleX: Const.scale, y: Const.scale)
         
