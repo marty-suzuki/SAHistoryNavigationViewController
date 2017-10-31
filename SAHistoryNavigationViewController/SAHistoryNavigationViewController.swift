@@ -108,7 +108,7 @@ open class SAHistoryNavigationViewController: UINavigationController {
         }
     }
     
-    @available(iOS 9, *)
+    @objc @available(iOS 9, *)
     func handleThirdDimensionalTouch(_ gesture: SAThirdDimensionalTouchRecognizer) {
         switch gesture.state {
         case .began:
@@ -137,7 +137,7 @@ open class SAHistoryNavigationViewController: UINavigationController {
         }
     }
     
-    func detectLongTap(_ gesture: UILongPressGestureRecognizer) {
+    @objc func detectLongTap(_ gesture: UILongPressGestureRecognizer) {
         if gesture.state == .began {
             showHistory()
         }
@@ -193,7 +193,7 @@ extension SAHistoryNavigationViewController : UIViewControllerTransitioningDeleg
 extension SAHistoryNavigationViewController: SAHistoryViewControllerDelegate {
     func historyViewController(_ viewController: SAHistoryViewController, didSelectIndex index: Int) {
         if viewControllers.count - 1 < index { return }
-        viewController.dismiss(animated: true) { _ in
+        viewController.dismiss(animated: true) {
             _ = self.popToViewController(self.viewControllers[index], animated: false)
             self.historyViewController = nil
             self.setNavigationBarHidden(false, animated: false)

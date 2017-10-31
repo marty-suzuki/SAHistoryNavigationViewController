@@ -7,13 +7,12 @@
 //
 
 import UIKit
-import MisterFusion
 
 protocol SAHistoryViewControllerDelegate: class {
     func historyViewController(_ viewController: SAHistoryViewController, didSelectIndex index: Int)
 }
 
-class SAHistoryViewController: UIViewController {
+final class SAHistoryViewController: UIViewController {
     //MARK: static constants
     fileprivate struct Const {
         static let lineSpace: CGFloat = 20.0
@@ -23,7 +22,7 @@ class SAHistoryViewController: UIViewController {
     //MARK: - Properties
     weak var delegate: SAHistoryViewControllerDelegate?
     weak var contentView: UIView?
-    let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     var images: [UIImage]?
     var currentIndex: Int = 0
     
@@ -51,12 +50,7 @@ class SAHistoryViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         if let contentView = contentView {
-            view.addLayoutSubview(contentView, andConstraints:
-                contentView.top,
-                contentView.bottom,
-                contentView.left,
-                contentView.right
-            )
+            view.addSubview(contentView, to: [.top(), .right(), .bottom(), .left()])
         }
         view.backgroundColor = contentView?.backgroundColor
         
@@ -70,12 +64,7 @@ class SAHistoryViewController: UIViewController {
         collectionView.backgroundColor = .clear
         collectionView.showsHorizontalScrollIndicator = false
         
-        view.addLayoutSubview(collectionView, andConstraints: 
-            collectionView.top,
-            collectionView.bottom,
-            collectionView.centerX,
-            collectionView.width |==| view.width |*| 3
-        )
+        view.addSubview(collectionView, to: [.top(), .bottom(), .centerX(), .width(multiplier: 3)])
     }
 
     override func viewDidLayoutSubviews() {
@@ -124,12 +113,7 @@ extension SAHistoryViewController: UICollectionViewDataSource {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.image = images?[indexPath.row]
-        cell.addLayoutSubview(imageView, andConstraints:
-            imageView.top,
-            imageView.bottom,
-            imageView.left,
-            imageView.right
-        )
+        cell.addSubview(imageView, to: [.top(), .right(), .bottom(), .left()])
         
         return cell
     }

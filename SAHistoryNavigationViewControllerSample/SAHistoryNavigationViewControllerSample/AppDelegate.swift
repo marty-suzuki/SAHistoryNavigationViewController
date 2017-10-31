@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UINavigationBar.appearance().barTintColor = UIColor(red: 0.0, green: 0.549, blue: 0.89, alpha: 1.0)
         UINavigationBar.appearance().tintColor = .white
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor : UIColor.white]
         UIApplication.shared.setStatusBarStyle(.lightContent, animated: false)
         
         (window?.rootViewController as? SAHistoryNavigationViewController)?.historyDelegate = self

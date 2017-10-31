@@ -8,17 +8,17 @@
 
 import UIKit
 
-class SAHistoryNavigationTransitionController: NSObject, UIViewControllerAnimatedTransitioning {
+final class SAHistoryNavigationTransitionController: NSObject, UIViewControllerAnimatedTransitioning {
     //MARK: - Static constants
-    fileprivate struct Const {
+    private struct Const {
         static let defaultDuration: TimeInterval = 0.3
     }
         
     //MARK: - Properties
-    fileprivate(set) var navigationControllerOperation: UINavigationControllerOperation
-    fileprivate var currentTransitionContext: UIViewControllerContextTransitioning?
-    fileprivate var backgroundView: UIView?
-    fileprivate var alphaView: UIView?
+    private(set) var navigationControllerOperation: UINavigationControllerOperation
+    private var currentTransitionContext: UIViewControllerContextTransitioning?
+    private var backgroundView: UIView?
+    private var alphaView: UIView?
     
     //MARK: - Initializers
     required init(operation: UINavigationControllerOperation) {

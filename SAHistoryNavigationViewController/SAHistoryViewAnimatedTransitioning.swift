@@ -10,13 +10,13 @@ import UIKit
 
 class SAHistoryViewAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransitioning {
     //MARK: - Static Constants
-    fileprivate struct Const {
+    private struct Const {
         static let duration: TimeInterval = 0.25
         static let scale: CGFloat = 0.7
     }
     
     //MARK: - Properties
-    fileprivate var isPresenting = true
+    private var isPresenting = true
     
     //MARK: - Initializers
     init(isPresenting: Bool) {
@@ -31,9 +31,12 @@ class SAHistoryViewAnimatedTransitioning: NSObject, UIViewControllerAnimatedTran
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard
-            let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to),
-            let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)
-        else { return }
+            let toVC = transitionContext.viewController(forKey: .to),
+            let fromVC = transitionContext.viewController(forKey: .from)
+        else {
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+            return
+        }
         let containerView = transitionContext.containerView
         if isPresenting {
             pushAnimation(transitionContext, containerView: containerView, toVC: toVC, fromVC: fromVC)
@@ -43,8 +46,11 @@ class SAHistoryViewAnimatedTransitioning: NSObject, UIViewControllerAnimatedTran
     }
 
     //MARK: - Animations
-    fileprivate func pushAnimation(_ transitionContext: UIViewControllerContextTransitioning, containerView: UIView, toVC: UIViewController, fromVC: UIViewController) {
-        guard let hvc = toVC as? SAHistoryViewController else { return }
+    private func pushAnimation(_ transitionContext: UIViewControllerContextTransitioning, containerView: UIView, toVC: UIViewController, fromVC: UIViewController) {
+        guard let hvc = toVC as? SAHistoryViewController else {
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+            return
+        }
         
         containerView.addSubview(toVC.view)
         fromVC.view.isHidden = true
@@ -67,8 +73,11 @@ class SAHistoryViewAnimatedTransitioning: NSObject, UIViewControllerAnimatedTran
         }
     }
     
-    fileprivate func popAnimation(_ transitionContext: UIViewControllerContextTransitioning, containerView: UIView, toVC: UIViewController, fromVC: UIViewController) {
-        guard let hvc = fromVC as? SAHistoryViewController else { return }
+    private func popAnimation(_ transitionContext: UIViewControllerContextTransitioning, containerView: UIView, toVC: UIViewController, fromVC: UIViewController) {
+        guard let hvc = fromVC as? SAHistoryViewController else {
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+            return
+        }
         
         containerView.addSubview(toVC.view)
         toVC.view.isHidden = true

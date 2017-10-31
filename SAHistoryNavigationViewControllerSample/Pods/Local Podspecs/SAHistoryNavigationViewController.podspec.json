@@ -1,6 +1,6 @@
 {
   "name": "SAHistoryNavigationViewController",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "summary": "SAHistoryNavigationViewController realizes iOS task manager like UI in UINavigationContoller.",
   "homepage": "https://github.com/marty-suzuki/SAHistoryNavigationViewController",
   "license": "MIT",
@@ -9,7 +9,7 @@
   },
   "source": {
     "git": "https://github.com/marty-suzuki/SAHistoryNavigationViewController.git",
-    "tag": "3.0.0"
+    "tag": "4.0.0"
   },
   "social_media_url": "https://twitter.com/marty_suzuki",
   "platforms": {
@@ -20,10 +20,5 @@
   "frameworks": [
     "UIKit",
     "AudioToolbox"
-  ],
-  "dependencies": {
-    "MisterFusion": [
-
-    ]
-  }
+  ]
 }
